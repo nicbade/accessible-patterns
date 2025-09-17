@@ -112,3 +112,79 @@ window.addEventListener('resize', setSkipOffset);
   // NOTE: intentionally no hashchange/load focus handlers,
   // so focus never jumps on initial page load.
 })();
+
+/* ===== Accordion ===== */
+(function () {
+  const accordions = document.querySelectorAll('.accordion');
+  if (!accordions.length) return;
+
+  accordions.forEach(acc => {
+    const allowMultiple = acc.hasAttribute('data-allow-multiple');
+    const triggers = acc.querySelectorAll('.accordion-trigger');
+
+    // Enhance panels for smooth transition (respecting reduced motion)
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const panels = acc.querySelectorAll('.accordion-panel');
+    if (!prefersReduced) panels.forEach(p => p.classList.add('__anim'));
+
+    function setExpanded(trigger, expanded) {
+      const panel = document.getElementById(trigger.getAttribute('aria-controls'));
+      trigger.setAttribute('aria-expanded', String(expanded));
+      if (expanded) {
+        panel.hidden = false;
+        if (!prefersReduced) {
+          panel.style.maxHeight = panel.scrollHeight + 'px';
+          panel.style.paddingTop = '';
+          panel.style.paddingBottom = '';
+        }
+      } else {
+        if (!prefersReduced) {
+          panel.style.maxHeight = '0px';
+          panel.style.paddingTop = '0px';
+          panel.style.paddingBottom = '0px';
+          // Wait for animation to end before hiding for a11y tree cleanliness
+          panel.addEventListener('transitionend', () => { panel.hidden = true; }, { once: true });
+        } else {
+          panel.hidden = true;
+        }
+      }
+    }
+
+    function closeAll(exceptId) {
+      triggers.forEach(t => {
+        if (t.id !== exceptId && t.getAttribute('aria-expanded') === 'true') {
+          setExpanded(t, false);
+        }
+      });
+    }
+
+    triggers.forEach((btn, i) => {
+      // Click toggles
+      btn.addEventListener('click', () => {
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        if (!allowMultiple && !isOpen) closeAll(btn.id);
+        setExpanded(btn, !isOpen);
+      });
+
+      // Keyboard navigation between triggers
+      btn.addEventListener('keydown', (e) => {
+        const key = e.key;
+        const lastIndex = triggers.length - 1;
+        let nextIndex = null;
+
+        if (key === 'ArrowDown') nextIndex = (i + 1) > lastIndex ? 0 : i + 1;
+        if (key === 'ArrowUp')   nextIndex = (i - 1) < 0 ? lastIndex : i - 1;
+        if (key === 'Home')      nextIndex = 0;
+        if (key === 'End')       nextIndex = lastIndex;
+
+        if (nextIndex !== null) {
+          e.preventDefault();
+          triggers[nextIndex].focus();
+        }
+
+        // Space/Enter handled by button natively to "click"
+        // No need to preventDefault unless customizing
+      });
+    });
+  });
+})();

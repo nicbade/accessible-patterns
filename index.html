@@ -9,11 +9,13 @@
     <meta name="theme-color" content="#121722" />
     <meta name="description"
         content="Accessible Patterns site shell with semantic landmarks, skip link, and responsive primary navigation following WAI-ARIA APG and WCAG 2.1 AA." />
-    <link rel="stylesheet" href="styles.css">
+    <!-- Global styles & scripts -->
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/js/main.js" defer></script>
+
     <title>Accessible Patterns — Site Shell</title>
     <!-- Optional: PicoCSS baseline (kept optional to avoid external dependency) -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"> -->
-    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
 </head>
 
 <body>
@@ -60,9 +62,9 @@
                     <h2>Featured Patterns</h2>
                     <ul class="cards">
                         <li class="card">
-                            <h3>Disclosure</h3>
+                            <h3>Accordion</h3>
                             <p>Simple show/hide details with a native control.</p>
-                            <a class="button" href="#0">View</a>
+                            <a class="button" href="#accordion">View</a>
                         </li>
                         <li class="card">
                             <h3>Tabs</h3>
@@ -75,7 +77,79 @@
                             <a class="button" href="#0">View</a>
                         </li>
                     </ul>
+
+                    <section class="container">
+                        <h2>Patterns</h2>
+                        <!-- Accordion Pattern  -->
+                        <section class="accordion" aria-label="accordion" data-allow-multiple>
+                            <h3 id="accordion">Accordion</h3>
+                            <!-- Item 1 -->
+                            <div class="accordion-item">
+                                <h4 class="accordion-heading">
+                                    <button type="button" class="accordion-trigger" id="acc-trigger-1"
+                                        aria-expanded="false" aria-controls="acc-panel-1">
+                                        What is this accordion?
+                                    </button>
+                                </h4>
+                                <div id="acc-panel-1" class="accordion-panel" role="region"
+                                    aria-labelledby="acc-trigger-1" hidden>
+                                    <!-- ✅ Image spot (optional) -->
+                                    <figure class="accordion-media">
+                                        <!-- Update the path to your image -->
+                                        <img src="assets/img/chloeDoggles.png"
+                                            alt="Chloe the Golden Retriever wearing doggles">
+                                        <figcaption class="visually-hidden">Chloe at Puppy class</figcaption>
+                                    </figure>
+
+                                    <p>
+                                        This accordion is keyboard and screen-reader friendly. You can include text,
+                                        lists,
+                                        links, and the image above.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div class="accordion-item">
+                                <h4 class="accordion-heading">
+                                    <button type="button" class="accordion-trigger" id="acc-trigger-2"
+                                        aria-expanded="false" aria-controls="acc-panel-2">
+                                        Can I open more than one section?
+                                    </button>
+                                </h4>
+                                <div id="acc-panel-2" class="accordion-panel" role="region"
+                                    aria-labelledby="acc-trigger-2" hidden>
+                                    <p>
+                                        Yes. This accordion container has <code>data-allow-multiple</code>, so multiple
+                                        panels
+                                        can stay open. Remove that attribute to enforce only one open at a time.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Item 3 -->
+                            <div class="accordion-item">
+                                <h4 class="accordion-heading">
+                                    <button type="button" class="accordion-trigger" id="acc-trigger-3"
+                                        aria-expanded="false" aria-controls="acc-panel-3">
+                                        Where do I put my image?
+                                    </button>
+                                </h4>
+                                <div id="acc-panel-3" class="accordion-panel" role="region"
+                                    aria-labelledby="acc-trigger-3" hidden>
+                                    <figure class="accordion-media">
+                                        <img src="assets/img/placeholder-16x9.jpg"
+                                            alt="Placeholder 16:9 illustrative image">
+                                    </figure>
+                                    <p>Drop your image into the <code>.accordion-media</code> figure inside the panel.
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+
                 </section>
+
 
                 <section id="guidelines" class="container">
                     <h2>Guidelines</h2>
@@ -96,18 +170,6 @@
                 <p>&copy; <span id="year"></span> Accessible Patterns</p>
             </footer>
         </div>
-
-        <h4>Accessibility features implemented</h4>
-        <ul>
-            <li>Landmarks: native <code>header</code>, <code>nav</code>, <code>main</code>, <code>footer</code>.</li>
-            <li>Visible skip link as first focusable element.</li>
-            <li>Mobile disclosure uses a native <code>button</code> with
-                <code>aria-expanded</code>/<code>aria-controls</code>; menu visibility via <code>hidden</code>.</li>
-            <li>High-contrast <code>:focus-visible</code> outlines (WCAG 2.1 AA).</li>
-            <li>Keyboard support: Tab/Shift+Tab; Esc closes the open mobile menu.</li>
-            <li>Respects <code>prefers-reduced-motion</code>; colors meet contrast targets.</li>
-        </ul>
-    </div>
 
 </body>
 
