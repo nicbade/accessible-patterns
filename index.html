@@ -25,30 +25,26 @@
             <a class="skip-link" href="#main">Skip to main content</a>
 
             <!-- Site Header (native header exposes the banner landmark; no redundant role) -->
-            <header class="site-header">
-                <div class="brand">
-                    <a href="/" class="site-logo" aria-label="Accessible Patterns Home">
-                        <span aria-hidden="true" class="logo-box"></span>
-                        <span class="site-name">Accessible Patterns</span>
-                    </a>
-                </div>
+            <header class="site-header pattern" data-pattern="site-shell">
+                <a class="site-logo" href="/" aria-label="accessible patterns home">
+                    <span class="logo-box" aria-hidden="true"></span>
+                    <span class="site-name">Accessible Patterns</span>
+                </a>
 
-                <!-- Mobile nav toggle (disclosure button) -->
-                <button class="menu-toggle" aria-expanded="false" aria-controls="primary-nav" type="button">
-                    <span class="icon" aria-hidden="true">☰</span>
-                    <span class="label">Menu</span>
+                <!-- ✅ Mobile nav toggle (controlled via JS) -->
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-primary">
+                    Menu
                 </button>
 
-                <!-- Primary nav -->
                 <nav class="site-nav" aria-label="Primary">
-                    <ul id="primary-nav" class="nav-list" hidden>
-                        <li><a href="/" aria-current="page">Home</a></li>
+                    <ul id="nav-primary" class="nav-list">
+                        <li><a href="#" aria-current="page">Home</a></li>
                         <li><a href="#patterns">Patterns</a></li>
-                        <li><a href="#guidelines">Guidelines</a></li>
-                        <li><a href="#about">About</a></li>
+                        <li><a href="#">Docs</a></li>
                     </ul>
                 </nav>
             </header>
+
 
             <!-- Main content -->
             <main id="main" class="site-main">
