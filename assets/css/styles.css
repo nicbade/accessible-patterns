@@ -1,15 +1,87 @@
-/* Page baseline (kept lean to avoid conflicts with frameworks like PicoCSS) */
 :root {
-    --bg: #0c0f14;
-    --surface: #121722;
-    --surface-2: #0f1420;
-    --text: #e9eef6;
-    --muted: #a9b4c5;
-    --accent: #2dd4bf;
-    --accent-strong: #14b8a6;
-    --link: #7dd3fc;
-    --focus: #22d3ee;
+  /* Background tiers */
+  --bg: #0b0f14;       /* page background (darker) */
+  --surface: #111827;  /* main surfaces (lighter than bg) */
+  --surface-2: #1f2937;/* secondary surfaces */
+
+  /* Text */
+  --text: #e8eef6;     /* body text on dark surfaces */
+  --muted: #a7b1c2;
+
+  /* Brand + states */
+  --accent: #60a5fa;        /* button/link backgrounds (lighter blue) */
+  --accent-strong: #3b82f6; /* hover/active */
+  --link: #93c5fd;          /* link text color */
+  --focus: #38bdf8;         /* focus ring */
+
+  /* Separators */
+  --border: #2a3648;        /* subtle border for elevation */
 }
+
+/* ===========================
+   1) Indigo tokens (Option 2)
+   =========================== */
+:root {
+  /* Background tiers */
+  --bg: #0b0f14;       /* page background (darker) */
+  --surface: #111827;  /* main surfaces (lighter than bg) */
+  --surface-2: #1f2937;/* secondary surfaces */
+
+  /* Text */
+  --text: #e8eef6;     /* body text on dark surfaces */
+  --muted: #a7b1c2;
+
+  /* Brand + states */
+  --accent: #60a5fa;        /* button/link backgrounds */
+  --accent-strong: #3b82f6; /* hover/active */
+  --link: #93c5fd;          /* link text color */
+  --focus: #38bdf8;         /* focus ring */
+
+  /* Separators */
+  --border: #2a3648;        /* subtle border for elevation */
+}  /* ← this closing brace ends the variables block */
+
+
+/* ==========================================
+   2) Elevation + separation (use the tokens)
+   ========================================== */
+html, body { background: var(--bg); color: var(--text); }
+
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.card,
+.accordion .accordion-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: 0 6px 16px rgba(0,0,0,.35);
+}
+
+.accordion-panel {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: .75rem;
+}
+
+a { color: var(--link); }
+
+.button {
+  background: var(--accent);
+  color: #0b0f14; /* dark text for contrast on blue */
+}
+.button:hover {
+  background: var(--accent-strong);
+  color: #0b0f14;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
 
 /* Respect user default font size and system zoom/text-size settings */
 html {
@@ -157,6 +229,11 @@ a {
 
 .card h3 {
     margin-top: 0;
+}
+
+.cards, .cards > li,
+.featured-patterns, .featured-patterns > li {
+  list-style: none !important;
 }
 
 .button {
