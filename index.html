@@ -24,33 +24,53 @@
             <!-- Skip link (always first focusable element) -->
             <a class="skip-link" href="#main">Skip to main content</a>
 
-            <!-- Site Header (native header exposes the banner landmark; no redundant role) -->
             <header class="site-header pattern" data-pattern="site-shell">
-                <a class="site-logo" href="/" aria-label="accessible patterns home">
+                <a class="site-logo" href="/" aria-label="Accessible Patterns Home">
                     <span class="logo-box" aria-hidden="true"></span>
                     <span class="site-name">Accessible Patterns</span>
                 </a>
 
-                <!-- ✅ Mobile nav toggle (controlled via JS) -->
-                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-primary">
+                <!-- ✅ Keep this exactly a <button> -->
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav"
+                    aria-label="Open menu">
                     Menu
                 </button>
 
+                <!-- Desktop nav (shown ≥768px) -->
                 <nav class="site-nav" aria-label="Primary">
-                    <ul id="nav-primary" class="nav-list">
+                    <ul id="primary-nav" class="nav-list">
                         <li><a href="#" aria-current="page">Home</a></li>
-                        <li><a href="#patterns">Patterns</a></li>
+                        <li><a href="#">Patterns</a></li>
                         <li><a href="#">Docs</a></li>
                     </ul>
                 </nav>
             </header>
 
+            <!-- ✅ Flyout drawer right after header -->
+            <div id="mobile-nav" class="mobile-nav" hidden>
+                <div class="mobile-nav__backdrop" data-close></div>
+                <aside class="mobile-nav__panel" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
+                    <div class="mobile-nav__header">
+                        <h2 id="mobile-menu-title" class="sr-only">Primary navigation</h2>
+                        <button type="button" class="mobile-nav__close" aria-label="Close menu"
+                            data-close>&times;</button>
+                    </div>
+                    <nav aria-label="Primary (mobile)">
+                        <ul class="mobile-nav__list">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Patterns</a></li>
+                            <li><a href="#">Docs</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+            </div>
 
             <!-- Main content -->
             <main id="main" class="site-main">
                 <section id="intro" class="container">
                     <h1>Welcome</h1>
-                    <p>We provide examples of accessible user interface components—use your keyboard or screen reader to
+                    <p>We provide examples of accessible user interface components—use your keyboard or screen
+                        reader to
                         explore them and learn the expected behaviors.</p>
                 </section>
 
@@ -98,7 +118,8 @@
                                     </figure>
 
                                     <p>
-                                        This accordion is keyboard and screen-reader friendly. You can include text,
+                                        This accordion is keyboard and screen-reader friendly. You can include
+                                        text,
                                         lists,
                                         links, and the image above.
                                     </p>
@@ -116,7 +137,8 @@
                                 <div id="acc-panel-2" class="accordion-panel" role="region"
                                     aria-labelledby="acc-trigger-2" hidden>
                                     <p>
-                                        Yes. This accordion container has <code>data-allow-multiple</code>, so multiple
+                                        Yes. This accordion container has <code>data-allow-multiple</code>, so
+                                        multiple
                                         panels
                                         can stay open. Remove that attribute to enforce only one open at a time.
                                     </p>
@@ -134,10 +156,11 @@
                                 <div id="acc-panel-3" class="accordion-panel" role="region"
                                     aria-labelledby="acc-trigger-3" hidden>
                                     <figure class="accordion-media">
-                                        <img src="assets/img/placeholder-16x9.jpg"
-                                            alt="Placeholder 16:9 illustrative image">
+                                        <!-- <img src="assets/img/placeholder-16x9.jpg"
+                                                    alt="Placeholder 16:9 illustrative image"> -->
                                     </figure>
-                                    <p>Drop your image into the <code>.accordion-media</code> figure inside the panel.
+                                    <p>Drop your image into the <code>.accordion-media</code> figure inside the
+                                        panel.
                                     </p>
                                 </div>
                             </div>
@@ -149,7 +172,8 @@
 
                 <section id="guidelines" class="container">
                     <h2>Guidelines</h2>
-                    <p>Favor native semantics, minimal ARIA, and strong focus visibility. Colors meet WCAG 2.1 AA
+                    <p>Favor native semantics, minimal ARIA, and strong focus visibility. Colors meet WCAG 2.1
+                        AA
                         contrast.</p>
                 </section>
             </main>

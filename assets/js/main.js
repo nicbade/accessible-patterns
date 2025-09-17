@@ -235,3 +235,94 @@ window.addEventListener('resize', setSkipOffset);
                       : mq.addListener(syncForViewport);
   syncForViewport(mq);
 })();
+
+/* ===== Mobile flyout menu (robust + accessible) ===== */
+(function () {
+  const body = document.body;
+  const toggle = document.querySelector('.menu-toggle');
+  const drawer = document.getElementById('mobile-nav');
+  const panel  = drawer?.querySelector('.mobile-nav__panel');
+  const backdrop = drawer?.querySelector('.mobile-nav__backdrop');
+  const closeButtons = drawer?.querySelectorAll('[data-close]');
+
+  if (!toggle || !drawer || !panel) return;
+
+  // If someone changed markup to <a> or <div>, make it act like a button:
+  if (toggle.tagName !== 'BUTTON') {
+    toggle.setAttribute('role', 'button');
+    toggle.setAttribute('tabindex', '0');
+  }
+
+  let lastFocused = null;
+  const FOCUSABLE = [
+    'a[href]', 'button:not([disabled])', 'input:not([disabled])',
+    'select:not([disabled])', 'textarea:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])'
+  ].join(',');
+
+  function trapTab(e) {
+    if (e.key !== 'Tab') return;
+    const focusables = panel.querySelectorAll(FOCUSABLE);
+    if (!focusables.length) return;
+    const first = focusables[0];
+    const last  = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault(); first.focus();
+    }
+  }
+
+  function openDrawer() {
+    lastFocused = document.activeElement;
+    toggle.setAttribute('aria-expanded', 'true');
+    body.classList.add('nav-open');
+    drawer.hidden = false;
+    drawer.classList.add('is-open');
+    const firstFocusable = panel.querySelector(FOCUSABLE);
+    (firstFocusable || panel).focus();
+    document.addEventListener('keydown', onKeydown);
+    panel.addEventListener('keydown', trapTab);
+  }
+
+  function closeDrawer() {
+    toggle.setAttribute('aria-expanded', 'false');
+    body.classList.remove('nav-open');
+    drawer.classList.remove('is-open');
+    requestAnimationFrame(() => { drawer.hidden = true; });
+    document.removeEventListener('keydown', onKeydown);
+    panel.removeEventListener('keydown', trapTab);
+    if (lastFocused && document.contains(lastFocused)) lastFocused.focus();
+  }
+
+  function onKeydown(e) {
+    if (e.key === 'Escape') { e.preventDefault(); closeDrawer(); }
+  }
+
+  // Mouse/touch click
+  toggle.addEventListener('click', (e) => {
+    // If toggle is an <a href="#">…</a>, prevent jump
+    if (toggle.tagName === 'A') e.preventDefault();
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    expanded ? closeDrawer() : openDrawer();
+  });
+
+  // Enter/Space support for non-button toggles (buttons already fire click on Enter/Space)
+  toggle.addEventListener('keydown', (e) => {
+    if (toggle.tagName === 'BUTTON') return; // native handled
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      expanded ? closeDrawer() : openDrawer();
+    }
+  });
+
+  // Backdrop and explicit close buttons
+  backdrop?.addEventListener('click', closeDrawer);
+  closeButtons?.forEach(btn => btn.addEventListener('click', closeDrawer));
+
+  // Close when resizing to desktop
+  const mq = window.matchMedia('(min-width: 768px)');
+  const sync = e => { if (e.matches) closeDrawer(); };
+  mq.addEventListener ? mq.addEventListener('change', sync) : mq.addListener(sync);
+})();

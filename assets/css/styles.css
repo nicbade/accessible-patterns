@@ -18,29 +18,6 @@
   --border: #2a3648;        /* subtle border for elevation */
 }
 
-/* ===========================
-   1) Indigo tokens (Option 2)
-   =========================== */
-:root {
-  /* Background tiers */
-  --bg: #0b0f14;       /* page background (darker) */
-  --surface: #111827;  /* main surfaces (lighter than bg) */
-  --surface-2: #1f2937;/* secondary surfaces */
-
-  /* Text */
-  --text: #e8eef6;     /* body text on dark surfaces */
-  --muted: #a7b1c2;
-
-  /* Brand + states */
-  --accent: #60a5fa;        /* button/link backgrounds */
-  --accent-strong: #3b82f6; /* hover/active */
-  --link: #93c5fd;          /* link text color */
-  --focus: #38bdf8;         /* focus ring */
-
-  /* Separators */
-  --border: #2a3648;        /* subtle border for elevation */
-}  
-
 
 /* ==========================================
    2) Elevation + separation (use the tokens)
@@ -437,3 +414,130 @@ button {
         transition: max-height .24s ease, padding-top .24s ease, padding-bottom .24s ease;
     }
 }
+
+/* --- Assistive utility (if you don't already have one) --- */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 1px, 1px) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* --- Prevent body scroll when drawer is open --- */
+body.nav-open { overflow: hidden; }
+
+/* --- Flyout container (covers viewport) --- */
+.mobile-nav[hidden] { display: none; }
+
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+}
+
+.mobile-nav__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  opacity: 0;
+  transition: opacity .22s ease;
+}
+
+/* Drawer panel */
+.mobile-nav__panel {
+  position: absolute;
+  top: 0; right: 0;
+  height: 100%;
+  width: min(86vw, 360px);
+  background: var(--surface, #111827);
+  color: var(--text, #e8eef6);
+  border-left: 1px solid var(--border, #2a3648);
+  box-shadow: -8px 0 20px rgba(0,0,0,.4);
+  transform: translateX(100%);
+  transition: transform .22s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-nav__header {
+  display: flex;
+  justify-content: flex-end;
+  padding: .5rem;
+}
+
+.mobile-nav__close {
+  background: transparent;
+  color: var(--text, #e8eef6);
+  border: 1px solid var(--border, #2a3648);
+  padding: .5rem .75rem;
+  border-radius: .5rem;
+}
+.mobile-nav__close:hover { background: var(--surface-2, #1f2937); }
+.mobile-nav__close:focus-visible {
+  outline: 3px solid var(--focus, #38bdf8);
+  outline-offset: 2px;
+}
+
+.mobile-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+.mobile-nav__list a {
+  display: block;
+  padding: .9rem 1rem;
+  border-radius: .5rem;
+  color: var(--text, #e8eef6);
+  text-decoration: none;
+}
+.mobile-nav__list a:hover,
+.mobile-nav__list a:focus-visible {
+  background: var(--surface-2, #1f2937);
+}
+
+.mobile-nav.is-open .mobile-nav__panel { transform: translateX(0); }
+.mobile-nav.is-open .mobile-nav__backdrop { opacity: 1; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-nav__panel,
+  .mobile-nav__backdrop { transition: none !important; }
+}
+
+/* --- Visibility rules: mobile vs desktop --- */
+@media (max-width: 767.98px) {
+  /* Hide desktop nav; show toggle button */
+  .site-nav { display: none; }
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border, #2a3648);
+    padding: .5rem .75rem;
+    border-radius: .75rem;
+  }
+  .menu-toggle:hover { background: var(--surface-2, #1f2937); }
+}
+
+@media (min-width: 768px) {
+  /* On desktop, hide the flyout entirely; show desktop nav */
+  .menu-toggle { display: none; }
+  #mobile-nav { display: none !important; }
+  .site-nav { display: block; }
+}
+
+/* Ensure the toggle sits above content in cramped headers */
+.menu-toggle { position: relative; z-index: 2; }
+
+/* When drawer is hidden, it's not in the stacking context */
+#mobile-nav[hidden] { display: none !important; }
