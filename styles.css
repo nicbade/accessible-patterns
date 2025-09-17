@@ -11,6 +11,12 @@
     --focus: #22d3ee;
 }
 
+/* Respect user default font size and system zoom/text-size settings */
+html {
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
 html,
 body {
     height: 100%;
@@ -20,7 +26,8 @@ body {
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    font: 400 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    /* switched from 16px to 1rem to honor user text prefs */
+    font: 400 1rem/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
 }
 
 :focus-visible {
