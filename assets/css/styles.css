@@ -1,62 +1,79 @@
 :root {
-  /* Background tiers */
-  --bg: #0b0f14;       /* page background (darker) */
-  --surface: #111827;  /* main surfaces (lighter than bg) */
-  --surface-2: #1f2937;/* secondary surfaces */
+    /* Background tiers */
+    --bg: #0b0f14;
+    /* page background (darker) */
+    --surface: #111827;
+    /* main surfaces (lighter than bg) */
+    --surface-2: #1f2937;
+    /* secondary surfaces */
 
-  /* Text */
-  --text: #e8eef6;     /* body text on dark surfaces */
-  --muted: #a7b1c2;
+    /* Text */
+    --text: #e8eef6;
+    /* body text on dark surfaces */
+    --muted: #a7b1c2;
 
-  /* Brand + states */
-  --accent: #60a5fa;        /* button/link backgrounds (lighter blue) */
-  --accent-strong: #3b82f6; /* hover/active */
-  --link: #93c5fd;          /* link text color */
-  --focus: #38bdf8;         /* focus ring */
+    /* Brand + states */
+    --accent: #60a5fa;
+    /* button/link backgrounds (lighter blue) */
+    --accent-strong: #3b82f6;
+    /* hover/active */
+    --link: #93c5fd;
+    /* link text color */
+    --focus: #38bdf8;
+    /* focus ring */
 
-  /* Separators */
-  --border: #2a3648;        /* subtle border for elevation */
+    /* Separators */
+    --border: #2a3648;
+    /* subtle border for elevation */
 }
 
 
 /* ==========================================
    2) Elevation + separation (use the tokens)
    ========================================== */
-html, body { background: var(--bg); color: var(--text); }
+html,
+body {
+    background: var(--bg);
+    color: var(--text);
+}
 
 .site-header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
 }
 
 .card,
 .accordion .accordion-item {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 1rem;
-  box-shadow: 0 6px 16px rgba(0,0,0,.35);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .35);
 }
 
 .accordion-panel {
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: .75rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: .75rem;
 }
 
-a { color: var(--link); }
+a {
+    color: var(--link);
+}
 
 .button {
-  background: var(--accent);
-  color: #0b0f14; /* dark text for contrast on blue */
+    background: var(--accent);
+    color: #0b0f14;
+    /* dark text for contrast on blue */
 }
+
 .button:hover {
-  background: var(--accent-strong);
-  color: #0b0f14;
+    background: var(--accent-strong);
+    color: #0b0f14;
 }
 
 :focus-visible {
-  outline: 3px solid var(--focus);
-  outline-offset: 2px;
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
 }
 
 
@@ -208,9 +225,11 @@ a {
     margin-top: 0;
 }
 
-.cards, .cards > li,
-.featured-patterns, .featured-patterns > li {
-  list-style: none !important;
+.cards,
+.cards>li,
+.featured-patterns,
+.featured-patterns>li {
+    list-style: none !important;
 }
 
 .button {
@@ -417,138 +436,332 @@ button {
 
 /* Position the toggle neatly above the accordion items */
 .accordion-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin: 0 0 .5rem 0;
-}
-.accordion-toggle-all.button {
-  margin: 0;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 0 .5rem 0;
 }
 
+.accordion-toggle-all.button {
+    margin: 0;
+}
+
+/* Guidance blocks */
+.a11y-help {
+    margin: 1rem 0;
+}
+
+.a11y-help h2 {
+    margin: 0 0 .5rem 0;
+}
+
+.a11y-block {
+    margin: 1rem 0;
+}
+
+/* Nicely styled keys */
+.a11y-help kbd {
+    font: 500 .9em/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: var(--text, #e8eef6);
+    background: var(--surface-2, #1f2937);
+    border: 1px solid var(--border, #2a3648);
+    border-radius: .375rem;
+    padding: .15em .45em;
+    white-space: nowrap;
+}
+
+/* End Accordion  */
 
 /* --- Assistive utility (if you don't already have one) --- */
 .sr-only {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  padding: 0 !important;
-  margin: -1px !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 1px, 1px) !important;
-  white-space: nowrap !important;
-  border: 0 !important;
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 1px, 1px) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
 }
 
 /* --- Prevent body scroll when drawer is open --- */
-body.nav-open { overflow: hidden; }
+body.nav-open {
+    overflow: hidden;
+}
 
 /* --- Flyout container (covers viewport) --- */
-.mobile-nav[hidden] { display: none; }
+.mobile-nav[hidden] {
+    display: none;
+}
 
 .mobile-nav {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
 }
 
 .mobile-nav__backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,.55);
-  opacity: 0;
-  transition: opacity .22s ease;
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .55);
+    opacity: 0;
+    transition: opacity .22s ease;
 }
 
 /* Drawer panel */
 .mobile-nav__panel {
-  position: absolute;
-  top: 0; right: 0;
-  height: 100%;
-  width: min(86vw, 360px);
-  background: var(--surface, #111827);
-  color: var(--text, #e8eef6);
-  border-left: 1px solid var(--border, #2a3648);
-  box-shadow: -8px 0 20px rgba(0,0,0,.4);
-  transform: translateX(100%);
-  transition: transform .22s ease;
-  display: flex;
-  flex-direction: column;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: min(86vw, 360px);
+    background: var(--surface, #111827);
+    color: var(--text, #e8eef6);
+    border-left: 1px solid var(--border, #2a3648);
+    box-shadow: -8px 0 20px rgba(0, 0, 0, .4);
+    transform: translateX(100%);
+    transition: transform .22s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .mobile-nav__header {
-  display: flex;
-  justify-content: flex-end;
-  padding: .5rem;
+    display: flex;
+    justify-content: flex-end;
+    padding: .5rem;
 }
 
 .mobile-nav__close {
-  background: transparent;
-  color: var(--text, #e8eef6);
-  border: 1px solid var(--border, #2a3648);
-  padding: .5rem .75rem;
-  border-radius: .5rem;
+    background: transparent;
+    color: var(--text, #e8eef6);
+    border: 1px solid var(--border, #2a3648);
+    padding: .5rem .75rem;
+    border-radius: .5rem;
 }
-.mobile-nav__close:hover { background: var(--surface-2, #1f2937); }
+
+.mobile-nav__close:hover {
+    background: var(--surface-2, #1f2937);
+}
+
 .mobile-nav__close:focus-visible {
-  outline: 3px solid var(--focus, #38bdf8);
-  outline-offset: 2px;
+    outline: 3px solid var(--focus, #38bdf8);
+    outline-offset: 2px;
 }
 
 .mobile-nav__list {
-  list-style: none;
-  margin: 0;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: .25rem;
-}
-.mobile-nav__list a {
-  display: block;
-  padding: .9rem 1rem;
-  border-radius: .5rem;
-  color: var(--text, #e8eef6);
-  text-decoration: none;
-}
-.mobile-nav__list a:hover,
-.mobile-nav__list a:focus-visible {
-  background: var(--surface-2, #1f2937);
+    list-style: none;
+    margin: 0;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
 }
 
-.mobile-nav.is-open .mobile-nav__panel { transform: translateX(0); }
-.mobile-nav.is-open .mobile-nav__backdrop { opacity: 1; }
+.mobile-nav__list a {
+    display: block;
+    padding: .9rem 1rem;
+    border-radius: .5rem;
+    color: var(--text, #e8eef6);
+    text-decoration: none;
+}
+
+.mobile-nav__list a:hover,
+.mobile-nav__list a:focus-visible {
+    background: var(--surface-2, #1f2937);
+}
+
+.mobile-nav.is-open .mobile-nav__panel {
+    transform: translateX(0);
+}
+
+.mobile-nav.is-open .mobile-nav__backdrop {
+    opacity: 1;
+}
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .mobile-nav__panel,
-  .mobile-nav__backdrop { transition: none !important; }
+
+    .mobile-nav__panel,
+    .mobile-nav__backdrop {
+        transition: none !important;
+    }
 }
 
 /* --- Visibility rules: mobile vs desktop --- */
 @media (max-width: 767.98px) {
-  /* Hide desktop nav; show toggle button */
-  .site-nav { display: none; }
-  .menu-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: .5rem;
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--border, #2a3648);
-    padding: .5rem .75rem;
-    border-radius: .75rem;
-  }
-  .menu-toggle:hover { background: var(--surface-2, #1f2937); }
+
+    /* Hide desktop nav; show toggle button */
+    .site-nav {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+        background: transparent;
+        color: var(--text);
+        border: 1px solid var(--border, #2a3648);
+        padding: .5rem .75rem;
+        border-radius: .75rem;
+    }
+
+    .menu-toggle:hover {
+        background: var(--surface-2, #1f2937);
+    }
 }
 
 @media (min-width: 768px) {
-  /* On desktop, hide the flyout entirely; show desktop nav */
-  .menu-toggle { display: none; }
-  #mobile-nav { display: none !important; }
-  .site-nav { display: block; }
+
+    /* On desktop, hide the flyout entirely; show desktop nav */
+    .menu-toggle {
+        display: none;
+    }
+
+    #mobile-nav {
+        display: none !important;
+    }
+
+    .site-nav {
+        display: block;
+    }
 }
 
 /* Ensure the toggle sits above content in cramped headers */
-.menu-toggle { position: relative; z-index: 2; }
+.menu-toggle {
+    position: relative;
+    z-index: 2;
+}
 
 /* When drawer is hidden, it's not in the stacking context */
-#mobile-nav[hidden] { display: none !important; }
+#mobile-nav[hidden] {
+    display: none !important;
+}
+
+/* Align the actions row */
+.actions {
+    display: flex;
+    gap: .5rem;
+    justify-content: flex-end;
+    margin: 0 0 .5rem 0;
+}
+
+/* Key styling */
+kbd {
+    font: 500 .9em/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: var(--text, #e8eef6);
+    background: var(--surface-2, #1f2937);
+    border: 1px solid var(--border, #2a3648);
+    border-radius: .375rem;
+    padding: .15em .45em;
+}
+
+/* Fit accordion images to the viewport (no overflow) */
+.accordion-media {
+  width: 100%;
+}
+
+.accordion-media img {
+  display: block;
+  /* Never overflow horizontally */
+  max-width: 100%;
+  /* Keep aspect ratio; scale down if too tall */
+  height: auto;
+  /* Cap the visible height to the viewport, but keep a sensible min/max */
+  max-height: clamp(240px, 65vh, 800px);
+  /* Nice to have */
+  margin: 0 auto;
+  object-fit: contain; /* safe even if height auto; kept for future frame-based tweaks */
+}
+
+/* === A11y contrast for captions & code inside accordion panels === */
+/* Safe defaults tuned for a dark UI; works with your Indigo tokens. */
+:root {
+  /* Caption text (light enough to exceed 4.5:1 on var(--surface-2) #1f2937) */
+  --caption-text: #e2e8f0;   /* slate-200-ish */
+
+  /* Code colors (high contrast on very dark bg) */
+  --code-bg:   #0f172a;      /* slate-900 */
+  --code-text: #e8eef6;      /* matches your --text */
+  --code-bd:   #334155;      /* slate-600 border */
+}
+
+/* Only affect visible captions (not .visually-hidden) */
+.accordion-panel figcaption:not(.visually-hidden) {
+  color: var(--caption-text);
+  font-size: 0.9375rem; /* optional: slightly smaller than body */
+  line-height: 1.4;
+  margin-top: .5rem;
+}
+
+/* Inline code */
+.accordion-panel code {
+  color: var(--code-text);
+  background: var(--code-bg);
+  border: 1px solid var(--code-bd);
+  padding: .1em .4em;
+  border-radius: .35rem;
+  font: 500 .9em/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+/* Code blocks */
+.accordion-panel pre {
+  color: var(--code-text);
+  background: var(--code-bg);
+  border: 1px solid var(--code-bd);
+  padding: .75rem 1rem;
+  border-radius: .5rem;
+  overflow: auto;
+}
+.accordion-panel pre code {
+  background: transparent; /* avoid double bg inside pre */
+  border: 0;
+  padding: 0;
+}
+
+/* Strong, scoped overrides to ensure ≥4.5:1 in dark panels */
+.pattern .accordion-panel figcaption:not(.visually-hidden) {
+  /* Slate-100 on #1f2937 (~gray-800) clears AA easily */
+  color: #f1f5f9; /* ≈9:1 against #1f2937 */
+}
+
+/* Keep code fully AA as well (in case Pico overrides) */
+.pattern .accordion-panel code {
+  color: #e8eef6;           /* light text */
+  background: #0f172a;      /* very dark bg */
+  border: 1px solid #334155;
+}
+.pattern .accordion-panel pre {
+  color: #e8eef6;
+  background: #0f172a;
+  border: 1px solid #334155;
+}
+.pattern .accordion-panel pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+/* === AA contrast fix for secondary text (global) ===
+   Ensures ≥ 4.5:1 on #111827 (surface) and #1f2937 (surface-2) */
+:root {
+  --muted: #e2e8f0; /* light slate 200 – strong contrast on dark */
+}
+
+/* Make visible figcaptions use the muted token and ignore low-opacities */
+.accordion-panel figcaption:not(.visually-hidden) {
+  color: var(--muted) !important;
+  opacity: 1 !important; /* some frameworks dim captions */
+}
+
+/* (Optional) Anywhere else on dark surfaces */
+figcaption:not(.visually-hidden) {
+  color: var(--muted);
+}
+
+/* If you also want inline code to pop (kept AA) */
+.accordion-panel code {
+  color: var(--text, #e8eef6);
+  background: #0f172a;
+  border: 1px solid #334155;
+}

@@ -10,12 +10,13 @@
     <meta name="description"
         content="Accessible Patterns site shell with semantic landmarks, skip link, and responsive primary navigation following WAI-ARIA APG and WCAG 2.1 AA." />
     <!-- Global styles & scripts -->
+    <!-- PicoCSS baseline (kept optional to avoid external dependency) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
     <script src="assets/js/main.js" defer></script>
 
     <title>Accessible Patterns — Site Shell</title>
-    <!-- Optional: PicoCSS baseline (kept optional to avoid external dependency) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+
 </head>
 
 <body>
@@ -168,18 +169,51 @@
                                     </p>
                                 </div>
                             </div>
+
+                            <section class="a11y-block" aria-labelledby="kbd-only-title">
+                                <h3 id="kbd-only-title">Keyboard-only navigation</h3>
+                                <ul>
+                                    <li>Press <kbd>Tab</kbd> until a question (button) is focused.</li>
+                                    <li>Press <kbd>Enter</kbd> or <kbd>Space</kbd> to expand/collapse that section.</li>
+                                    <li>Use <kbd>↓</kbd> / <kbd>↑</kbd> to move to the next/previous question.
+                                        (Optional)</li>
+                                    <li>Use <kbd>Home</kbd> / <kbd>End</kbd> to jump to the first/last question.</li>
+                                    <li>When a section is collapsed, its content isn’t tabbable (expected).</li>
+                                    <li>When expanded, use <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> to move
+                                        through links,
+                                        buttons, or fields inside.</li>
+                                    <li>If present, the <strong>Open/Close all</strong> button toggles every section;
+                                        focus stays on
+                                        that button after toggling.</li>
+                                </ul>
+                            </section>
+
+                            <div class="a11y-block">
+                                <h3 id="sr-title">JAWS / NVDA navigation (Windows)</h3>
+                                <ul>
+                                    <li>Stay in <strong>Browse/Virtual</strong> mode by default.</li>
+                                    <li>Use <kbd>B</kbd> / <kbd>Shift</kbd>+<kbd>B</kbd> to move to the next/previous
+                                        <strong>button</strong> (each question is a button).</li>
+                                    <li>Or use <kbd>H</kbd> / <kbd>Shift</kbd>+<kbd>H</kbd> to jump between
+                                        <strong>headings</strong> for each question.</li>
+                                    <li>Press <kbd>Enter</kbd> or <kbd>Space</kbd> on a question to expand/collapse; the
+                                        reader
+                                        announces “expanded/collapsed”.</li>
+                                    <li>Inside an expanded panel, use arrow keys to read line by line, or <kbd>Tab</kbd>
+                                        to jump
+                                        between interactive elements.</li>
+                                    <li>Find the <strong>Open/Close all</strong> control with <kbd>B</kbd>; toggle with
+                                        <kbd>Space</kbd>/<kbd>Enter</kbd> (JAWS/NVDA announce “pressed/not pressed”).
+                                    </li>
+                                </ul>
+                            </div>
                         </section>
                     </section>
 
                 </section>
 
 
-                <section id="guidelines" class="container">
-                    <h2>Guidelines</h2>
-                    <p>Favor native semantics, minimal ARIA, and strong focus visibility. Colors meet WCAG 2.1
-                        AA
-                        contrast.</p>
-                </section>
+
             </main>
 
             <!-- Footer -->
