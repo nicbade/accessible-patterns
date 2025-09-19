@@ -415,6 +415,17 @@ button {
     }
 }
 
+/* Position the toggle neatly above the accordion items */
+.accordion-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 .5rem 0;
+}
+.accordion-toggle-all.button {
+  margin: 0;
+}
+
+
 /* --- Assistive utility (if you don't already have one) --- */
 .sr-only {
   position: absolute !important;
