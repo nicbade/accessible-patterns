@@ -843,3 +843,102 @@ section.accordion.is-warning {
 section.accordion.is-neutral {
     --pattern-accent: var(--pattern-accent-neutral);
 }
+
+/* Breadcrumbs  */
+/* ===============================
+   Component: Breadcrumb
+   =============================== */
+
+.breadcrumb {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: .75rem;
+  padding: .5rem .75rem;
+  margin: 1rem 0;
+}
+
+.breadcrumb ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem .5rem; /* row-gap, column-gap */
+}
+
+.breadcrumb li {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+
+/* Links */
+.breadcrumb a {
+  color: var(--link);
+  text-decoration: none;
+}
+.breadcrumb a:hover { text-decoration: underline; }
+
+/* Current page (not a link) */
+.breadcrumb [aria-current="page"] {
+  color: var(--text);           /* ≥4.5:1 on var(--surface) */
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Visual separator (›) via CSS so ATs don’t announce it */
+.breadcrumb li + li::before {
+  content: "›";
+  margin: 0 .25rem 0 .125rem;
+  line-height: 1;
+  color: var(--text-muted);     /* ≥4.5:1 on var(--surface) */
+}
+
+/* Long labels: don’t break layouts */
+.breadcrumb li a,
+.breadcrumb [aria-current="page"] {
+  display: inline-block;
+  max-width: 30ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Dark mode keeps contrast passing */
+@media (prefers-color-scheme: dark) {
+  .breadcrumb { background: var(--surface); border-color: var(--border); }
+  .breadcrumb a { color: var(--link); }
+  .breadcrumb [aria-current="page"] { color: var(--text); }
+  .breadcrumb li + li::before { color: var(--text-muted); }
+}
+
+
+/* ===============================
+   Generic Section Visuals (for any component section)
+   Your breadcrumb section already has: class="pattern is-neutral"
+   =============================== */
+
+section.pattern {
+  background: var(--pattern-bg, var(--surface));
+  border: 1px solid var(--pattern-border, var(--border));
+  border-left: 6px solid var(--pattern-accent, var(--border));
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+/* Optional accent variants */
+section.pattern.is-info    { --pattern-accent: var(--pattern-accent-info, #1d4ed8); }
+section.pattern.is-success { --pattern-accent: var(--pattern-accent-success, #065f46); }
+section.pattern.is-warning { --pattern-accent: var(--pattern-accent-warning, #b45309); }
+section.pattern.is-neutral { --pattern-accent: var(--pattern-accent-neutral, #4b5563); }
+
+/* Headings and hints stay readable on the section background */
+section.pattern h2,
+section.pattern h3,
+section.pattern h4 { color: var(--text); margin-top: .25rem; }
+
+section.pattern .help,
+section.pattern .meta,
+section.pattern figcaption { color: var(--text-muted); }
