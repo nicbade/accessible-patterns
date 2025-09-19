@@ -14,7 +14,7 @@ window.addEventListener('resize', setSkipOffset);
 
   // Mobile menu toggle logic (disclosure pattern)
   const root = document.querySelector('.pattern[data-pattern="site-shell"]');
-  const toggle = root?.querySelector('.menu-toggle'); // ← fixed optional chaining
+  const toggle = root?.querySelector('.menu-toggle'); // ✅ fixed optional chaining
   const list = document.getElementById('primary-nav');
 
   function openMenu() {
@@ -131,18 +131,30 @@ window.addEventListener('resize', setSkipOffset);
     function setExpanded(trigger, expanded) {
       const panel = document.getElementById(trigger.getAttribute('aria-controls'));
       trigger.setAttribute('aria-expanded', String(expanded));
+
       if (expanded) {
         panel.hidden = false;
-        if (!prefersReduced) {
-          panel.style.maxHeight = panel.scrollHeight + 'px';
+
+        // If animating, open to content height; otherwise just show.
+        if (!prefersReduced && panel.classList.contains('__anim')) {
+          // Baseline 0 → then grow to natural height
+          panel.style.maxHeight = '0px';
           panel.style.paddingTop = '';
           panel.style.paddingBottom = '';
+          requestAnimationFrame(() => {
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+          });
         }
       } else {
-        if (!prefersReduced) {
-          panel.style.maxHeight = '0px';
-          panel.style.paddingTop = '0px';
-          panel.style.paddingBottom = '0px';
+        if (!prefersReduced && panel.classList.contains('__anim')) {
+          // Collapse with animation; clip content during transition
+          panel.style.maxHeight = panel.scrollHeight + 'px'; // set current height
+          requestAnimationFrame(() => {
+            panel.style.maxHeight = '0px';
+            panel.style.paddingTop = '0px';
+            panel.style.paddingBottom = '0px';
+          });
+          // After transition, fully hide so contents are untabbable
           panel.addEventListener('transitionend', () => { panel.hidden = true; }, { once: true });
         } else {
           panel.hidden = true;
@@ -215,8 +227,8 @@ window.addEventListener('resize', setSkipOffset);
 /* ===== Mobile nav toggle (accessible) ===== */
 (function () {
   const header = document.querySelector('.site-header');
-  const toggle = header?.querySelector('.menu-toggle');
-  const navList = header?.querySelector('.site-nav .nav-list');
+  const toggle = header?.querySelector('.menu-toggle'); // ✅ fixed
+  const navList = header?.querySelector('.site-nav .nav-list'); // ✅ fixed
 
   if (!header || !toggle || !navList) return;
 
@@ -263,9 +275,9 @@ window.addEventListener('resize', setSkipOffset);
   const body = document.body;
   const toggle = document.querySelector('.menu-toggle');
   const drawer = document.getElementById('mobile-nav');
-  const panel  = drawer?.querySelector('.mobile-nav__panel');
-  const backdrop = drawer?.querySelector('.mobile-nav__backdrop');
-  const closeButtons = drawer?.querySelectorAll('[data-close]');
+  const panel  = drawer?.querySelector('.mobile-nav__panel');     // ✅ fixed
+  const backdrop = drawer?.querySelector('.mobile-nav__backdrop'); // ✅ fixed
+  const closeButtons = drawer?.querySelectorAll('[data-close]');   // ✅ fixed
 
   if (!toggle || !drawer || !panel) return;
 
@@ -340,13 +352,11 @@ window.addEventListener('resize', setSkipOffset);
   });
 
   // Backdrop and explicit close buttons
-  backdrop?.addEventListener('click', closeDrawer);
-  closeButtons?.forEach(btn => btn.addEventListener('click', closeDrawer));
+  backdrop?.addEventListener('click', closeDrawer);    // ✅ fixed
+  closeButtons?.forEach(btn => btn.addEventListener('click', closeDrawer)); // ✅ fixed
 
   // Close when resizing to desktop
   const mq = window.matchMedia('(min-width: 768px)');
   const sync = e => { if (e.matches) closeDrawer(); };
   mq.addEventListener ? mq.addEventListener('change', sync) : mq.addListener(sync);
 })();
-
-

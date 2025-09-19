@@ -26,7 +26,7 @@
             <a class="skip-link" href="#main">Skip to main content</a>
 
             <header class="site-header pattern" data-pattern="site-shell">
-                <a class="site-logo" href="/" aria-label="Accessible Patterns Home">
+                <a class="site-logo" href="#" aria-label="Accessible Patterns Home">
                     <span class="logo-box" aria-hidden="true"></span>
                     <span class="site-name">Accessible Patterns</span>
                 </a>
@@ -79,19 +79,17 @@
                     <h2>Featured Patterns</h2>
                     <ul class="cards">
                         <li class="card">
-                            <h3>Accordion</h3>
+                            <h3><a href="#accordion">Accordion</a></h3>
                             <p>Simple show/hide details with a native control.</p>
-                            <a class="button" href="#accordion">View</a>
                         </li>
                         <li class="card">
-                            <h3>Tabs</h3>
+                            <!-- Link when built -->
+                            <h3>Tabs</h3> 
                             <p>Keyboard-accessible tab interface per APG.</p>
-                            <a class="button" href="#0">View</a>
                         </li>
                         <li class="card">
                             <h3>Modal</h3>
                             <p>Dialog with focus trap and inert background.</p>
-                            <a class="button" href="#0">View</a>
                         </li>
                     </ul>
 
@@ -119,7 +117,6 @@
                                         <!-- Update the path to your image -->
                                         <img src="assets/img/chloeDoggles.png"
                                             alt="Chloe the Golden Retriever wearing doggles">
-                                        <figcaption class="visually-hidden">Chloe at Puppy class</figcaption>
                                     </figure>
 
                                     <p>
@@ -139,8 +136,7 @@
                                         Can I open more than one section?
                                     </button>
                                 </h4>
-                                <div id="acc-panel-2" class="accordion-panel" role="region"
-                                    aria-labelledby="acc-trigger-2" hidden>
+                                <div id="acc-panel-2" class="accordion-panel" hidden>
                                     <p>
                                         Yes. This accordion container has <code>data-allow-multiple</code>, so
                                         multiple
@@ -150,27 +146,7 @@
                                 </div>
                             </div>
 
-                            <!-- Item 3 -->
-                            <div class="accordion-item">
-                                <h4 class="accordion-heading">
-                                    <button type="button" class="accordion-trigger" id="acc-trigger-3"
-                                        aria-expanded="false" aria-controls="acc-panel-3">
-                                        Where do I put my image?
-                                    </button>
-                                </h4>
-                                <div id="acc-panel-3" class="accordion-panel" role="region"
-                                    aria-labelledby="acc-trigger-3" hidden>
-                                    <figure class="accordion-media">
-                                        <!-- <img src="assets/img/placeholder-16x9.jpg"
-                                                    alt="Placeholder 16:9 illustrative image"> -->
-                                    </figure>
-                                    <p>Drop your image into the <code>.accordion-media</code> figure inside the
-                                        panel.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <section class="a11y-block" aria-labelledby="kbd-only-title">
+                            <div class="a11y-block">
                                 <h3 id="kbd-only-title">Keyboard-only navigation</h3>
                                 <ul>
                                     <li>Press <kbd>Tab</kbd> until a question (button) is focused.</li>
@@ -186,7 +162,7 @@
                                         focus stays on
                                         that button after toggling.</li>
                                 </ul>
-                            </section>
+                            </div>
 
                             <div class="a11y-block">
                                 <h3 id="sr-title">JAWS / NVDA navigation (Windows)</h3>
@@ -220,12 +196,12 @@
             <footer class="site-footer">
                 <nav aria-label="Footer">
                     <ul class="footer-links">
-                        <li><a href="#privacy">Privacy</a></li>
-                        <li><a href="#terms">Terms</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li>
+                            <a href="#contact">Contact</a>
+                        </li>
                     </ul>
                 </nav>
-                <p>&copy; <span id="year"></span> Accessible Patterns</p>
+                <p>&copy; <span id="year"></span> nicbade.com</p>
             </footer>
         </div>
 
