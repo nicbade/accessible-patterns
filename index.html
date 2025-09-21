@@ -149,7 +149,7 @@
                         </div>
 
                         <div class="a11y-block">
-                            <h3 id="kbd-only-title">Keyboard-only navigation</h3>
+                            <h4 id="kbd-only-title">Keyboard-only navigation</h4>
                             <ul>
                                 <li>Press <kbd>Tab</kbd> until a question (button) is focused.</li>
                                 <li>Press <kbd>Enter</kbd> or <kbd>Space</kbd> to expand/collapse that section.</li>
@@ -167,7 +167,7 @@
                         </div>
 
                         <div class="a11y-block">
-                            <h3 id="sr-title">JAWS / NVDA navigation (Windows)</h3>
+                            <h4 id="sr-title">JAWS / NVDA navigation (Windows)</h4>
                             <ul>
                                 <li>Stay in <strong>Browse/Virtual</strong> mode by default.</li>
                                 <li>Use <kbd>B</kbd> / <kbd>Shift</kbd>+<kbd>B</kbd> to move to the next/previous
@@ -190,21 +190,21 @@
 
                     <!-- Component: Breadcrumb -->
                     <section class="pattern is-neutral" data-pattern="breadcrumb" aria-labelledby="bc1-h">
-                        <header class="container" style="padding:0; margin-bottom:.25rem;">
-                            <h2 id="bc1-h">Breadcrumb</h2>
+                        <div class="container" style="padding:0; margin-bottom:.25rem;">
+                            <h3 id="bc1-h">Breadcrumb</h3>
                             <p class="help">
                                 Shows where you are in the site. The current page is not a link; earlier
                                 items link to their parent pages (per WAI-ARIA APG).
                             </p>
-                        </header>
+                        </div>
 
                         <div class="container" style="padding:0;">
                             <!-- Live example -->
                             <nav class="breadcrumb" aria-label="Breadcrumb">
                                 <ol>
-                                    <li><a href="/">Home</a></li>
-                                    <li><a href="/patterns/">Patterns</a></li>
-                                    <li><a href="/patterns/navigation/">Navigation</a></li>
+                                    <li><a href="#">Home</a></li>
+                                    <li><a href="#">Patterns</a></li>
+                                    <li><a href="#">Navigation</a></li>
                                     <li>
                                         <span>Breadcrumb</span>
                                         <span class="visually-hidden">(current page)</span>
@@ -215,13 +215,13 @@
 
                         <!-- How to use -->
                         <div class="container" style="padding:0;">
-                            <h3 class="small" style="margin:.5rem 0 0;">Keyboard</h3>
+                            <h4 class="small" style="margin:.5rem 0 0;">Keyboard</h4>
                             <ul class="small" style="margin:.25rem 0 0;">
                                 <li>Use <strong>Tab / Shift+Tab</strong> to move through the breadcrumb links; press
                                     <strong>Enter</strong> to follow one.</li>
                             </ul>
 
-                            <h3 class="small" style="margin:.75rem 0 0;">Screen readers</h3>
+                            <h4 class="small" style="margin:.75rem 0 0;">Screen readers</h4>
                             <ul class="small" style="margin:.25rem 0 0;">
                                 <li><strong>NVDA (Windows):</strong> Press <strong>D</strong> to jump between landmarks
                                     until you hear “Breadcrumb, navigation”, or press <strong>NVDA+F7</strong> and
@@ -236,6 +236,40 @@
 
                     </section>
 
+                    <!-- Component: Button -->
+                    <section class="pattern is-success" data-pattern="button" aria-labelledby="btn-h">
+                        <header class="container section-header">
+                            <h2 id="btn-h">Button</h2>
+                            <p class="help">Use for the main action on a page. Press Enter or Space to activate.</p>
+                        </header>
+
+                        <div class="container container--flush">
+                            <!-- Live example: single primary button -->
+                            <div class="button-demo">
+                                <button type="button" class="button button--primary" id="btn-primary-demo">
+                                    Primary action
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- How to use -->
+                        <div class="container container--flush">
+                            <h3 class="small mt-050">Keyboard</h3>
+                            <ul class="small list-compact">
+                                <li><strong>Tab / Shift+Tab</strong> moves focus to the button.</li>
+                                <li><strong>Enter</strong> or <strong>Space</strong> activates it and shows an alert.
+                                </li>
+                                <li><strong>Esc</strong> key closes alert and returns users focus to the triggering element (Button).</li>
+                            </ul>
+
+                            <h3 class="small mt-075">Screen readers (NVDA / JAWS / VoiceOver)</h3>
+                            <ul class="small list-compact">
+                                <li>Announces as “button.” Activate with Enter/Space (or VO+Space on macOS). A native
+                                    browser alert appears.</li>
+                            </ul>
+                        </div>
+                        <!-- Button Pattern end  -->
+                    </section>
 
                     <!-- Pattern section end  -->
                 </section>

@@ -1,5 +1,6 @@
 // --- Sticky header offset for skip/anchors (compute first so it's ready) ---
 const headerEl = document.querySelector('.site-header');
+
 function setSkipOffset() {
   const h = headerEl ? headerEl.offsetHeight : 0;
   document.documentElement.style.setProperty('--skip-offset', `${h}px`);
@@ -21,10 +22,12 @@ window.addEventListener('resize', setSkipOffset);
     toggle.setAttribute('aria-expanded', 'true');
     list.hidden = false;
   }
+
   function closeMenu() {
     toggle.setAttribute('aria-expanded', 'false');
     list.hidden = true;
   }
+
   function isOpen() {
     return toggle.getAttribute('aria-expanded') === 'true';
   }
@@ -238,6 +241,7 @@ window.addEventListener('resize', setSkipOffset);
     header.setAttribute('data-nav-open', 'false');
     navList.setAttribute('hidden', '');
   }
+
   function expand() {
     toggle.setAttribute('aria-expanded', 'true');
     header.setAttribute('data-nav-open', 'true');
@@ -254,6 +258,7 @@ window.addEventListener('resize', setSkipOffset);
 
   // If viewport switches to desktop, ensure menu is visible & attributes sane
   const mq = window.matchMedia('(min-width: 768px)');
+
   function syncForViewport(e) {
     if (e.matches) {
       // desktop
@@ -352,11 +357,20 @@ window.addEventListener('resize', setSkipOffset);
   });
 
   // Backdrop and explicit close buttons
-  backdrop?.addEventListener('click', closeDrawer);    // ✅ fixed
+  backdrop?.addEventListener('click', closeDrawer);               // ✅ fixed
   closeButtons?.forEach(btn => btn.addEventListener('click', closeDrawer)); // ✅ fixed
 
   // Close when resizing to desktop
   const mq = window.matchMedia('(min-width: 768px)');
   const sync = e => { if (e.matches) closeDrawer(); };
   mq.addEventListener ? mq.addEventListener('change', sync) : mq.addListener(sync);
+})();
+
+/* ===== Button demo: primary triggers alert ===== */
+(function () {
+  const demoBtn = document.getElementById('btn-primary-demo');
+  if (!demoBtn) return;
+  demoBtn.addEventListener('click', () => {
+    alert('Button triggered an action!');
+  });
 })();

@@ -850,67 +850,85 @@ section.accordion.is-neutral {
    =============================== */
 
 .breadcrumb {
-  background: var(--surface);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: .75rem;
-  padding: .5rem .75rem;
-  margin: 1rem 0;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: .75rem;
+    padding: .5rem .75rem;
+    margin: 1rem 0;
 }
 
 .breadcrumb ol {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: .25rem .5rem; /* row-gap, column-gap */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25rem .5rem;
+    /* row-gap, column-gap */
 }
 
 .breadcrumb li {
-  display: inline-flex;
-  align-items: center;
-  min-width: 0;
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
 }
 
 /* Links */
 .breadcrumb a {
-  color: var(--link);
-  text-decoration: none;
+    color: var(--link);
+    text-decoration: none;
 }
-.breadcrumb a:hover { text-decoration: underline; }
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
 
 /* Current page (not a link) */
 .breadcrumb [aria-current="page"] {
-  color: var(--text);           /* ≥4.5:1 on var(--surface) */
-  font-weight: 600;
-  text-decoration: none;
+    color: var(--text);
+    /* ≥4.5:1 on var(--surface) */
+    font-weight: 600;
+    text-decoration: none;
 }
 
 /* Visual separator (›) via CSS so ATs don’t announce it */
-.breadcrumb li + li::before {
-  content: "›";
-  margin: 0 .25rem 0 .125rem;
-  line-height: 1;
-  color: var(--text-muted);     /* ≥4.5:1 on var(--surface) */
+.breadcrumb li+li::before {
+    content: "›";
+    margin: 0 .25rem 0 .125rem;
+    line-height: 1;
+    color: var(--text-muted);
+    /* ≥4.5:1 on var(--surface) */
 }
 
 /* Long labels: don’t break layouts */
 .breadcrumb li a,
 .breadcrumb [aria-current="page"] {
-  display: inline-block;
-  max-width: 30ch;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 30ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Dark mode keeps contrast passing */
 @media (prefers-color-scheme: dark) {
-  .breadcrumb { background: var(--surface); border-color: var(--border); }
-  .breadcrumb a { color: var(--link); }
-  .breadcrumb [aria-current="page"] { color: var(--text); }
-  .breadcrumb li + li::before { color: var(--text-muted); }
+    .breadcrumb {
+        background: var(--surface);
+        border-color: var(--border);
+    }
+
+    .breadcrumb a {
+        color: var(--link);
+    }
+
+    .breadcrumb [aria-current="page"] {
+        color: var(--text);
+    }
+
+    .breadcrumb li+li::before {
+        color: var(--text-muted);
+    }
 }
 
 
@@ -920,25 +938,174 @@ section.accordion.is-neutral {
    =============================== */
 
 section.pattern {
-  background: var(--pattern-bg, var(--surface));
-  border: 1px solid var(--pattern-border, var(--border));
-  border-left: 6px solid var(--pattern-accent, var(--border));
-  border-radius: 1rem;
-  padding: 1rem;
-  margin: 1rem 0;
+    background: var(--pattern-bg, var(--surface));
+    border: 1px solid var(--pattern-border, var(--border));
+    border-left: 6px solid var(--pattern-accent, var(--border));
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem 0;
 }
 
 /* Optional accent variants */
-section.pattern.is-info    { --pattern-accent: var(--pattern-accent-info, #1d4ed8); }
-section.pattern.is-success { --pattern-accent: var(--pattern-accent-success, #065f46); }
-section.pattern.is-warning { --pattern-accent: var(--pattern-accent-warning, #b45309); }
-section.pattern.is-neutral { --pattern-accent: var(--pattern-accent-neutral, #4b5563); }
+section.pattern.is-info {
+    --pattern-accent: var(--pattern-accent-info, #1d4ed8);
+}
+
+section.pattern.is-success {
+    --pattern-accent: var(--pattern-accent-success, #065f46);
+}
+
+section.pattern.is-warning {
+    --pattern-accent: var(--pattern-accent-warning, #b45309);
+}
+
+section.pattern.is-neutral {
+    --pattern-accent: var(--pattern-accent-neutral, #4b5563);
+}
 
 /* Headings and hints stay readable on the section background */
 section.pattern h2,
 section.pattern h3,
-section.pattern h4 { color: var(--text); margin-top: .25rem; }
+section.pattern h4 {
+    color: var(--text);
+    margin-top: .25rem;
+}
 
 section.pattern .help,
 section.pattern .meta,
-section.pattern figcaption { color: var(--text-muted); }
+section.pattern figcaption {
+    color: var(--text-muted);
+}
+
+
+/* ===============================
+   Utilities (replacing prior inline styles)
+   =============================== */
+
+/* Section headers used inside component sections */
+.section-header {
+    padding: 0;
+    margin-bottom: .25rem;
+}
+
+/* Remove container padding for “live example” and “how to use” blocks */
+.container--flush {
+    padding: 0;
+}
+
+/* Spacing for headings/lists inside components */
+.mt-050 {
+    margin-top: .5rem;
+}
+
+.mt-075 {
+    margin-top: .75rem;
+}
+
+.list-compact {
+    margin: .25rem 0 0;
+}
+
+
+/* ===============================
+   Component: Button (variants)
+   =============================== */
+
+/* Ensure touch target & readable line-height */
+.button {
+    min-height: 2.75rem;
+    /* ~44px target */
+    line-height: 1.2;
+}
+
+/* Variants */
+.button--primary {
+    background: var(--accent);
+    color: #0b0f14;
+}
+
+.button--primary:hover {
+    background: var(--accent-strong);
+    color: #0b0f14;
+}
+
+.button--secondary {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.button--secondary:hover {
+    background: var(--surface-2);
+}
+
+.button--ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.button--ghost:hover {
+    background: var(--surface-2);
+}
+
+/* Danger tokens (AA with on-color) */
+:root {
+    --danger: #dc2626;
+    /* red-600-ish */
+    --danger-strong: #b91c1c;
+    /* darker on hover */
+    --on-danger: #0b0f14;
+    /* dark text for strong contrast */
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --danger: #ef4444;
+        /* brighter red on dark */
+        --danger-strong: #dc2626;
+        --on-danger: #0b0f14;
+    }
+}
+
+.button--danger {
+    background: var(--danger);
+    color: var(--on-danger);
+    border: 1px solid var(--border);
+}
+
+.button--danger:hover {
+    background: var(--danger-strong);
+    color: var(--on-danger);
+}
+
+/* Full-width option */
+.button--block {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+/* Disabled (no opacity dimming to keep legibility) */
+.button[disabled],
+.button[aria-disabled="true"] {
+    background: var(--surface-2);
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Demo layout */
+.button-demo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    align-items: center;
+}
+
+.button-demo .button--block {
+    flex-basis: 100%;
+}
+
+/* Button component end  */
