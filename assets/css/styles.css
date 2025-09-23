@@ -1525,47 +1525,197 @@ a.button-link:focus-visible {
 /* === AA contrast for code elements (global) === */
 /* Tokens (override any earlier values) */
 :root {
-  --code-bg:   #0f172a;  /* very dark slate */
-  --code-text: #e8eef6;  /* light text */
-  --code-bd:   #334155;  /* subtle border */
+    --code-bg: #0f172a;
+    /* very dark slate */
+    --code-text: #e8eef6;
+    /* light text */
+    --code-bd: #334155;
+    /* subtle border */
 }
 
 /* Inline code chips */
 code:not(pre code) {
-  color: var(--code-text) !important;
-  background: var(--code-bg) !important;
-  border: 1px solid var(--code-bd);
-  padding: .1em .4em;
-  border-radius: .35rem;
-  font: 500 .9em/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  opacity: 1 !important;               /* defeat low-opacity defaults */
-  white-space: break-spaces;            /* wrap long tokens on small screens */
+    color: var(--code-text) !important;
+    background: var(--code-bg) !important;
+    border: 1px solid var(--code-bd);
+    padding: .1em .4em;
+    border-radius: .35rem;
+    font: 500 .9em/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    opacity: 1 !important;
+    /* defeat low-opacity defaults */
+    white-space: break-spaces;
+    /* wrap long tokens on small screens */
 }
 
 /* Code blocks */
 pre {
-  color: var(--code-text) !important;
-  background: var(--code-bg) !important;
-  border: 1px solid var(--code-bd);
-  padding: .75rem 1rem;
-  border-radius: .5rem;
-  overflow: auto;                       /* scroll if needed */
-  margin: .75rem 0;
+    color: var(--code-text) !important;
+    background: var(--code-bg) !important;
+    border: 1px solid var(--code-bd);
+    padding: .75rem 1rem;
+    border-radius: .5rem;
+    overflow: auto;
+    /* scroll if needed */
+    margin: .75rem 0;
 }
+
 pre code {
-  background: transparent !important;   /* avoid double bg */
-  color: inherit;
-  border: 0;
-  padding: 0;
-  white-space: pre;                      /* keep block formatting */
+    background: transparent !important;
+    /* avoid double bg */
+    color: inherit;
+    border: 0;
+    padding: 0;
+    white-space: pre;
+    /* keep block formatting */
 }
 
 /* Optional: code inside links keeps the link action but uses the AA chip */
-a > code {
-  text-decoration: none;
+a>code {
+    text-decoration: none;
 }
-a:hover > code {
-  box-shadow: 0 0 0 2px rgba(255,255,255,.08) inset;
+
+a:hover>code {
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, .08) inset;
 }
 
 /* Code contrast update end  */
+
+
+/* ===== Tooltips ===== */
+.tooltip-examples p {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    flex-wrap: wrap;
+}
+
+.tooltip-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Trigger styles */
+.tooltip-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    min-height: 2rem;
+    padding: 0 .5rem;
+    border: 1px solid var(--border, #2a3648);
+    border-radius: .5rem;
+    background: var(--surface, #111827);
+    color: var(--text, #e8eef6);
+    cursor: pointer;
+}
+
+.tooltip-trigger.icon-help {
+    width: 2rem;
+    padding: 0;
+    font-weight: 700;
+}
+
+.tooltip-trigger:hover {
+    background: var(--surface-2, #1f2937);
+}
+
+.tooltip-trigger:focus-visible {
+    outline: 3px solid var(--focus, #38bdf8);
+    outline-offset: 2px;
+}
+
+/* Bubble */
+.tooltip-bubble {
+    position: absolute;
+    z-index: 20;
+    max-width: min(36ch, 80vw);
+    padding: .45rem .6rem;
+    border-radius: .5rem;
+    border: 1px solid var(--border, #2a3648);
+    background: var(--surface-2, #1f2937);
+    color: var(--text, #e8eef6);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .45);
+    font-size: .9375rem;
+    line-height: 1.35;
+    pointer-events: none;
+    /* not interactive */
+    opacity: 0;
+    transform: translateY(-4px);
+}
+
+/* Placement (top / right / bottom / left) */
+.tooltip-wrapper[data-placement="top"] .tooltip-bubble {
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translate(-50%, -4px);
+}
+
+.tooltip-wrapper[data-placement="right"] .tooltip-bubble {
+    top: 50%;
+    left: calc(100% + 8px);
+    transform: translate(4px, -50%);
+}
+
+.tooltip-wrapper[data-placement="bottom"] .tooltip-bubble {
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translate(-50%, 4px);
+}
+
+.tooltip-wrapper[data-placement="left"] .tooltip-bubble {
+    top: 50%;
+    right: calc(100% + 8px);
+    transform: translate(-4px, -50%);
+}
+
+/* Visible state (we toggle [hidden]) */
+.tooltip-bubble:not([hidden]) {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+/* Arrow */
+.tooltip-bubble::after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--surface-2, #1f2937);
+    border-left: 1px solid var(--border, #2a3648);
+    border-top: 1px solid var(--border, #2a3648);
+    transform: rotate(45deg);
+}
+
+.tooltip-wrapper[data-placement="top"] .tooltip-bubble::after {
+    bottom: -5px;
+    left: calc(50% - 4px);
+    transform: rotate(45deg);
+}
+
+.tooltip-wrapper[data-placement="right"] .tooltip-bubble::after {
+    left: -5px;
+    top: calc(50% - 4px);
+    transform: rotate(45deg);
+}
+
+.tooltip-wrapper[data-placement="bottom"] .tooltip-bubble::after {
+    top: -5px;
+    left: calc(50% - 4px);
+    transform: rotate(45deg);
+}
+
+.tooltip-wrapper[data-placement="left"] .tooltip-bubble::after {
+    right: -5px;
+    top: calc(50% - 4px);
+    transform: rotate(45deg);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .tooltip-bubble {
+        transition: none !important;
+    }
+}
+
+/* Tooltips end  */

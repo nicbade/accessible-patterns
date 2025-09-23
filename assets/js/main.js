@@ -495,3 +495,63 @@ closers && closers.forEach(btn => btn.addEventListener('click', closeDrawer));
   });
 })();
 // Alert fix end 
+
+/* ===== Tooltips (automatic + manual) ===== */
+(function initTooltips() {
+  const ESC = 'Escape';
+
+  // Automatic tooltips: trigger uses aria-describedby="ID" to a role=tooltip bubble
+  const autoTriggers = document.querySelectorAll('.tooltip-trigger[aria-describedby]');
+  autoTriggers.forEach(trigger => {
+    const id = trigger.getAttribute('aria-describedby');
+    const bubble = id ? document.getElementById(id) : null;
+    if (!bubble) return;
+
+    function show() { bubble.hidden = false; }
+    function hide() { bubble.hidden = true; }
+
+    // Focus/hover show; blur/mouseleave hide
+    trigger.addEventListener('focus', show);
+    trigger.addEventListener('blur', hide);
+    trigger.addEventListener('mouseenter', show);
+    trigger.addEventListener('mouseleave', hide);
+
+    // Esc hides while focused
+    trigger.addEventListener('keydown', (e) => { if (e.key === ESC) { hide(); } });
+  });
+
+  // Manual tooltips: trigger uses aria-controls="ID" + aria-expanded
+  const manualTriggers = document.querySelectorAll('.tooltip-trigger[aria-controls]');
+  manualTriggers.forEach(trigger => {
+    const id = trigger.getAttribute('aria-controls');
+    const bubble = id ? document.getElementById(id) : null;
+    if (!bubble) return;
+
+    function setOpen(open) {
+      trigger.setAttribute('aria-expanded', String(open));
+      bubble.hidden = !open;
+    }
+
+    trigger.addEventListener('click', () => {
+      const open = trigger.getAttribute('aria-expanded') === 'true';
+      setOpen(!open);
+      trigger.focus(); // keep focus on trigger
+    });
+
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === ESC) {
+        setOpen(false);
+        trigger.focus();
+      }
+    });
+
+    // Click outside closes
+    document.addEventListener('click', (e) => {
+      if (!bubble.hidden && !trigger.contains(e.target) && !bubble.contains(e.target)) {
+        setOpen(false);
+      }
+    });
+  });
+})();
+
+// Tooltips end 
