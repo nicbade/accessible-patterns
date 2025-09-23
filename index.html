@@ -273,8 +273,10 @@
                     </section>
 
                     <!-- Pattern section end  -->
-                    <section class="carousel" aria-labelledby="carousel-heading" data-autoplay="false">
+                    <!-- Carousel -->
+                    <section class="carousel pattern is-info" aria-labelledby="carousel-heading" data-autoplay="false">
                         <h3 id="carousel-heading">Carousel</h3>
+
 
                         <div class="carousel-viewport">
                             <!-- Slide 1 -->
@@ -366,8 +368,78 @@
                                     (e.g., “Slide 2 of 3”).</li>
 
                             </ul>
+
+                        </section>
+                        <!-- Carousel end  -->
+                    </section>
+
+                    <!-- Modal -->
+                    <section class="modal pattern is-warning" aria-labelledby="modal-component-title">
+                        <h3 id="modal-component-title">Modal dialog</h3>
+
+
+                        <!-- actions (template uses: <div class="modal actions">) -->
+                        <div class="modal actions">
+                            <button type="button" class="button" id="open-demo-modal">Open modal</button>
+                        </div>
+
+                        <!-- component element -->
+                        <div id="demo-modal" class="modal-root" hidden>
+                            <div class="modal-backdrop" data-close></div>
+
+                            <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title"
+                                aria-describedby="demo-modal-desc" tabindex="-1">
+                                <div class="modal-header">
+                                    <h4 id="demo-modal-title">Chloe Modal Dialog!</h4>
+                                    <!-- <button type="button" class="modal-close" aria-label="Close dialog"
+                                        data-close>&times;</button> -->
+                                </div>
+
+                                <div class="modal-body" id="demo-modal-desc">
+                                    <!-- Image inside the modal (no <figure>) -->
+                                    <img class="modal-img" src="assets/img/example-1.jpg"
+                                        alt="Accordion component screenshot on dark theme" width="1600" height="900"
+                                        loading="lazy" decoding="async">
+                                    <p class="modal-text">Short description of what the image shows.</p>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="button" data-close>Close</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- guidance: keyboard-only -->
+                        <section aria-labelledby="kbd-modal">
+                            <h4 id="kbd-modal">Keyboard-only navigation</h4>
+                            <ul>
+                                <li>Press <kbd>Tab</kbd> to the <strong>Open modal</strong> button, then press
+                                    <kbd>Enter</kbd> or <kbd>Space</kbd>.</li>
+                                <li>The dialog opens and focus moves into it. Use
+                                    <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd> to cycle through controls.</li>
+                                <li>Press <kbd>Esc</kbd> to close at any time. Focus returns to the <strong>Open
+                                        modal</strong> button.</li>
+                                <li>Clicking outside of the modal with mouse or the <strong>Close</strong> button closes the
+                                    dialog.</li>
+                            </ul>
                         </section>
 
+                        <!-- guidance: JAWS / NVDA -->
+                        <section aria-labelledby="sr-modal">
+                            <h4 id="sr-modal">JAWS / NVDA navigation (Windows)</h4>
+                            <ul>
+                                <li>Activate <strong>Open modal</strong> with <kbd>Enter</kbd>/<kbd>Space</kbd>. The
+                                    reader announces a modal dialog and the modal label.</li>
+                                <li>The dialog is modal: only its content is navigable. Use
+                                    <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd> to move between buttons and links.
+                                </li>
+                                <li>Use arrow keys to read text inside the dialog. The image has concise
+                                    <code>alt</code> text.</li>
+                                <li>Press <kbd>Esc</kbd> or activate <strong>Close</strong> button to dismiss; focus returns to
+                                    the trigger button.</li>
+                            </ul>
+                        </section>
+                        <!-- Modal end  -->
                     </section>
 
 

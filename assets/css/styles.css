@@ -689,6 +689,60 @@ figure,
     }
 }
 
+/* Generic “pattern card” wrapper for any component section */
+section.pattern {
+    background: var(--pattern-bg);
+    border: 1px solid var(--pattern-border);
+    border-left: 6px solid var(--pattern-accent);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+/* Headings and helper text render clearly on the pattern surface */
+section.pattern h2,
+section.pattern h3,
+section.pattern h4 {
+    color: var(--text);
+    margin-top: .25rem;
+}
+
+section.pattern .help,
+section.pattern .meta {
+    color: var(--text-muted);
+}
+
+/* Optional accent variants (pick one per component) */
+section.pattern.is-info {
+    --pattern-accent: var(--pattern-accent-info);
+}
+
+section.pattern.is-success {
+    --pattern-accent: var(--pattern-accent-success);
+}
+
+section.pattern.is-warning {
+    --pattern-accent: var(--pattern-accent-warning);
+}
+
+section.pattern.is-neutral {
+    --pattern-accent: var(--pattern-accent-neutral);
+}
+
+/* Keep inner component bits readable on the pattern background */
+section.pattern .container,
+section.pattern .content,
+section.pattern .example {
+    background: var(--surface);
+    border-radius: .5rem;
+}
+
+/* Give pattern sections a little extra separation when stacked */
+section.pattern+section.pattern {
+    margin-top: 1.25rem;
+}
+
+
 /* Pattern wrapper: each pattern section gets a light/dark card look */
 section.accordion {
     background: var(--pattern-bg);
@@ -1112,42 +1166,180 @@ section.pattern figcaption {
 
 /* Figure-free carousel image rules (reuse accordion sizing) */
 .carousel-img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  /* viewport-aware height cap: min 240px, prefer ~65vh, never above 800px */
-  max-height: clamp(240px, 65vh, 800px);
-  margin: 0 auto;
-  object-fit: contain;
+    display: block;
+    max-width: 100%;
+    height: auto;
+    /* viewport-aware height cap: min 240px, prefer ~65vh, never above 800px */
+    max-height: clamp(240px, 65vh, 800px);
+    margin: 0 auto;
+    object-fit: contain;
 }
 
 /* Visible caption text (AA contrast on dark surfaces) */
 .carousel-caption {
-  color: var(--muted, #e2e8f0);
-  font-size: 0.9375rem;
-  line-height: 1.4;
-  margin: .5rem 0 0 0;
+    color: var(--muted, #e2e8f0);
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    margin: .5rem 0 0 0;
 }
 
 /* Optional: slide layout + transitions (unchanged) */
-.carousel { margin-block: 1.25rem; }
-.carousel .actions { display: flex; gap: .5rem; justify-content: flex-end; margin-bottom: .5rem; }
-.carousel-viewport { position: relative; }
-.carousel-slide { display: grid; gap: .5rem; }
-.carousel-slide[hidden] { display: none; }
-
-@media (prefers-reduced-motion: no-preference) {
-  .carousel-viewport { overflow: hidden; }
-  .carousel-slide { transition: opacity .24s ease; }
+.carousel {
+    margin-block: 1.25rem;
 }
 
 .carousel .actions {
-  display: flex;
-  gap: .5rem;
-  justify-content: flex-end;
-  margin-top: .5rem;   /* moved below the image */
-  margin-bottom: 0;
+    display: flex;
+    gap: .5rem;
+    justify-content: flex-end;
+    margin-bottom: .5rem;
+}
+
+.carousel-viewport {
+    position: relative;
+}
+
+.carousel-slide {
+    display: grid;
+    gap: .5rem;
+}
+
+.carousel-slide[hidden] {
+    display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .carousel-viewport {
+        overflow: hidden;
+    }
+
+    .carousel-slide {
+        transition: opacity .24s ease;
+    }
+}
+
+.carousel .actions {
+    display: flex;
+    gap: .5rem;
+    justify-content: flex-end;
+    margin-top: .5rem;
+    /* moved below the image */
+    margin-bottom: 0;
 }
 
 
 /* Carousel end  */
+
+/* ===== Modal (APG-style) ===== */
+body.modal-open {
+    overflow: hidden;
+}
+
+.modal-root[hidden] {
+    display: none;
+}
+
+.modal-root {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+}
+
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .55);
+    opacity: 0;
+    transition: opacity .2s ease;
+}
+
+.modal-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(92vw, 720px);
+    max-height: min(85vh, 1000px);
+    transform: translate(-50%, -50%) scale(.98);
+    background: var(--surface, #111827);
+    color: var(--text, #e8eef6);
+    border: 1px solid var(--border, #2a3648);
+    border-radius: 1rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .6);
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    outline: none;
+    overflow: hidden;
+    /* contain inner scroll */
+    opacity: 0;
+    transition: transform .2s ease, opacity .2s ease;
+}
+
+.modal-header,
+.modal-footer {
+    padding: .75rem 1rem;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border, #2a3648);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--border, #2a3648);
+}
+
+.modal-close {
+    background: transparent;
+    color: inherit;
+    border: 1px solid var(--border, #2a3648);
+    padding: .35rem .6rem;
+    border-radius: .5rem;
+}
+
+.modal-close:hover {
+    background: var(--surface-2, #1f2937);
+}
+
+.modal-close:focus-visible {
+    outline: 3px solid var(--focus, #38bdf8);
+    outline-offset: 2px;
+}
+
+.modal-body {
+    padding: .75rem 1rem;
+    overflow: auto;
+    /* scroll long content within the dialog */
+}
+
+/* Image sizing (no <figure>): fit viewport, keep aspect ratio */
+.modal-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: clamp(240px, 60vh, 800px);
+    margin: 0 auto .75rem auto;
+    object-fit: contain;
+}
+
+/* Open state (added via JS) */
+.modal-root.is-open .modal-backdrop {
+    opacity: 1;
+}
+
+.modal-root.is-open .modal-dialog {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .modal-backdrop,
+    .modal-dialog {
+        transition: none !important;
+    }
+}
+
+/* Modal End  */
