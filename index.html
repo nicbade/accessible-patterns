@@ -398,8 +398,8 @@
                                 <div class="modal-body" id="demo-modal-desc">
                                     <!-- Image inside the modal (no <figure>) -->
                                     <img class="modal-img" src="assets/img/SuperGirlChloe.jpg"
-                                        alt="Chloe jumping over snow in a similar manner to supergirl" width="1600" height="900"
-                                        loading="lazy" decoding="async">
+                                        alt="Chloe jumping over snow in a similar manner to supergirl" width="1600"
+                                        height="900" loading="lazy" decoding="async">
                                     <p class="modal-text">Action Pup Chloe leaping into your hearts</p>
                                 </div>
 
@@ -419,7 +419,8 @@
                                     <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd> to cycle through controls.</li>
                                 <li>Press <kbd>Esc</kbd> to close at any time. Focus returns to the <strong>Open
                                         modal</strong> button.</li>
-                                <li>Clicking outside of the modal with mouse or the <strong>Close</strong> button closes the
+                                <li>Clicking outside of the modal with mouse or the <strong>Close</strong> button closes
+                                    the
                                     dialog.</li>
                             </ul>
                         </section>
@@ -435,11 +436,75 @@
                                 </li>
                                 <li>Use arrow keys to read text inside the dialog. The image has concise
                                     <code>alt</code> text.</li>
-                                <li>Press <kbd>Esc</kbd> or activate <strong>Close</strong> button to dismiss; focus returns to
+                                <li>Press <kbd>Esc</kbd> or activate <strong>Close</strong> button to dismiss; focus
+                                    returns to
                                     the trigger button.</li>
                             </ul>
                         </section>
                         <!-- Modal end  -->
+                    </section>
+
+                    <section class="links pattern is-neutral" aria-labelledby="links-heading">
+                        <h3 id="links-heading">Links</h3>
+
+                        <!-- actions area (optional controls for this component) -->
+                        <div class="links actions"></div>
+
+                        <!-- component element -->
+                        <ul class="link-examples">
+                            <li>
+                                <a href="#accordion">Standard link inside content - links to accordion</a>
+                            </li>
+
+                            <li>
+                                <a class="link-external" href="https://www.w3.org/WAI/" target="_blank" rel="noopener">
+                                    External resource - w3.org
+                                    <span class="sr-only">(opens in a new tab)</span>
+                                    <!-- decorative icon -->
+                                    <svg class="ext-icon" aria-hidden="true" viewBox="0 0 24 24" width="1em"
+                                        height="1em">
+                                        <path fill="currentColor"
+                                            d="M14 3h7v7h-2V6.41l-9.29 9.3l-1.42-1.42l9.3-9.29H14V3ZM5 5h6v2H7v10h10v-4h2v6H5V5Z" />
+                                    </svg>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="link-download" href="assets/img/chloChair.jpg" download>
+                                    Download a Chloe Pic <span class="sr-only">Image</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="link-inline" href="#main">In-page anchor: jump to main content</a>
+                            </li>
+                        </ul>
+
+                        <!-- guidance: keyboard-only -->
+                        <section aria-labelledby="kbd-links">
+                            <h4 id="kbd-links">Keyboard-only navigation</h4>
+                            <ul>
+                                <li>Use <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd> to move through links.</li>
+                                <li>Press <kbd>Enter</kbd> to activate a focused link.</li>
+                                <li>External links that open in a new tab include hidden text announcing “opens in a new
+                                    tab”.</li>
+                                <li>Button-style links are still real links—<kbd>Enter</kbd>/<kbd>Space</kbd> activates
+                                    them.</li>
+                            </ul>
+                        </section>
+
+                        <!-- guidance: JAWS / NVDA -->
+                        <section aria-labelledby="sr-links">
+                            <h4 id="sr-links">JAWS / NVDA navigation</h4>
+                            <ul>
+                                <li>Use <kbd>Tab</kbd> to move through links, or <kbd>Insert</kbd>+<kbd>F7</kbd>
+                                    (JAWS/NVDA) to list all links.</li>
+                                <li>Activate with <kbd>Enter</kbd>. External links announce “opens
+                                    in a new tab”.</li>
+                                <li>Visited links are visibly distinct and remain high contrast.</li>
+                            </ul>
+                        </section>
+                        <!-- Links end  -->
                     </section>
 
 

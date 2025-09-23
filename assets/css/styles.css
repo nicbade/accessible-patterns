@@ -1343,3 +1343,105 @@ body.modal-open {
 }
 
 /* Modal End  */
+
+/* --- Link pattern styles --- */
+.link-examples {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: .5rem;
+}
+
+.link-examples>li {
+    min-height: 44px;
+    /* touch target */
+    display: flex;
+    align-items: center;
+}
+
+/* Base link: high-contrast, always underlined */
+a {
+    color: var(--link, #93c5fd);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+}
+
+a:hover {
+    text-decoration-thickness: 3px;
+}
+
+a:focus-visible {
+    outline: 3px solid var(--focus, #38bdf8);
+    outline-offset: 2px;
+    border-radius: .25rem;
+}
+
+a:visited {
+    color: var(--link-visited, #c4b5fd);
+    /* AA on dark backgrounds */
+}
+
+/* External link icon + SR note */
+.link-external .ext-icon {
+    margin-left: .35em;
+    transform: translateY(.08em);
+}
+
+/* Download/in-page variants just inherit; add subtle affordance if desired */
+.link-download::before {
+    content: "⬇";
+    font-size: .95em;
+    margin-right: .4em;
+    aria-hidden: true;
+}
+
+.link-inline::before {
+    content: "↘";
+    font-size: .95em;
+    margin-right: .4em;
+    aria-hidden: true;
+}
+
+/* Button-styled anchor for CTAs (still a link) */
+a.button-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    min-height: 44px;
+    padding: .5rem .9rem;
+    background: var(--accent, #60a5fa);
+    color: #0b0f14;
+    /* dark text on light button */
+    border-radius: .75rem;
+    text-decoration: none;
+    /* intentional for button look */
+    border: 1px solid transparent;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .25);
+}
+
+a.button-link:hover {
+    background: var(--accent-strong, #3b82f6);
+}
+
+a.button-link:focus-visible {
+    outline: 3px solid var(--focus, #38bdf8);
+    outline-offset: 2px;
+}
+
+/* SR-only helper (if not already present) */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0 0 1px 1px) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Link end  */
