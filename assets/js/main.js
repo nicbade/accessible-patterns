@@ -374,3 +374,93 @@ window.addEventListener('resize', setSkipOffset);
     alert('Button triggered an action!');
   });
 })();
+
+// Button end 
+
+/* ===== Carousel (APG prev/next style) ===== */
+(function initCarousels() {
+  const carousels = document.querySelectorAll('.carousel');
+  if (!carousels.length) return;
+
+  carousels.forEach(carousel => {
+    const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+    const prevBtn = carousel.querySelector('.carousel-prev');
+    const nextBtn = carousel.querySelector('.carousel-next');
+    const toggleBtn = carousel.querySelector('.carousel-toggle');
+    const status = carousel.querySelector('.carousel-status');
+    const autoplayDefault = carousel.getAttribute('data-autoplay') === 'true';
+
+    let index = 0;
+    let playing = false;
+    let timer = null;
+
+    function setSlide(newIndex, announce = true) {
+      index = (newIndex + slides.length) % slides.length;
+      slides.forEach((s, i) => {
+        const isCurrent = i === index;
+        s.toggleAttribute('hidden', !isCurrent);
+        s.setAttribute('aria-label', `${i + 1} of ${slides.length}`);
+      });
+      if (announce && status) status.textContent = `Slide ${index + 1} of ${slides.length}`;
+    }
+
+    function play() {
+      if (playing) return;
+      playing = true;
+      toggleBtn?.setAttribute('aria-pressed', 'true');
+      toggleBtn && (toggleBtn.textContent = 'Pause', toggleBtn.setAttribute('aria-label', 'Pause automatic slide rotation'));
+      timer = window.setInterval(() => setSlide(index + 1), 5000);
+    }
+
+    function pause() {
+      playing = false;
+      toggleBtn?.setAttribute('aria-pressed', 'false');
+      toggleBtn && (toggleBtn.textContent = 'Play', toggleBtn.setAttribute('aria-label', 'Start automatic slide rotation'));
+      window.clearInterval(timer);
+      timer = null;
+    }
+
+    // Wire controls
+    prevBtn?.addEventListener('click', () => { setSlide(index - 1); prevBtn.focus(); });
+    nextBtn?.addEventListener('click', () => { setSlide(index + 1); nextBtn.focus(); });
+
+    // Optional: left/right activate when focused on prev/next
+    [prevBtn, nextBtn].forEach(btn => btn?.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); prevBtn.click(); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); nextBtn.click(); }
+    }));
+
+    // Play/Pause
+    toggleBtn?.addEventListener('click', () => {
+      playing ? pause() : play();
+      toggleBtn.focus(); // keep focus on the control
+    });
+
+    // Pause while user hovers or focuses inside the carousel
+    carousel.addEventListener('mouseenter', () => playing && pause());
+    carousel.addEventListener('focusin', () => playing && pause());
+    // Optionally resume when leaving (only if autoplay was on by default or user pressed Play)
+    carousel.addEventListener('mouseleave', () => { if (autoplayDefault) play(); });
+    carousel.addEventListener('focusout', (e) => {
+      if (!carousel.contains(e.relatedTarget) && autoplayDefault) play();
+    });
+
+    // Start
+    setSlide(0, false);
+    if (autoplayDefault) play();
+
+    // Re-measure height for open slide after images load or viewport changes
+    function refreshVisible() {
+      const open = carousel.querySelector('.carousel-slide:not([hidden]) img');
+      if (!open) return;
+      // nothing to set because we use object-fit/contain + max-height clamp
+      // This hook is here if you want to adjust container height later.
+    }
+    carousel.querySelectorAll('img').forEach(img => {
+      if (!img.complete) img.addEventListener('load', refreshVisible);
+    });
+    window.addEventListener('resize', refreshVisible);
+  });
+})();
+
+// Carousel end 

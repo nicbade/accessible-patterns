@@ -1109,3 +1109,45 @@ section.pattern figcaption {
 }
 
 /* Button component end  */
+
+/* Figure-free carousel image rules (reuse accordion sizing) */
+.carousel-img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  /* viewport-aware height cap: min 240px, prefer ~65vh, never above 800px */
+  max-height: clamp(240px, 65vh, 800px);
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+/* Visible caption text (AA contrast on dark surfaces) */
+.carousel-caption {
+  color: var(--muted, #e2e8f0);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  margin: .5rem 0 0 0;
+}
+
+/* Optional: slide layout + transitions (unchanged) */
+.carousel { margin-block: 1.25rem; }
+.carousel .actions { display: flex; gap: .5rem; justify-content: flex-end; margin-bottom: .5rem; }
+.carousel-viewport { position: relative; }
+.carousel-slide { display: grid; gap: .5rem; }
+.carousel-slide[hidden] { display: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .carousel-viewport { overflow: hidden; }
+  .carousel-slide { transition: opacity .24s ease; }
+}
+
+.carousel .actions {
+  display: flex;
+  gap: .5rem;
+  justify-content: flex-end;
+  margin-top: .5rem;   /* moved below the image */
+  margin-bottom: 0;
+}
+
+
+/* Carousel end  */

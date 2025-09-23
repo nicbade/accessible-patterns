@@ -259,7 +259,8 @@
                                 <li><strong>Tab / Shift+Tab</strong> moves focus to the button.</li>
                                 <li><strong>Enter</strong> or <strong>Space</strong> activates it and shows an alert.
                                 </li>
-                                <li><strong>Esc</strong> key closes alert and returns users focus to the triggering element (Button).</li>
+                                <li><strong>Esc</strong> key closes alert and returns users focus to the triggering
+                                    element (Button).</li>
                             </ul>
 
                             <h3 class="small mt-075">Screen readers (NVDA / JAWS / VoiceOver)</h3>
@@ -272,6 +273,104 @@
                     </section>
 
                     <!-- Pattern section end  -->
+                    <section class="carousel" aria-labelledby="carousel-heading" data-autoplay="false">
+                        <h3 id="carousel-heading">Carousel</h3>
+
+                        <div class="carousel-viewport">
+                            <!-- Slide 1 -->
+                            <div class="carousel-slide" role="group" aria-label="1 of 3">
+                                <img class="carousel-img" src="assets/img/ChloVet.JPG"
+                                    alt="Chloe the golden retriever at her first visit.  She was 8 weeks old."
+                                    width="1600" height="900" loading="lazy" decoding="async">
+                                <p>Accessible accordion, keyboard + SR-friendly.</p>
+                            </div>
+
+                            <!-- Slide 2 -->
+                            <div class="carousel-slide" role="group" aria-label="2 of 3" hidden>
+                                <img class="carousel-img" src="assets/img/chloeTennisBall.JPG"
+                                    alt="Chloe the golden retriever holding a tennis ball, ready to run" width="1600"
+                                    height="900" loading="lazy" decoding="async">
+                                <p>Auto rotation can be paused.</p>
+                            </div>
+
+                            <!-- Slide 3 -->
+                            <div class="carousel-slide" role="group" aria-label="3 of 3" hidden>
+                                <img class="carousel-img" src="assets/img/ChloeSnow.JPG"
+                                    alt="Chloe the golden retriever laying in the snow" width="1600" height="900"
+                                    loading="lazy" decoding="async">
+                                <p>Keep an eye out for Chloe elsewhere on this site!</p>
+                            </div>
+                        </div>
+                        <!-- Controls AFTER images -->
+                        <div class="carousel actions">
+                            <button type="button" class="carousel-prev button" aria-label="Previous slide">Prev</button>
+                            <button type="button" class="carousel-next button" aria-label="Next slide">Next</button>
+                            <button type="button" class="carousel-toggle button" aria-pressed="false">Play</button>
+                        </div>
+
+                        <p class="carousel-status sr-only" aria-live="polite"></p>
+
+                        <!-- Guidance: keyboard-only -->
+                        <section aria-labelledby="kbd-carousel">
+                            <h4 id="kbd-carousel">Keyboard-only navigation</h4>
+                            <ul>
+                                <li>Press <kbd>Tab</kbd> until a carousel control is focused (e.g.,
+                                    <strong>Prev</strong>, <strong>Next</strong>, or
+                                    <strong>Play</strong>/<strong>Pause</strong>).</li>
+                                <li>Activate controls with <kbd>Enter</kbd> or <kbd>Space</kbd>:
+                                    <ul>
+                                        <li><strong>Prev</strong> / <strong>Next</strong> moves to the previous/next
+                                            slide.</li>
+                                        <li><strong>Play</strong>/<strong>Pause</strong> starts or stops automatic slide
+                                            rotation.</li>
+                                    </ul>
+                                </li>
+                                <li>While focused on <strong>Prev</strong> or <strong>Next</strong>, you can also use
+                                    <kbd>←</kbd> / <kbd>→</kbd> to move slides.</li>
+                                <li>Focus remains on the control you pressed (no unexpected focus jumps).</li>
+                                <li>Only the current slide’s content is focusable; hidden slides are removed from the
+                                    tab order.</li>
+                                <li>Hovering the carousel or focusing inside it will pause autoplay (if enabled). Use
+                                    <strong>Play</strong> to resume.</li>
+                            </ul>
+                        </section>
+
+                        <!-- Guidance: JAWS/NVDA -->
+                        <section aria-labelledby="sr-carousel">
+                            <h4 id="sr-carousel">JAWS / NVDA navigation (Windows)</h4>
+                            <ul>
+                                <li>In <strong>Browse/Virtual</strong> mode, use <kbd>B</kbd> /
+                                    <kbd>Shift</kbd>+<kbd>B</kbd> to move between the carousel’s buttons:
+                                    <ul>
+                                        <li><strong>Prev</strong> and <strong>Next</strong> change slides.</li>
+                                        <li><strong>Play</strong>/<strong>Pause</strong> starts or stops rotation.</li>
+                                    </ul>
+                                </li>
+                                <li>Press <kbd>Enter</kbd> or <kbd>Space</kbd> on a button to activate it. The screen
+                                    reader will announce the new slide (e.g., “Slide 2 of 3”).</li>
+                                <li>Read the current slide’s content using arrow keys, or press <kbd>Tab</kbd> to move
+                                    to interactive items inside the slide.</li>
+                                <li>Autoplay (when on) pauses as soon as you focus inside the carousel; press
+                                    <strong>Play</strong> to resume.</li>
+                                <li>If a button doesn’t activate:
+                                    <ul>
+                                        <li><strong>NVDA</strong>: press <kbd>NVDA</kbd>+<kbd>Space</kbd> to switch to
+                                            <strong>Focus mode</strong>, activate, then press again to return to Browse.
+                                        </li>
+                                        <li><strong>JAWS</strong>: if needed, toggle Virtual PC Cursor with
+                                            <kbd>Insert</kbd>+<kbd>Z</kbd>, activate, then toggle back.</li>
+                                    </ul>
+                                </li>
+                                <li>When moving into the carousel with the <kbd>←</kbd>
+                                    / <kbd>→</kbd>. Your screen reader announces the new slide as a group
+                                    (e.g., “Slide 2 of 3”).</li>
+
+                            </ul>
+                        </section>
+
+                    </section>
+
+
                 </section>
 
 
