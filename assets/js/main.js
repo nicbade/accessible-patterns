@@ -303,8 +303,10 @@ function addMQListener(mq, handler) {
     expanded ? closeDrawer() : openDrawer();
   });
 
-  backdrop?.addEventListener('click', closeDrawer);
-  closers && closers.forEach(btn => btn.addEventListener('click', closeDrawer));
+ // Backdrop and explicit close buttons (fixed)
+backdrop && backdrop.addEventListener('click', closeDrawer);
+closers && closers.forEach(btn => btn.addEventListener('click', closeDrawer));
+
 
   // Close when resizing to desktop
   const mq = window.matchMedia('(min-width: 768px)');
@@ -481,3 +483,15 @@ function addMQListener(mq, handler) {
 })();
 
 // Table end 
+
+// Alert fix 
+/* ===== Button demo: primary triggers alert ===== */
+(function () {
+  const demoBtn = document.getElementById('btn-primary-demo');
+  if (!demoBtn) return;
+  demoBtn.addEventListener('click', () => {
+    alert('Button triggered an action!');
+    demoBtn.focus(); // return focus to the trigger after alert closes
+  });
+})();
+// Alert fix end 
