@@ -382,3 +382,102 @@ function addMQListener(mq, handler) {
   closeEls.forEach(el => el.addEventListener('click', close));
   backdrop && backdrop.addEventListener('click', close);
 })();
+
+// Modal end 
+
+/* ===== Sortable Table (APG style) ===== */
+(function initSortableTables() {
+  function parseCell(value, type) {
+    if (type === 'numeric') {
+      const n = parseFloat(String(value).replace(/[^\d.-]/g, ''));
+      return isNaN(n) ? Number.NEGATIVE_INFINITY : n;
+    }
+    if (type === 'date') {
+      const t = Date.parse(value);
+      return isNaN(t) ? -8640000000000000 : t; // min time for invalid
+    }
+    // text (default): case-insensitive
+    return String(value).toLowerCase();
+  }
+
+  function sortTable(table, colIndex, type, direction) {
+    const tbody = table.tBodies[0];
+    const rows = Array.from(tbody.rows).map((row, i) => ({ row, i })); // stable
+
+    rows.sort((a, b) => {
+      const aVal = parseCell(a.row.cells[colIndex].textContent.trim(), type);
+      const bVal = parseCell(b.row.cells[colIndex].textContent.trim(), type);
+      if (aVal < bVal) return direction === 'ascending' ? -1 : 1;
+      if (aVal > bVal) return direction === 'ascending' ? 1 : -1;
+      return a.i - b.i; // stable fallback
+    });
+
+    // Re-append in new order
+    rows.forEach(({ row }) => tbody.appendChild(row));
+  }
+
+  function clearAriaSort(ths) {
+    ths.forEach(th => th.setAttribute('aria-sort', 'none'));
+  }
+
+  const tables = document.querySelectorAll('.sortable-table');
+  if (!tables.length) return;
+
+  tables.forEach(table => {
+    const theadThs = table.tHead ? Array.from(table.tHead.rows[0].cells) : [];
+    const status = table.closest('section')?.querySelector('.table-status');
+
+    theadThs.forEach((th, index) => {
+      const btn = th.querySelector('button');
+      if (!btn) return;
+
+      const type = btn.getAttribute('data-type') || 'text';
+
+      btn.addEventListener('click', () => {
+        // Toggle sort direction for this column
+        const current = th.getAttribute('aria-sort') || 'none';
+        const next = current === 'ascending' ? 'descending' : 'ascending';
+
+        clearAriaSort(theadThs);
+        th.setAttribute('aria-sort', next);
+
+        sortTable(table, index, type, next);
+
+        // Keep focus on the button and announce
+        btn.focus();
+        if (status) status.textContent = `Sorted by ${btn.textContent.trim()}, ${next}.`;
+      });
+    });
+  });
+
+  // Reset sort buttons (optional)
+  document.querySelectorAll('.table-reset').forEach(resetBtn => {
+    resetBtn.addEventListener('click', () => {
+      const targetSel = resetBtn.getAttribute('data-target');
+      const table = targetSel ? document.querySelector(targetSel) : null;
+      if (!table || !table.tBodies[0]) return;
+
+      const tbody = table.tBodies[0];
+      // Restore original order by data-index (set once) or by DOM snapshot
+      if (!tbody.__originalOrder) {
+        tbody.__originalOrder = Array.from(tbody.rows);
+      }
+      // Clear aria-sort
+      const ths = table.tHead ? Array.from(table.tHead.rows[0].cells) : [];
+      ths.forEach(th => th.setAttribute('aria-sort', 'none'));
+
+      tbody.__originalOrder.forEach(row => tbody.appendChild(row));
+
+      const status = table.closest('section')?.querySelector('.table-status');
+      if (status) status.textContent = 'Sort reset to original order.';
+      resetBtn.focus();
+    });
+  });
+
+  // Capture original order once on DOM ready
+  document.querySelectorAll('.sortable-table tbody').forEach(tbody => {
+    if (!tbody.__originalOrder) tbody.__originalOrder = Array.from(tbody.rows);
+  });
+})();
+
+// Table end 

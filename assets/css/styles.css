@@ -1445,3 +1445,127 @@ a.button-link:focus-visible {
 }
 
 /* Link end  */
+
+/* ===== Sortable table ===== */
+.sortable-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface, #111827);
+    color: var(--text, #e8eef6);
+    border: 1px solid var(--border, #2a3648);
+    border-radius: .75rem;
+    overflow: hidden;
+}
+
+/* Cell spacing and borders */
+.sortable-table th,
+.sortable-table td {
+    padding: .6rem .8rem;
+    border-bottom: 1px solid var(--border, #2a3648);
+    vertical-align: top;
+}
+
+/* Header buttons */
+.sortable-table thead th {
+    text-align: left;
+    background: var(--surface-2, #1f2937);
+}
+
+.sortable-table thead th button {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    cursor: pointer;
+    color: inherit;
+    padding: .25rem .25rem;
+    border-radius: .35rem;
+}
+
+.sortable-table thead th button:hover {
+    background: rgba(255, 255, 255, .06);
+}
+
+.sortable-table thead th button:focus-visible {
+    outline: 3px solid var(--focus, #38bdf8);
+    outline-offset: 2px;
+}
+
+/* Sort indicators using aria-sort on TH */
+.sortable-table thead th[aria-sort="ascending"] button::after {
+    content: "▲";
+    font-size: .85em;
+}
+
+.sortable-table thead th[aria-sort="descending"] button::after {
+    content: "▼";
+    font-size: .85em;
+}
+
+.sortable-table thead th[aria-sort="none"] button::after {
+    content: "↕";
+    font-size: .85em;
+    opacity: .7;
+}
+
+/* Zebra rows for readability */
+.sortable-table tbody tr:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* Make sure Reset button aligns nicely in actions row */
+.table.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: .5rem;
+}
+
+/* Table end  */
+
+/* === AA contrast for code elements (global) === */
+/* Tokens (override any earlier values) */
+:root {
+  --code-bg:   #0f172a;  /* very dark slate */
+  --code-text: #e8eef6;  /* light text */
+  --code-bd:   #334155;  /* subtle border */
+}
+
+/* Inline code chips */
+code:not(pre code) {
+  color: var(--code-text) !important;
+  background: var(--code-bg) !important;
+  border: 1px solid var(--code-bd);
+  padding: .1em .4em;
+  border-radius: .35rem;
+  font: 500 .9em/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  opacity: 1 !important;               /* defeat low-opacity defaults */
+  white-space: break-spaces;            /* wrap long tokens on small screens */
+}
+
+/* Code blocks */
+pre {
+  color: var(--code-text) !important;
+  background: var(--code-bg) !important;
+  border: 1px solid var(--code-bd);
+  padding: .75rem 1rem;
+  border-radius: .5rem;
+  overflow: auto;                       /* scroll if needed */
+  margin: .75rem 0;
+}
+pre code {
+  background: transparent !important;   /* avoid double bg */
+  color: inherit;
+  border: 0;
+  padding: 0;
+  white-space: pre;                      /* keep block formatting */
+}
+
+/* Optional: code inside links keeps the link action but uses the AA chip */
+a > code {
+  text-decoration: none;
+}
+a:hover > code {
+  box-shadow: 0 0 0 2px rgba(255,255,255,.08) inset;
+}
+
+/* Code contrast update end  */

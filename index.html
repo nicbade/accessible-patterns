@@ -507,6 +507,122 @@
                         <!-- Links end  -->
                     </section>
 
+                    <section class="table pattern is-neutral" aria-labelledby="table-heading">
+                        <h3 id="table-heading">Sortable table</h3>
+
+                        <!-- component element -->
+                        <table id="demo-table" class="sortable-table">
+                            <caption class="sr-only">Demo data table you can sort by each column</caption>
+                            <thead>
+                                <tr>
+                                    <!-- Each TH has a button that controls sorting and the TH itself carries aria-sort -->
+                                    <th scope="col" aria-sort="none">
+                                        <button type="button" data-type="text">First name</button>
+                                    </th>
+                                    <th scope="col" aria-sort="none">
+                                        <button type="button" data-type="text">Last name</button>
+                                    </th>
+                                    <th scope="col" aria-sort="none">
+                                        <button type="button" data-type="numeric">Age</button>
+                                    </th>
+                                    <th scope="col" aria-sort="none">
+                                        <button type="button" data-type="text">Favorite fruit</button>
+                                    </th>
+                                    <th scope="col" aria-sort="none">
+                                        <button type="button" data-type="date">Member since</button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Alex</td>
+                                    <td>Rivera</td>
+                                    <td>29</td>
+                                    <td>Mango</td>
+                                    <td>2022-03-14</td>
+                                </tr>
+                                <tr>
+                                    <td>Bianca</td>
+                                    <td>Nguyen</td>
+                                    <td>41</td>
+                                    <td>Apple</td>
+                                    <td>2021-10-02</td>
+                                </tr>
+                                <tr>
+                                    <td>Carlos</td>
+                                    <td>Lee</td>
+                                    <td>35</td>
+                                    <td>Banana</td>
+                                    <td>2020-07-18</td>
+                                </tr>
+                                <tr>
+                                    <td>Dina</td>
+                                    <td>O’Connor</td>
+                                    <td>27</td>
+                                    <td>Cherry</td>
+                                    <td>2024-01-09</td>
+                                </tr>
+                                <tr>
+                                    <td>Elijah</td>
+                                    <td>Patel</td>
+                                    <td>33</td>
+                                    <td>Orange</td>
+                                    <td>2019-05-30</td>
+                                </tr>
+                                <tr>
+                                    <td>Farah</td>
+                                    <td>Singh</td>
+                                    <td>39</td>
+                                    <td>Grape</td>
+                                    <td>2023-06-22</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- polite SR status -->
+                        <p class="table-status sr-only" aria-live="polite"></p>
+
+                        <!-- guidance: keyboard-only -->
+                        <section aria-labelledby="kbd-table">
+                            <h4 id="kbd-table">Keyboard-only navigation</h4>
+                            <ul>
+                                <li>Use <kbd>Tab</kbd> to focus a column header button.</li>
+                                <li>Press <kbd>Enter</kbd> or <kbd>Space</kbd> to sort that column. Re-press to toggle
+                                    ascending/descending.</li>
+                                <li>Focus stays on the same header button after sorting.</li>
+                                <li>Use <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd> to move across header buttons or
+                                    into table cells (If actionable).</li>
+                            </ul>
+                        </section>
+
+                        <!-- guidance: JAWS / NVDA -->
+                        <section aria-labelledby="sr-table">
+                            <h4 id="sr-table">JAWS / NVDA navigation</h4>
+                            <ul>
+                                <li>Jump to the next/previous table with <kbd>T</kbd> / <kbd>Shift</kbd>+<kbd>T</kbd>.
+                                </li>
+                                <li>Move cell-by-cell with
+                                    <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>←</kbd>/<kbd>→</kbd>/<kbd>↑</kbd>/<kbd>↓</kbd>.
+                                    With proper headers, the screen reader announces the cell’s value
+                                    <em>with</em> its column/row header.</li>
+                                <li><strong>JAWS:</strong> press <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>NumPad 5</kbd> to
+                                    re-announce the current cell’s row/column headers on demand.</li>
+                                <li><strong>NVDA (fallback when headers aren’t coded):</strong> set header associations
+                                    manually:
+                                    <ul>
+                                        <li><kbd>NVDA</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> = mark current row as
+                                            <em>column headers</em> (announce when moving down).</li>
+                                        <li><kbd>NVDA</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd> = mark current column as
+                                            <em>row headers</em> (announce when moving right).</li>
+                                    </ul>
+                                </li>
+                                <li>Tips: keep focus on a header button to sort; the polite status will announce “Sorted
+                                    by …, ascending/descending.”</li>
+                            </ul>
+                        </section>
+
+                        <!-- Table end  -->
+                    </section>
 
                 </section>
 
