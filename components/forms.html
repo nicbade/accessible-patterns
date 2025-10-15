@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,13 +14,83 @@
   <!-- Load includes; it will inject header/footer, then load main.js -->
   <script src="/assets/js/includes.js" defer></script>
 </head>
+
 <body>
   <!-- Header via include -->
-  <div data-include="./components/site-header.html"></div>
+  <div data-include="/components/header.html"></div>
 
   <main id="main" class="site-main container">
+
+    <section class="forms-intro pattern is-neutral" aria-labelledby="forms-intro-heading">
+      <h3 id="forms-intro-heading">Using a screen reader in <em>Browse mode</em> (Forms)</h3>
+
+      <!-- actions (none for this intro) -->
+      <div class="forms-intro actions"></div>
+
+      <!-- intro content -->
+      <div class="content">
+        <p>
+          In <strong>Browse (Virtual) mode</strong>, a screen reader lets you read a page with the arrow keys and
+          jump by element type (headings, links, form fields). When you focus an input, many readers switch to
+          <strong>Forms/Focus mode</strong> automatically so you can type. You can also toggle modes manually.
+        </p>
+        <p>
+          Tip: stay in <strong>Browse mode</strong> to skim and locate fields, then switch to <strong>Forms/Focus
+            mode</strong> only
+          when you’re ready to edit. Press <kbd>Esc</kbd> to exit Forms/Focus mode quickly.
+        </p>
+      </div>
+
+      <!-- guidance: keyboard-only (no SR) -->
+      <section aria-labelledby="kbd-forms-intro">
+        <h4 id="kbd-forms-intro">Keyboard-only (no screen reader)</h4>
+        <ul>
+          <li>Use <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd> to move between fields and buttons.</li>
+          <li>Use <kbd>Space</kbd> to check/uncheck checkboxes; <kbd>Arrow keys</kbd> to change radios or move in
+            selects.</li>
+          <li>Use <kbd>Enter</kbd> to activate the focused button (e.g., Submit).</li>
+        </ul>
+      </section>
+
+      <!-- guidance: JAWS / NVDA -->
+      <section aria-labelledby="sr-forms-intro">
+        <h4 id="sr-forms-intro">JAWS / NVDA in Browse mode</h4>
+        <ul>
+          <li><strong>Move around in Browse mode:</strong> Use the <kbd>Arrow keys</kbd> to read; use quick-nav letters:
+            <ul>
+              <li><kbd>H</kbd>/<kbd>Shift</kbd>+<kbd>H</kbd> — next/previous heading</li>
+              <li><kbd>F</kbd>/<kbd>Shift</kbd>+<kbd>F</kbd> — next/previous <em>form field</em></li>
+              <li><kbd>E</kbd>/<kbd>Shift</kbd>+<kbd>E</kbd> — next/previous edit (text) field</li>
+              <li><kbd>B</kbd>/<kbd>Shift</kbd>+<kbd>B</kbd> — next/previous button</li>
+            </ul>
+          </li>
+          <li><strong>Enter Forms/Focus mode to type:</strong>
+            <ul>
+              <li><strong>NVDA:</strong> Press <kbd>NVDA</kbd>+<kbd>Space</kbd> to toggle Browse/Focus mode manually
+                (auto on most fields).</li>
+              <li><strong>JAWS:</strong> Toggle Virtual PC Cursor with <kbd>Insert</kbd>+<kbd>Z</kbd> if a control won’t
+                activate in Browse mode.</li>
+              <li>Press <kbd>Esc</kbd> to leave Forms/Focus mode and return to Browse mode.</li>
+            </ul>
+          </li>
+          <li><strong>Jump to a list of elements:</strong>
+            <ul>
+              <li><strong>NVDA:</strong> <kbd>NVDA</kbd>+<kbd>F7</kbd> opens the Elements List (filter by Form fields,
+                Buttons, etc.).</li>
+              <li><strong>JAWS:</strong> <kbd>Insert</kbd>+<kbd>F5</kbd> lists form fields;
+                <kbd>Insert</kbd>+<kbd>F6</kbd> lists headings.</li>
+            </ul>
+          </li>
+          <li><strong>While in a table inside a form:</strong> Use <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Arrow keys</kbd>
+            to move cell-by-cell; headers are announced with cells when marked up correctly.</li>
+        </ul>
+      </section>
+    </section>
+
+
+    <!-- Form section  -->
     <section class="forms pattern is-success" aria-labelledby="forms-heading">
-      <h3 id="forms-heading">Forms</h3>
+      <h1 id="forms-heading">Forms</h1>
       <div class="forms actions"></div>
 
       <!-- simple example form -->
@@ -40,9 +111,9 @@
           <label for="role">Role</label>
           <select id="role" name="role">
             <option value="">Select one…</option>
-            <option>Designer</option>
-            <option>Engineer</option>
-            <option>PM</option>
+            <option>Aardvark</option>
+            <option>Bear</option>
+            <option>Caribou</option>
           </select>
         </div>
 
@@ -66,6 +137,7 @@
   </main>
 
   <!-- Footer via include -->
-  <div data-include="./components/site-footer.html"></div>
+  <div data-include="/components/footer.html"></div>
 </body>
+
 </html>
