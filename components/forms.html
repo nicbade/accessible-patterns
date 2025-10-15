@@ -4,19 +4,25 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Forms • Accessible Patterns</title>
-  <link rel="stylesheet" href="assets/css/styles.css" />
-  <!-- Load includes; it will load main.js after components are injected -->
-  <script src="assets/js/includes.js" defer></script>
+
+  <!-- Load CSS (RELATIVE path) -->
+  <!-- If you also use Pico, put Pico FIRST, then your styles.css -->
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"> -->
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+
+  <!-- Load includes; it will inject header/footer, then load main.js -->
+  <script src="./assets/js/includes.js" defer></script>
 </head>
 <body>
-  <header data-include="components/site-header.html"></header>
+  <!-- Header via include -->
+  <div data-include="./components/site-header.html"></div>
 
   <main id="main" class="site-main container">
     <section class="forms pattern is-success" aria-labelledby="forms-heading">
       <h3 id="forms-heading">Forms</h3>
       <div class="forms actions"></div>
 
-      <!-- Example form (AA defaults, labels, describedby) -->
+      <!-- simple example form -->
       <form class="form-example" action="#" method="post" novalidate aria-describedby="form-help">
         <p id="form-help" class="help">All fields marked * are required.</p>
 
@@ -56,28 +62,10 @@
           <button class="button" type="submit">Submit</button>
         </div>
       </form>
-
-      <!-- Guidance blocks -->
-      <section aria-labelledby="kbd-forms">
-        <h4 id="kbd-forms">Keyboard-only navigation</h4>
-        <ul>
-          <li>Use <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd> to move between fields.</li>
-          <li>Use <kbd>Space</kbd> to check/uncheck boxes; <kbd>Arrow keys</kbd> to change radio choices.</li>
-          <li>Use <kbd>Enter</kbd> to submit when focused on the Submit button.</li>
-        </ul>
-      </section>
-
-      <section aria-labelledby="sr-forms">
-        <h4 id="sr-forms">JAWS / NVDA navigation</h4>
-        <ul>
-          <li>Use form mode (auto when entering a form). If needed: <strong>NVDA</strong> toggle with <kbd>NVDA</kbd>+<kbd>Space</kbd>; <strong>JAWS</strong> toggle Virtual PC Cursor with <kbd>Insert</kbd>+<kbd>Z</kbd>.</li>
-          <li>JAWS/NVDA announce labels from <code>&lt;label for=…&gt;</code>; additional guidance comes from <code>aria-describedby</code> (e.g., “All fields required”).</li>
-          <li>Errors should be announced via <code>role="alert"</code> or associating messages with the field (you can add later).</li>
-        </ul>
-      </section>
     </section>
   </main>
 
-  <footer data-include="components/site-footer.html"></footer>
+  <!-- Footer via include -->
+  <div data-include="./components/site-footer.html"></div>
 </body>
 </html>
