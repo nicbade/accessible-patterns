@@ -1719,3 +1719,36 @@ a:hover>code {
 }
 
 /* Tooltips end  */
+
+/* Forms layout helpers */
+.form-example {
+    display: grid;
+    gap: .75rem;
+    max-width: 640px;
+}
+
+.field {
+    display: grid;
+    gap: .35rem;
+}
+
+.field input,
+.field select {
+    min-height: 44px;
+}
+
+.check {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+fieldset {
+    border: 1px solid var(--border, #2a3648);
+    border-radius: .5rem;
+    padding: .5rem .75rem;
+}
+
+legend {
+    padding: 0 .25rem;
+}

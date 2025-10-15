@@ -1,0 +1,44 @@
+<!-- Skip link (always first focusable element) -->
+            <a class="skip-link" href="#main">Skip to main content</a>
+
+            <header class="site-header pattern" data-pattern="site-shell">
+                <a class="site-logo" href="#" aria-label="Accessible Patterns Home">
+                    <span class="logo-box" aria-hidden="true"></span>
+                    <span class="site-name">Accessible Patterns</span>
+                </a>
+
+                <!-- ✅ Keep this exactly a <button> -->
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav"
+                    aria-label="Open menu">
+                    Menu
+                </button>
+
+                <!-- Desktop nav (shown ≥768px) -->
+                <nav class="site-nav" aria-label="Primary">
+                    <ul id="primary-nav" class="nav-list">
+                        <li><a href="#" aria-current="page">Home</a></li>
+                        <li><a href="#">Patterns</a></li>
+                        <li><a href="forms.html">Forms</a></li>
+                        <li><a href="#">Docs</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <!-- ✅ Flyout drawer right after header -->
+            <div id="mobile-nav" class="mobile-nav" hidden>
+                <div class="mobile-nav__backdrop" data-close></div>
+                <aside class="mobile-nav__panel" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
+                    <div class="mobile-nav__header">
+                        <h2 id="mobile-menu-title" class="sr-only">Primary navigation</h2>
+                        <button type="button" class="mobile-nav__close" aria-label="Close menu"
+                            data-close>&times;</button>
+                    </div>
+                    <nav aria-label="Primary (mobile)">
+                        <ul class="mobile-nav__list">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Patterns</a></li>
+                            <li><a href="#">Docs</a></li>
+                        </ul>
+                    </nav>
+                </aside>
+            </div>

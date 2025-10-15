@@ -13,7 +13,7 @@
     <!-- PicoCSS baseline (kept optional to avoid external dependency) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/includes.js" defer></script>
 
     <title>Accessible Patterns — Site Shell</title>
 
@@ -22,52 +22,12 @@
 <body>
     <div class="pattern" data-pattern="site-shell">
         <div class="pattern-example">
-            <!-- Skip link (always first focusable element) -->
-            <a class="skip-link" href="#main">Skip to main content</a>
 
-            <header class="site-header pattern" data-pattern="site-shell">
-                <a class="site-logo" href="#" aria-label="Accessible Patterns Home">
-                    <span class="logo-box" aria-hidden="true"></span>
-                    <span class="site-name">Accessible Patterns</span>
-                </a>
-
-                <!-- ✅ Keep this exactly a <button> -->
-                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav"
-                    aria-label="Open menu">
-                    Menu
-                </button>
-
-                <!-- Desktop nav (shown ≥768px) -->
-                <nav class="site-nav" aria-label="Primary">
-                    <ul id="primary-nav" class="nav-list">
-                        <li><a href="#" aria-current="page">Home</a></li>
-                        <li><a href="#">Patterns</a></li>
-                        <li><a href="#">Docs</a></li>
-                    </ul>
-                </nav>
-            </header>
-
-            <!-- ✅ Flyout drawer right after header -->
-            <div id="mobile-nav" class="mobile-nav" hidden>
-                <div class="mobile-nav__backdrop" data-close></div>
-                <aside class="mobile-nav__panel" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title">
-                    <div class="mobile-nav__header">
-                        <h2 id="mobile-menu-title" class="sr-only">Primary navigation</h2>
-                        <button type="button" class="mobile-nav__close" aria-label="Close menu"
-                            data-close>&times;</button>
-                    </div>
-                    <nav aria-label="Primary (mobile)">
-                        <ul class="mobile-nav__list">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Patterns</a></li>
-                            <li><a href="#">Docs</a></li>
-                        </ul>
-                    </nav>
-                </aside>
-            </div>
+            <!-- Header via include -->
+            <header data-include="components/header.html"></header>
 
             <!-- Main content -->
-            <main id="main" class="site-main">
+            <main id="main" class="site-main container">
                 <section id="intro" class="container">
                     <h1>Welcome</h1>
                     <p>We provide examples of accessible user interface components—use your keyboard or screen
@@ -633,7 +593,7 @@
                         <div class="tooltip-examples">
                             <!-- ── Example A: Automatic tooltip (focus/hover shows it) ── -->
                             <p>
-                                Hover or focus this help icon:
+                                Automatic tooltip: Hover or focus this help icon:
                                 <span class="tooltip-wrapper" data-placement="top">
                                     <button type="button" class="tooltip-trigger icon-help" aria-describedby="tt-auto-1"
                                         aria-label="More info about accessibility">?</button>
@@ -648,7 +608,7 @@
 
                             <!-- ── Example B: Manual tooltip (click toggles open/close) ── -->
                             <p>
-                                Manually toggle this info tip:
+                                Manually tooltip requires <kbd>Enter</kbd> or <kbd>Space</kbd> to toggle this tooltip:
                                 <span class="tooltip-wrapper" data-placement="right">
                                     <button type="button" class="tooltip-trigger" aria-controls="tt-man-1"
                                         aria-expanded="false">
@@ -702,16 +662,8 @@
             </main>
 
             <!-- Footer -->
-            <footer class="site-footer">
-                <nav aria-label="Footer">
-                    <ul class="footer-links">
-                        <li>
-                            <a href="#contact">Contact</a>
-                        </li>
-                    </ul>
-                </nav>
-                <p>&copy; <span id="year"></span> nicbade.com</p>
-            </footer>
+            <footer data-include="/components/footer.html"></footer>
+
         </div>
 
 </body>
