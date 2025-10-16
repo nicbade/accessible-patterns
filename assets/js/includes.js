@@ -47,3 +47,22 @@
     loadIncludesThenMain();
   }
 })();
+
+// assets/js/includes.js (loads fragments, then main.js)
+(() => {
+  async function inject(el) {
+    const url = el.getAttribute('data-include');
+    if (!url) return;
+    const res = await fetch(new URL(url, document.baseURI), { cache: 'no-cache' });
+    if (res.ok) el.innerHTML = await res.text();
+  }
+  async function load() {
+    const targets = document.querySelectorAll('[data-include]');
+    await Promise.all([...targets].map(inject));
+    const s = document.createElement('script');
+    s.src = 'assets/js/main.js';
+    s.defer = true;
+    document.body.appendChild(s);
+  }
+  (document.readyState === 'loading') ? document.addEventListener('DOMContentLoaded', load) : load();
+})();
