@@ -60,7 +60,7 @@
     const targets = document.querySelectorAll('[data-include]');
     await Promise.all([...targets].map(inject));
     const s = document.createElement('script');
-    s.src = 'assets/js/main.js';
+    s.src = '/assets/js/main.js';
     s.defer = true;
     document.body.appendChild(s);
   }
