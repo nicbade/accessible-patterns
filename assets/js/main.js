@@ -605,4 +605,51 @@ closers && closers.forEach(btn => btn.addEventListener('click', closeDrawer));
   });
 })();
 
+
+/* ===== Set aria-current="page" on active nav link (robust) ===== */
+(function navAriaCurrent() {
+  // Normalize to "host + canonicalPath", treating "/" as "/index.html"
+  function canonical(urlLike) {
+    const u = new URL(urlLike, document.baseURI);
+    const host = u.hostname.replace(/^www\./, ''); // ignore "www."
+    let p = u.pathname.replace(/\/{2,}/g, '/');     // collapse "//"
+    if (p.endsWith('/')) p += 'index.html';         // "/" => "/index.html"
+    if (!p.endsWith('.html')) {
+      // if you ever use extensionless pages, add custom mapping here
+    }
+    return host + p; // omit protocol/query/hash for comparison
+  }
+
+  function mark() {
+    const here = canonical(location.href);
+    document.querySelectorAll('nav a[href]').forEach(a => {
+      const href = a.getAttribute('href');
+      // ignore non-document links
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+        a.removeAttribute('aria-current');
+        return;
+      }
+      const there = canonical(href);
+      if (there === here) {
+        a.setAttribute('aria-current', 'page');
+      } else {
+        a.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  // Run now (in case nav is already present)
+  mark();
+
+  // Run again when includes inject the header/footer
+  const obs = new MutationObserver(() => {
+    if (document.querySelector('nav a[href]')) mark();
+  });
+  obs.observe(document.body, { childList: true, subtree: true });
+
+  // Re-run if URL changes (e.g., history/nav without full reload)
+  window.addEventListener('popstate', mark);
+  window.addEventListener('hashchange', mark);
+})();
+
 // Aria-current end 
