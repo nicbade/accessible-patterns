@@ -30,7 +30,7 @@
 
     // Now that header/footer exist, load main.js so it can bind event handlers
     const s = document.createElement('script');
-    s.src = 'assets/js/main.js';     // keep this relative (no leading slash)
+    s.src = '/assets/js/main.js';     // keep this relative (no leading slash)
     s.defer = true;
     document.body.appendChild(s);
   }
