@@ -556,3 +556,45 @@ closers && closers.forEach(btn => btn.addEventListener('click', closeDrawer));
 
 // Tooltips end 
 
+/* ===== Set aria-current="page" on the active nav link ===== */
+(function setAriaCurrent() {
+  // Normalize paths so "/" and "/index.html" are treated the same
+  function normPath(u) {
+    const url = (u instanceof URL) ? u : new URL(u, document.baseURI);
+    let p = url.pathname;
+    // If path ends with "/", treat as "/.../index.html"
+    if (p.endsWith('/')) p = p + 'index.html';
+    // Collapse duplicate slashes just in case
+    p = p.replace(/\/{2,}/g, '/');
+    return p;
+  }
+
+  const currentPath = normPath(location.href);
+
+  // Look in both desktop and mobile navs
+  const links = document.querySelectorAll('.site-header a[href], #mobile-nav a[href]');
+  links.forEach(a => {
+    const href = a.getAttribute('href');
+    // Ignore non-document links
+    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+      a.removeAttribute('aria-current');
+      return;
+    }
+
+    const linkURL = new URL(href, document.baseURI);
+    // Only compare same-origin links
+    if (linkURL.origin !== location.origin) {
+      a.removeAttribute('aria-current');
+      return;
+    }
+
+    const linkPath = normPath(linkURL);
+    if (linkPath === currentPath) {
+      a.setAttribute('aria-current', 'page');
+    } else {
+      a.removeAttribute('aria-current');
+    }
+  });
+})();
+
+// End aria-current 
