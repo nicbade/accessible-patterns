@@ -1754,42 +1754,5 @@ legend {
 }
 
 
-/* aria-current  */
-/* Base nav links (adjust if you already style these) */
-.site-nav .nav-list {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
-  padding: 0;
-  margin: 0;
-}
-.site-nav a {
-  text-decoration: none;
-  color: var(--text, #e8eef6);
-  padding: .25rem .4rem;
-  border-radius: .4rem;
-}
-.site-nav a:focus-visible {
-  outline: 3px solid var(--focus, #38bdf8);
-  outline-offset: 2px;
-}
-
-/* Visual cue for current page */
-/* Style the current page link */
-.site-nav a[aria-current="page"] {
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 6px;
-  text-decoration-thickness: 3px;
-  position: relative;
-}
-.site-nav a[aria-current="page"]::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: -6px;
-  height: 4px; border-radius: 2px;
-  background: var(--focus, #38bdf8);
-}
 
 
-/* aria-current  */
