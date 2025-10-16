@@ -557,47 +557,54 @@ closers && closers.forEach(btn => btn.addEventListener('click', closeDrawer));
 // Tooltips end 
 
 // aria-current 
-/* ===== Set aria-current="page" on the active .site-nav link ===== */
+// ADD the attribute
+const link = document.querySelector('nav.site-nav a[href="forms.html"]');
+if (link) link.setAttribute('aria-current', 'page');
+
+// REMOVE the attribute
+if (link) link.removeAttribute('aria-current');
+
+/* Mark current page link in <nav class="site-nav"> */
 (function setAriaCurrent() {
-  // Normalize URL so "/" ≡ "/index.html" and ignore "www."
+  // Normalize so "/" ≡ "/index.html" and ignore leading "www."
   function canonical(urlLike) {
     const u = new URL(urlLike, document.baseURI);
     const host = u.hostname.replace(/^www\./, '');
     let p = u.pathname.replace(/\/{2,}/g, '/');
     if (p.endsWith('/')) p += 'index.html';
-    return host + p;
+    return host + p; // host + path only (ignore query/hash)
   }
 
-  function markCurrent() {
+  function mark() {
     const here = canonical(location.href);
-    const links = document.querySelectorAll('.site-nav a[href]');
-    links.forEach(a => {
+    document.querySelectorAll('.site-nav a[href]').forEach(a => {
       const href = a.getAttribute('href');
+      // ignore fragments and non-document links
       if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
         a.removeAttribute('aria-current');
         return;
       }
       const there = canonical(href);
       if (there === here) {
-        a.setAttribute('aria-current', 'page');
+        a.setAttribute('aria-current', 'page');  // ✅ add
       } else {
-        a.removeAttribute('aria-current');
+        a.removeAttribute('aria-current');       // ❌ remove
       }
     });
   }
 
-  // Run now…
-  markCurrent();
+  // Run now
+  mark();
 
-  // …and re-run if header is injected later (e.g., via includes)
-  const mo = new MutationObserver(() => {
-    if (document.querySelector('.site-nav a[href]')) markCurrent();
-  });
-  mo.observe(document.body, { childList: true, subtree: true });
+  // Re-run if your header is injected later (optional)
+  new MutationObserver(() => {
+    if (document.querySelector('.site-nav a[href]')) mark();
+  }).observe(document.body, { childList: true, subtree: true });
 
-  // Re-run on client-side navigation or hash changes (if you use them)
-  window.addEventListener('popstate', markCurrent);
-  window.addEventListener('hashchange', markCurrent);
+  // Re-run on client-side navigation (optional)
+  window.addEventListener('popstate', mark);
+  window.addEventListener('hashchange', mark);
 })();
+
 
 // aria-current end 

@@ -1775,9 +1775,9 @@ legend {
 }
 
 /* Visual cue for current page */
+/* Style the current page link */
 .site-nav a[aria-current="page"] {
   font-weight: 700;
-  color: var(--text, #e8eef6);
   text-decoration: underline;
   text-underline-offset: 6px;
   text-decoration-thickness: 3px;
@@ -1786,12 +1786,10 @@ legend {
 .site-nav a[aria-current="page"]::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -6px;
-  height: 4px;
-  border-radius: 2px;
-  background: var(--focus, #38bdf8); /* high-contrast accent bar */
+  left: 0; right: 0; bottom: -6px;
+  height: 4px; border-radius: 2px;
+  background: var(--focus, #38bdf8);
 }
+
 
 /* aria-current  */
