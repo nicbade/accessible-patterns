@@ -556,75 +556,23 @@ closers && closers.forEach(btn => btn.addEventListener('click', closeDrawer));
 
 // Tooltips end 
 
-/* ===== Robust aria-current handler for nav links ===== */
+// aria-current 
+/* ===== Set aria-current="page" on the active .site-nav link ===== */
 (function setAriaCurrent() {
-  // Normalize a URL (absolute or relative) to an absolute path we can compare
-  function normalize(href) {
-    try {
-      const u = new URL(href, document.baseURI);
-      // Strip query/hash, collapse multiple slashes
-      let p = u.pathname.replace(/\/{2,}/g, '/');
-      // Treat trailing slash as index.html (e.g., "/" == "/index.html")
-      if (p.endsWith('/')) p = p + 'index.html';
-      // Normalize explicit "index.html" vs directory root
-      if (p.endsWith('/index.html')) {
-        // keep as-is; our comparison will also convert current page accordingly
-      }
-      return u.origin + p;
-    } catch {
-      return null;
-    }
-  }
-
-  // Current page, normalized
-  const here = normalize(location.href);
-
-  // Be generous: any <nav> on the page (desktop + mobile)
-  const links = document.querySelectorAll('nav a[href]');
-  links.forEach(a => {
-    const href = a.getAttribute('href');
-    if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
-      a.removeAttribute('aria-current');
-      return;
-    }
-
-    const linkURL = normalize(href);
-    if (!linkURL) return;
-
-    // Match exact page, including "/" vs "/index.html"
-    const isCurrent = linkURL === here
-      || (linkURL.endsWith('/index.html') && here.endsWith('/index.html') && linkURL === here);
-
-    if (isCurrent) {
-      a.setAttribute('aria-current', 'page');
-      a.classList.add('is-current'); // optional hook for styling
-    } else {
-      a.removeAttribute('aria-current');
-      a.classList.remove('is-current');
-    }
-  });
-})();
-
-
-/* ===== Set aria-current="page" on active nav link (robust) ===== */
-(function navAriaCurrent() {
-  // Normalize to "host + canonicalPath", treating "/" as "/index.html"
+  // Normalize URL so "/" ≡ "/index.html" and ignore "www."
   function canonical(urlLike) {
     const u = new URL(urlLike, document.baseURI);
-    const host = u.hostname.replace(/^www\./, ''); // ignore "www."
-    let p = u.pathname.replace(/\/{2,}/g, '/');     // collapse "//"
-    if (p.endsWith('/')) p += 'index.html';         // "/" => "/index.html"
-    if (!p.endsWith('.html')) {
-      // if you ever use extensionless pages, add custom mapping here
-    }
-    return host + p; // omit protocol/query/hash for comparison
+    const host = u.hostname.replace(/^www\./, '');
+    let p = u.pathname.replace(/\/{2,}/g, '/');
+    if (p.endsWith('/')) p += 'index.html';
+    return host + p;
   }
 
-  function mark() {
+  function markCurrent() {
     const here = canonical(location.href);
-    document.querySelectorAll('nav a[href]').forEach(a => {
+    const links = document.querySelectorAll('.site-nav a[href]');
+    links.forEach(a => {
       const href = a.getAttribute('href');
-      // ignore non-document links
       if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
         a.removeAttribute('aria-current');
         return;
@@ -638,18 +586,18 @@ closers && closers.forEach(btn => btn.addEventListener('click', closeDrawer));
     });
   }
 
-  // Run now (in case nav is already present)
-  mark();
+  // Run now…
+  markCurrent();
 
-  // Run again when includes inject the header/footer
-  const obs = new MutationObserver(() => {
-    if (document.querySelector('nav a[href]')) mark();
+  // …and re-run if header is injected later (e.g., via includes)
+  const mo = new MutationObserver(() => {
+    if (document.querySelector('.site-nav a[href]')) markCurrent();
   });
-  obs.observe(document.body, { childList: true, subtree: true });
+  mo.observe(document.body, { childList: true, subtree: true });
 
-  // Re-run if URL changes (e.g., history/nav without full reload)
-  window.addEventListener('popstate', mark);
-  window.addEventListener('hashchange', mark);
+  // Re-run on client-side navigation or hash changes (if you use them)
+  window.addEventListener('popstate', markCurrent);
+  window.addEventListener('hashchange', markCurrent);
 })();
 
-// Aria-current end 
+// aria-current end 
