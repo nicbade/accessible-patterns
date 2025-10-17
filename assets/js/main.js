@@ -556,3 +556,18 @@ closers && closers.forEach(btn => btn.addEventListener('click', closeDrawer));
 
 // Tooltips end 
 
+/* ===== Ensure header nav links point to site root (prevents 404s) ===== */
+(function rebaseSiteNavLinks() {
+  const ROOT = location.origin + '/'; // e.g., https://nicbade.com/
+  document.querySelectorAll('.site-nav a[href]').forEach(a => {
+    const href = a.getAttribute('href');
+    // ignore non-document links
+    if (!href || href.startsWith('#') || /^[a-z]+:/i.test(href)) return;
+
+    // If the link is already root-absolute (starts with "/"), leave it.
+    if (href.startsWith('/')) return;
+
+    // Otherwise, rewrite to root-absolute (so "forms.html" => "/forms.html")
+    a.setAttribute('href', '/' + href.replace(/^\.?\//, ''));
+  });
+})();

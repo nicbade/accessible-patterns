@@ -112,12 +112,3 @@
 })();
 
 
-// // Manually add/remove/toggle aria-current on a specific link
-// window.setCurrentLink = (selector) => {
-//   document.querySelectorAll('.site-nav a[aria-current="page"]').forEach(a => a.removeAttribute('aria-current'));
-//   const link = document.querySelector(selector);
-//   if (link) link.setAttribute('aria-current', 'page');
-// };
-// window.clearCurrentLink = () => {
-//   document.querySelectorAll('.site-nav a[aria-current="page"]').forEach(a => a.removeAttribute('aria-current'));
-// };
