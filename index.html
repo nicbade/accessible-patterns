@@ -1,671 +1,1064 @@
 <!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#121722" />
-    <meta name="description"
-        content="Accessible Patterns site shell with semantic landmarks, skip link, and responsive primary navigation following WAI-ARIA APG and WCAG 2.1 AA." />
+    <meta
+      name="description"
+      content="Accessible Patterns site shell with semantic landmarks, skip link, and responsive primary navigation following WAI-ARIA APG and WCAG 2.1 AA."
+    />
     <!-- Global styles & scripts -->
     <!-- PicoCSS baseline (kept optional to avoid external dependency) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
     <script src="assets/js/includes.js" defer></script>
 
     <title>Accessible Patterns — Site Shell</title>
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div class="pattern" data-pattern="site-shell">
-        <div class="pattern-example">
+      <div class="pattern-example">
+        <!-- Header via include -->
+        <header data-include="components/header.html"></header>
 
-            <!-- Header via include -->
-            <header data-include="components/header.html"></header>
+        <!-- Main content -->
+        <main id="main" class="site-main container">
+          <section id="intro" class="container">
+            <h1>Welcome</h1>
+            <p>
+              We provide examples of accessible user interface components—use
+              your keyboard or screen reader to explore them and learn the
+              expected behaviors.
+            </p>
 
-            <!-- Main content -->
-            <main id="main" class="site-main container">
-                <section id="intro" class="container">
-                    <h1>Welcome</h1>
-                    <p>We provide examples of accessible user interface components—use your keyboard or screen
-                        reader to
-                        explore them and learn the expected behaviors.</p>
-                </section>
+            <div class="overview-grid">
+              <!-- Keyboard Navigation -->
+              <section
+                class="keyboard-overview pattern is-neutral"
+                aria-labelledby="kbd-overview"
+              >
+                <h2 id="kbd-overview">Keyboard Navigation</h2>
+                <div class="keyboard-overview actions"></div>
+                <p>
+                  <strong>Move</strong> with <kbd>Tab</kbd> (forward) and
+                  <kbd>Shift</kbd>+<kbd>Tab</kbd> (back). The focused item
+                  should always show a visible focus ring.
+                </p>
+                <p>
+                  <strong>Activate</strong> controls with <kbd>Enter</kbd> or
+                  <kbd>Space</kbd> (follow links, press buttons, toggle
+                  checkboxes). Use <kbd>Esc</kbd> to close menus, dialogs, and
+                  other popovers when supported.
+                </p>
+                <p>
+                  <strong>Within widgets</strong> (tabs, radio groups, menus,
+                  carousels), use the Arrow keys as indicated in each
+                  component’s guidance. On macOS, enable full keyboard
+                  navigation in System Settings → Keyboard.
+                </p>
+              </section>
 
-                <section id="patterns" class="container">
-                    <h2>Featured Patterns</h2>
-                    <ul class="cards">
-                        <li class="card">
-                            <h3><a href="#accordion">Accordion</a></h3>
-                            <p>Simple show/hide details with a native control.</p>
-                        </li>
-                        <li class="card">
-                            <!-- Link when built -->
-                            <h3>Tabs</h3>
-                            <p>Keyboard-accessible tab interface per APG.</p>
-                        </li>
-                        <li class="card">
-                            <h3>Modal</h3>
-                            <p>Dialog with focus trap and inert background.</p>
-                        </li>
+              <!-- Screen Reader Navigation -->
+              <section
+                class="sr-overview pattern is-neutral"
+                aria-labelledby="sr-overview"
+              >
+                <h2 id="sr-overview">Screen Reader Navigation</h2>
+                <div class="sr-overview actions"></div>
+                <p>
+                  <strong>Browse/Virtual mode</strong> lets you read with Arrow
+                  keys and jump by element type (headings, links, form fields).
+                  Use quick-nav keys (e.g., H for headings, B for buttons) to
+                  skim pages efficiently.
+                </p>
+                <p>
+                  <strong>Forms/Focus mode</strong> activates when you enter
+                  fields so you can type and interact. Press <kbd>Esc</kbd> to
+                  return to Browse mode. NVDA toggles with
+                  <kbd>NVDA</kbd>+<kbd>Space</kbd>; JAWS can toggle Virtual PC
+                  Cursor with <kbd>Insert</kbd>+<kbd>Z</kbd>.
+                </p>
+                <p>
+                  <strong>Expectations</strong>: Only visible, current content
+                  should be focusable; dialogs trap focus until closed; status
+                  messages should be announced. Each component on this site
+                  includes specific keyboard and screen reader notes.
+                </p>
+              </section>
+            </div>
+          </section>
+
+          <section id="patterns" class="container">
+            <h2>Featured Patterns</h2>
+            <ul class="cards">
+              <li class="card">
+                <h3><a href="#accordion">Accordion</a></h3>
+                <p>Simple show/hide details with a native control.</p>
+              </li>
+              <li class="card">
+                <!-- Link when built -->
+                <h3>Tabs</h3>
+                <p>Keyboard-accessible tab interface per APG.</p>
+              </li>
+              <li class="card">
+                <h3>Modal</h3>
+                <p>Dialog with focus trap and inert background.</p>
+              </li>
+            </ul>
+          </section>
+          <!-- Features Patterns End  -->
+          <section class="container">
+            <h2 id="patterns">Patterns</h2>
+            <!-- Accordion Pattern  -->
+            <section
+              class="accordion"
+              aria-label="accordion"
+              data-allow-multiple
+            >
+              <h3 id="accordion">Accordion</h3>
+              <!-- Item 1 -->
+              <div class="accordion-actions">
+                <button
+                  type="button"
+                  class="accordion-toggle-all button"
+                  aria-pressed="false"
+                  data-open-label="Open all"
+                  data-close-label="Close all"
+                >
+                  Open all accordions
+                </button>
+              </div>
+              <div class="accordion-item">
+                <h4 class="accordion-heading">
+                  <button
+                    type="button"
+                    class="accordion-trigger"
+                    id="acc-trigger-1"
+                    aria-expanded="false"
+                    aria-controls="acc-panel-1"
+                  >
+                    What is this accordion?
+                  </button>
+                </h4>
+                <div
+                  id="acc-panel-1"
+                  class="accordion-panel"
+                  role="group"
+                  aria-labelledby="acc-trigger-1"
+                  hidden
+                >
+                  <!-- ✅ Image spot (optional) -->
+                  <figure class="accordion-media">
+                    <!-- Update the path to your image -->
+                    <img
+                      src="assets/img/chloeDoggles.png"
+                      alt="Chloe the Golden Retriever wearing doggles"
+                    />
+                  </figure>
+
+                  <p>
+                    This accordion is keyboard and screen-reader friendly. You
+                    can include text, lists, links, and the image above.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Item 2 -->
+              <div class="accordion-item">
+                <h4 class="accordion-heading">
+                  <button
+                    type="button"
+                    class="accordion-trigger"
+                    id="acc-trigger-2"
+                    aria-expanded="false"
+                    aria-controls="acc-panel-2"
+                  >
+                    Can I open more than one section?
+                  </button>
+                </h4>
+                <div
+                  id="acc-panel-2"
+                  class="accordion-panel"
+                  hidden
+                  role="group"
+                  aria-labelledby="acc-trigger-2"
+                >
+                  <p>
+                    Yes. This accordion container has
+                    <code>data-allow-multiple</code>, so multiple panels can
+                    stay open. Remove that attribute to enforce only one open at
+                    a time.
+                  </p>
+                </div>
+              </div>
+
+              <div class="a11y-block">
+                <h4 id="kbd-only-title">Keyboard-only navigation</h4>
+                <ul>
+                  <li>
+                    Press <kbd>Tab</kbd> until a question (button) is focused.
+                  </li>
+                  <li>
+                    Press <kbd>Enter</kbd> or <kbd>Space</kbd> to
+                    expand/collapse that section.
+                  </li>
+                  <li>
+                    Use <kbd>↓</kbd> / <kbd>↑</kbd> to move to the next/previous
+                    question. (Optional)
+                  </li>
+                  <li>
+                    Use <kbd>Home</kbd> / <kbd>End</kbd> to jump to the
+                    first/last question.
+                  </li>
+                  <li>
+                    When a section is collapsed, its content isn’t tabbable
+                    (expected).
+                  </li>
+                  <li>
+                    When expanded, use <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd
+                      >Tab</kbd
+                    >
+                    to move through links, buttons, or fields inside.
+                  </li>
+                  <li>
+                    If present, the <strong>Open/Close all</strong> button
+                    toggles every section; focus stays on that button after
+                    toggling.
+                  </li>
+                </ul>
+              </div>
+
+              <div class="a11y-block">
+                <h4 id="sr-title">JAWS / NVDA navigation (Windows)</h4>
+                <ul>
+                  <li>
+                    Stay in <strong>Browse/Virtual</strong> mode by default.
+                  </li>
+                  <li>
+                    Use <kbd>B</kbd> / <kbd>Shift</kbd>+<kbd>B</kbd> to move to
+                    the next/previous <strong>button</strong> (each question is
+                    a button).
+                  </li>
+                  <li>
+                    Or use <kbd>H</kbd> / <kbd>Shift</kbd>+<kbd>H</kbd> to jump
+                    between <strong>headings</strong> for each question.
+                  </li>
+                  <li>
+                    Press <kbd>Enter</kbd> or <kbd>Space</kbd> on a question to
+                    expand/collapse; the reader announces “expanded/collapsed”.
+                  </li>
+                  <li>
+                    Inside an expanded panel, use arrow keys to read line by
+                    line, or <kbd>Tab</kbd> to jump between interactive
+                    elements.
+                  </li>
+                  <li>
+                    Find the <strong>Open/Close all</strong> control with
+                    <kbd>B</kbd>; toggle with <kbd>Space</kbd>/<kbd>Enter</kbd>
+                    (JAWS/NVDA announce “pressed/not pressed”).
+                  </li>
+                </ul>
+              </div>
+              <!-- Accordion end  -->
+            </section>
+
+            <!-- Component: Breadcrumb -->
+            <section
+              class="pattern is-neutral"
+              data-pattern="breadcrumb"
+              aria-labelledby="bc1-h"
+            >
+              <div class="container" style="padding: 0; margin-bottom: 0.25rem">
+                <h3 id="bc1-h">Breadcrumb</h3>
+                <p class="help">
+                  Shows where you are in the site. The current page is not a
+                  link; earlier items link to their parent pages (per WAI-ARIA
+                  APG).
+                </p>
+              </div>
+
+              <div class="container" style="padding: 0">
+                <!-- Live example -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                  <ol>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Patterns</a></li>
+                    <li><a href="#">Navigation</a></li>
+                    <li>
+                      <span>Breadcrumb</span>
+                      <span class="visually-hidden">(current page)</span>
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+
+              <!-- How to use -->
+              <div class="container" style="padding: 0">
+                <h4 class="small" style="margin: 0.5rem 0 0">Keyboard</h4>
+                <ul class="small" style="margin: 0.25rem 0 0">
+                  <li>
+                    Use <strong>Tab / Shift+Tab</strong> to move through the
+                    breadcrumb links; press <strong>Enter</strong> to follow
+                    one.
+                  </li>
+                </ul>
+
+                <h4 class="small" style="margin: 0.75rem 0 0">
+                  Screen readers
+                </h4>
+                <ul class="small" style="margin: 0.25rem 0 0">
+                  <li>
+                    <strong>NVDA (Windows):</strong> Press <strong>D</strong> to
+                    jump between landmarks until you hear “Breadcrumb,
+                    navigation”, or press <strong>NVDA+F7</strong> and choose
+                    the <em>Landmarks</em> tab. Then Tab through the links; the
+                    last item announces as “current page.”
+                  </li>
+                  <li>
+                    <strong>JAWS (Windows):</strong> Press
+                    <strong>R / Shift+R</strong> to move between regions
+                    (landmarks) to “Breadcrumb”, or use
+                    <strong>Insert+F7</strong> for the Links List. Tab through
+                    links; the last item is plain text with “current page.”
+                  </li>
+                </ul>
+              </div>
+              <!-- Breadcrumb end  -->
+            </section>
+
+            <!-- Component: Button -->
+            <section
+              class="pattern is-success"
+              data-pattern="button"
+              aria-labelledby="btn-h"
+            >
+              <header class="container section-header">
+                <h3 id="btn-h">Button</h3>
+                <p class="help">
+                  Use for the main action on a page. Press Enter or Space to
+                  activate.
+                </p>
+              </header>
+
+              <div class="container container--flush">
+                <!-- Live example: single primary button -->
+                <div class="button-demo">
+                  <button
+                    type="button"
+                    class="button button--primary"
+                    id="btn-primary-demo"
+                  >
+                    Primary action
+                  </button>
+                </div>
+              </div>
+
+              <!-- How to use -->
+              <div class="container container--flush">
+                <h4 class="small mt-050">Keyboard</h4>
+                <ul class="small list-compact">
+                  <li>
+                    <strong>Tab / Shift+Tab</strong> moves focus to the button.
+                  </li>
+                  <li>
+                    <strong>Enter</strong> or <strong>Space</strong> activates
+                    it and shows an alert.
+                  </li>
+                  <li>
+                    <strong>Esc</strong> key closes alert and returns users
+                    focus to the triggering element (Button).
+                  </li>
+                </ul>
+
+                <h4 class="small mt-075">
+                  Screen readers (NVDA / JAWS / VoiceOver)
+                </h4>
+                <ul class="small list-compact">
+                  <li>
+                    Announces as “button.” Activate with Enter/Space (or
+                    VO+Space on macOS). A native browser alert appears.
+                  </li>
+                </ul>
+              </div>
+              <!-- Button Pattern end  -->
+            </section>
+
+            <!-- Pattern section end  -->
+            <!-- Carousel -->
+            <section
+              class="carousel pattern is-info"
+              aria-labelledby="carousel-heading"
+              data-autoplay="false"
+            >
+              <h3 id="carousel-heading">Carousel</h3>
+
+              <div class="carousel-viewport">
+                <!-- Slide 1 -->
+                <div class="carousel-slide" role="group" aria-label="1 of 3">
+                  <img
+                    class="carousel-img"
+                    src="assets/img/ChloVet.JPG"
+                    alt="Chloe the golden retriever at her first visit.  She was 8 weeks old."
+                    width="1600"
+                    height="900"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <p>Accessible accordion, keyboard + SR-friendly.</p>
+                </div>
+
+                <!-- Slide 2 -->
+                <div
+                  class="carousel-slide"
+                  role="group"
+                  aria-label="2 of 3"
+                  hidden
+                >
+                  <img
+                    class="carousel-img"
+                    src="assets/img/chloeTennisBall.JPG"
+                    alt="Chloe the golden retriever holding a tennis ball, ready to run"
+                    width="1600"
+                    height="900"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <p>Auto rotation can be paused.</p>
+                </div>
+
+                <!-- Slide 3 -->
+                <div
+                  class="carousel-slide"
+                  role="group"
+                  aria-label="3 of 3"
+                  hidden
+                >
+                  <img
+                    class="carousel-img"
+                    src="assets/img/ChloeSnow.JPG"
+                    alt="Chloe the golden retriever laying in the snow"
+                    width="1600"
+                    height="900"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <p>Keep an eye out for Chloe elsewhere on this site!</p>
+                </div>
+              </div>
+              <!-- Controls AFTER images -->
+              <div class="carousel actions">
+                <button
+                  type="button"
+                  class="carousel-prev button"
+                  aria-label="Previous slide"
+                >
+                  Prev
+                </button>
+                <button
+                  type="button"
+                  class="carousel-next button"
+                  aria-label="Next slide"
+                >
+                  Next
+                </button>
+                <button
+                  type="button"
+                  class="carousel-toggle button"
+                  aria-pressed="false"
+                >
+                  Play
+                </button>
+              </div>
+
+              <p class="carousel-status sr-only" aria-live="polite"></p>
+
+              <!-- Guidance: keyboard-only -->
+              <section aria-labelledby="kbd-carousel">
+                <h4 id="kbd-carousel">Keyboard-only navigation</h4>
+                <ul>
+                  <li>
+                    Press <kbd>Tab</kbd> until a carousel control is focused
+                    (e.g., <strong>Prev</strong>, <strong>Next</strong>, or
+                    <strong>Play</strong>/<strong>Pause</strong>).
+                  </li>
+                  <li>
+                    Activate controls with <kbd>Enter</kbd> or <kbd>Space</kbd>:
+                    <ul>
+                      <li>
+                        <strong>Prev</strong> / <strong>Next</strong> moves to
+                        the previous/next slide.
+                      </li>
+                      <li>
+                        <strong>Play</strong>/<strong>Pause</strong> starts or
+                        stops automatic slide rotation.
+                      </li>
                     </ul>
-                </section>
-                <!-- Features Patterns End  -->
-                <section class="container">
-                    <h2 id="patterns">Patterns</h2>
-                    <!-- Accordion Pattern  -->
-                    <section class="accordion" aria-label="accordion" data-allow-multiple>
-                        <h3 id="accordion">Accordion</h3>
-                        <!-- Item 1 -->
-                        <div class="accordion-actions">
-                            <button type="button" class="accordion-toggle-all button" aria-pressed="false"
-                                data-open-label="Open all" data-close-label="Close all">Open all accordions</button>
-                        </div>
-                        <div class="accordion-item">
-                            <h4 class="accordion-heading">
-                                <button type="button" class="accordion-trigger" id="acc-trigger-1" aria-expanded="false"
-                                    aria-controls="acc-panel-1">
-                                    What is this accordion?
-                                </button>
-                            </h4>
-                            <div id="acc-panel-1" class="accordion-panel" role="group" aria-labelledby="acc-trigger-1"
-                                hidden>
-                                <!-- ✅ Image spot (optional) -->
-                                <figure class="accordion-media">
-                                    <!-- Update the path to your image -->
-                                    <img src="assets/img/chloeDoggles.png"
-                                        alt="Chloe the Golden Retriever wearing doggles">
-                                </figure>
+                  </li>
+                  <li>
+                    While focused on <strong>Prev</strong> or
+                    <strong>Next</strong>, you can also use <kbd>←</kbd> /
+                    <kbd>→</kbd> to move slides.
+                  </li>
+                  <li>
+                    Focus remains on the control you pressed (no unexpected
+                    focus jumps).
+                  </li>
+                  <li>
+                    Only the current slide’s content is focusable; hidden slides
+                    are removed from the tab order.
+                  </li>
+                  <li>
+                    Hovering the carousel or focusing inside it will pause
+                    autoplay (if enabled). Use <strong>Play</strong> to resume.
+                  </li>
+                </ul>
+              </section>
 
-                                <p>
-                                    This accordion is keyboard and screen-reader friendly. You can include
-                                    text,
-                                    lists,
-                                    links, and the image above.
-                                </p>
-                            </div>
-                        </div>
+              <!-- Guidance: JAWS/NVDA -->
+              <section aria-labelledby="sr-carousel">
+                <h4 id="sr-carousel">JAWS / NVDA navigation (Windows)</h4>
+                <ul>
+                  <li>
+                    In <strong>Browse/Virtual</strong> mode, use <kbd>B</kbd> /
+                    <kbd>Shift</kbd>+<kbd>B</kbd> to move between the carousel’s
+                    buttons:
+                    <ul>
+                      <li>
+                        <strong>Prev</strong> and <strong>Next</strong> change
+                        slides.
+                      </li>
+                      <li>
+                        <strong>Play</strong>/<strong>Pause</strong> starts or
+                        stops rotation.
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    Press <kbd>Enter</kbd> or <kbd>Space</kbd> on a button to
+                    activate it. The screen reader will announce the new slide
+                    (e.g., “Slide 2 of 3”).
+                  </li>
+                  <li>
+                    Read the current slide’s content using arrow keys, or press
+                    <kbd>Tab</kbd> to move to interactive items inside the
+                    slide.
+                  </li>
+                  <li>
+                    Autoplay (when on) pauses as soon as you focus inside the
+                    carousel; press <strong>Play</strong> to resume.
+                  </li>
+                  <li>
+                    If a button doesn’t activate:
+                    <ul>
+                      <li>
+                        <strong>NVDA</strong>: press <kbd>NVDA</kbd>+<kbd
+                          >Space</kbd
+                        >
+                        to switch to <strong>Focus mode</strong>, activate, then
+                        press again to return to Browse.
+                      </li>
+                      <li>
+                        <strong>JAWS</strong>: if needed, toggle Virtual PC
+                        Cursor with <kbd>Insert</kbd>+<kbd>Z</kbd>, activate,
+                        then toggle back.
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    When moving into the carousel with the <kbd>←</kbd> /
+                    <kbd>→</kbd>. Your screen reader announces the new slide as
+                    a group (e.g., “Slide 2 of 3”).
+                  </li>
+                </ul>
+              </section>
+              <!-- Carousel end  -->
+            </section>
 
-                        <!-- Item 2 -->
-                        <div class="accordion-item">
-                            <h4 class="accordion-heading">
-                                <button type="button" class="accordion-trigger" id="acc-trigger-2" aria-expanded="false"
-                                    aria-controls="acc-panel-2">
-                                    Can I open more than one section?
-                                </button>
-                            </h4>
-                            <div id="acc-panel-2" class="accordion-panel" hidden role="group"
-                                aria-labelledby="acc-trigger-2">
-                                <p>
-                                    Yes. This accordion container has <code>data-allow-multiple</code>, so
-                                    multiple
-                                    panels
-                                    can stay open. Remove that attribute to enforce only one open at a time.
-                                </p>
-                            </div>
-                        </div>
+            <!-- Modal -->
+            <section
+              class="modal pattern is-warning"
+              aria-labelledby="modal-component-title"
+            >
+              <h3 id="modal-component-title">Modal dialog</h3>
 
-                        <div class="a11y-block">
-                            <h4 id="kbd-only-title">Keyboard-only navigation</h4>
-                            <ul>
-                                <li>Press <kbd>Tab</kbd> until a question (button) is focused.</li>
-                                <li>Press <kbd>Enter</kbd> or <kbd>Space</kbd> to expand/collapse that section.</li>
-                                <li>Use <kbd>↓</kbd> / <kbd>↑</kbd> to move to the next/previous question.
-                                    (Optional)</li>
-                                <li>Use <kbd>Home</kbd> / <kbd>End</kbd> to jump to the first/last question.</li>
-                                <li>When a section is collapsed, its content isn’t tabbable (expected).</li>
-                                <li>When expanded, use <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> to move
-                                    through links,
-                                    buttons, or fields inside.</li>
-                                <li>If present, the <strong>Open/Close all</strong> button toggles every section;
-                                    focus stays on
-                                    that button after toggling.</li>
-                            </ul>
-                        </div>
+              <!-- actions (template uses: <div class="modal actions">) -->
+              <div class="modal actions">
+                <button type="button" class="button" id="open-demo-modal">
+                  Open modal
+                </button>
+              </div>
 
-                        <div class="a11y-block">
-                            <h4 id="sr-title">JAWS / NVDA navigation (Windows)</h4>
-                            <ul>
-                                <li>Stay in <strong>Browse/Virtual</strong> mode by default.</li>
-                                <li>Use <kbd>B</kbd> / <kbd>Shift</kbd>+<kbd>B</kbd> to move to the next/previous
-                                    <strong>button</strong> (each question is a button).</li>
-                                <li>Or use <kbd>H</kbd> / <kbd>Shift</kbd>+<kbd>H</kbd> to jump between
-                                    <strong>headings</strong> for each question.</li>
-                                <li>Press <kbd>Enter</kbd> or <kbd>Space</kbd> on a question to expand/collapse; the
-                                    reader
-                                    announces “expanded/collapsed”.</li>
-                                <li>Inside an expanded panel, use arrow keys to read line by line, or <kbd>Tab</kbd>
-                                    to jump
-                                    between interactive elements.</li>
-                                <li>Find the <strong>Open/Close all</strong> control with <kbd>B</kbd>; toggle with
-                                    <kbd>Space</kbd>/<kbd>Enter</kbd> (JAWS/NVDA announce “pressed/not pressed”).
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- Accordion end  -->
-                    </section>
+              <!-- component element -->
+              <div id="demo-modal" class="modal-root" hidden>
+                <div class="modal-backdrop" data-close></div>
 
-                    <!-- Component: Breadcrumb -->
-                    <section class="pattern is-neutral" data-pattern="breadcrumb" aria-labelledby="bc1-h">
-                        <div class="container" style="padding:0; margin-bottom:.25rem;">
-                            <h3 id="bc1-h">Breadcrumb</h3>
-                            <p class="help">
-                                Shows where you are in the site. The current page is not a link; earlier
-                                items link to their parent pages (per WAI-ARIA APG).
-                            </p>
-                        </div>
-
-                        <div class="container" style="padding:0;">
-                            <!-- Live example -->
-                            <nav class="breadcrumb" aria-label="Breadcrumb">
-                                <ol>
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">Patterns</a></li>
-                                    <li><a href="#">Navigation</a></li>
-                                    <li>
-                                        <span>Breadcrumb</span>
-                                        <span class="visually-hidden">(current page)</span>
-                                    </li>
-                                </ol>
-                            </nav>
-                        </div>
-
-                        <!-- How to use -->
-                        <div class="container" style="padding:0;">
-                            <h4 class="small" style="margin:.5rem 0 0;">Keyboard</h4>
-                            <ul class="small" style="margin:.25rem 0 0;">
-                                <li>Use <strong>Tab / Shift+Tab</strong> to move through the breadcrumb links; press
-                                    <strong>Enter</strong> to follow one.</li>
-                            </ul>
-
-                            <h4 class="small" style="margin:.75rem 0 0;">Screen readers</h4>
-                            <ul class="small" style="margin:.25rem 0 0;">
-                                <li><strong>NVDA (Windows):</strong> Press <strong>D</strong> to jump between landmarks
-                                    until you hear “Breadcrumb, navigation”, or press <strong>NVDA+F7</strong> and
-                                    choose the <em>Landmarks</em> tab. Then Tab through the links; the last item
-                                    announces as “current page.”</li>
-                                <li><strong>JAWS (Windows):</strong> Press <strong>R / Shift+R</strong> to move between
-                                    regions (landmarks) to “Breadcrumb”, or use <strong>Insert+F7</strong> for the Links
-                                    List. Tab through links; the last item is plain text with “current page.”</li>
-                            </ul>
-                        </div>
-                        <!-- Breadcrumb end  -->
-
-                    </section>
-
-                    <!-- Component: Button -->
-                    <section class="pattern is-success" data-pattern="button" aria-labelledby="btn-h">
-                        <header class="container section-header">
-                            <h3 id="btn-h">Button</h3>
-                            <p class="help">Use for the main action on a page. Press Enter or Space to activate.</p>
-                        </header>
-
-                        <div class="container container--flush">
-                            <!-- Live example: single primary button -->
-                            <div class="button-demo">
-                                <button type="button" class="button button--primary" id="btn-primary-demo">
-                                    Primary action
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- How to use -->
-                        <div class="container container--flush">
-                            <h4 class="small mt-050">Keyboard</h4>
-                            <ul class="small list-compact">
-                                <li><strong>Tab / Shift+Tab</strong> moves focus to the button.</li>
-                                <li><strong>Enter</strong> or <strong>Space</strong> activates it and shows an alert.
-                                </li>
-                                <li><strong>Esc</strong> key closes alert and returns users focus to the triggering
-                                    element (Button).</li>
-                            </ul>
-
-                            <h4 class="small mt-075">Screen readers (NVDA / JAWS / VoiceOver)</h4>
-                            <ul class="small list-compact">
-                                <li>Announces as “button.” Activate with Enter/Space (or VO+Space on macOS). A native
-                                    browser alert appears.</li>
-                            </ul>
-                        </div>
-                        <!-- Button Pattern end  -->
-                    </section>
-
-                    <!-- Pattern section end  -->
-                    <!-- Carousel -->
-                    <section class="carousel pattern is-info" aria-labelledby="carousel-heading" data-autoplay="false">
-                        <h3 id="carousel-heading">Carousel</h3>
-
-
-                        <div class="carousel-viewport">
-                            <!-- Slide 1 -->
-                            <div class="carousel-slide" role="group" aria-label="1 of 3">
-                                <img class="carousel-img" src="assets/img/ChloVet.JPG"
-                                    alt="Chloe the golden retriever at her first visit.  She was 8 weeks old."
-                                    width="1600" height="900" loading="lazy" decoding="async">
-                                <p>Accessible accordion, keyboard + SR-friendly.</p>
-                            </div>
-
-                            <!-- Slide 2 -->
-                            <div class="carousel-slide" role="group" aria-label="2 of 3" hidden>
-                                <img class="carousel-img" src="assets/img/chloeTennisBall.JPG"
-                                    alt="Chloe the golden retriever holding a tennis ball, ready to run" width="1600"
-                                    height="900" loading="lazy" decoding="async">
-                                <p>Auto rotation can be paused.</p>
-                            </div>
-
-                            <!-- Slide 3 -->
-                            <div class="carousel-slide" role="group" aria-label="3 of 3" hidden>
-                                <img class="carousel-img" src="assets/img/ChloeSnow.JPG"
-                                    alt="Chloe the golden retriever laying in the snow" width="1600" height="900"
-                                    loading="lazy" decoding="async">
-                                <p>Keep an eye out for Chloe elsewhere on this site!</p>
-                            </div>
-                        </div>
-                        <!-- Controls AFTER images -->
-                        <div class="carousel actions">
-                            <button type="button" class="carousel-prev button" aria-label="Previous slide">Prev</button>
-                            <button type="button" class="carousel-next button" aria-label="Next slide">Next</button>
-                            <button type="button" class="carousel-toggle button" aria-pressed="false">Play</button>
-                        </div>
-
-                        <p class="carousel-status sr-only" aria-live="polite"></p>
-
-                        <!-- Guidance: keyboard-only -->
-                        <section aria-labelledby="kbd-carousel">
-                            <h4 id="kbd-carousel">Keyboard-only navigation</h4>
-                            <ul>
-                                <li>Press <kbd>Tab</kbd> until a carousel control is focused (e.g.,
-                                    <strong>Prev</strong>, <strong>Next</strong>, or
-                                    <strong>Play</strong>/<strong>Pause</strong>).</li>
-                                <li>Activate controls with <kbd>Enter</kbd> or <kbd>Space</kbd>:
-                                    <ul>
-                                        <li><strong>Prev</strong> / <strong>Next</strong> moves to the previous/next
-                                            slide.</li>
-                                        <li><strong>Play</strong>/<strong>Pause</strong> starts or stops automatic slide
-                                            rotation.</li>
-                                    </ul>
-                                </li>
-                                <li>While focused on <strong>Prev</strong> or <strong>Next</strong>, you can also use
-                                    <kbd>←</kbd> / <kbd>→</kbd> to move slides.</li>
-                                <li>Focus remains on the control you pressed (no unexpected focus jumps).</li>
-                                <li>Only the current slide’s content is focusable; hidden slides are removed from the
-                                    tab order.</li>
-                                <li>Hovering the carousel or focusing inside it will pause autoplay (if enabled). Use
-                                    <strong>Play</strong> to resume.</li>
-                            </ul>
-                        </section>
-
-                        <!-- Guidance: JAWS/NVDA -->
-                        <section aria-labelledby="sr-carousel">
-                            <h4 id="sr-carousel">JAWS / NVDA navigation (Windows)</h4>
-                            <ul>
-                                <li>In <strong>Browse/Virtual</strong> mode, use <kbd>B</kbd> /
-                                    <kbd>Shift</kbd>+<kbd>B</kbd> to move between the carousel’s buttons:
-                                    <ul>
-                                        <li><strong>Prev</strong> and <strong>Next</strong> change slides.</li>
-                                        <li><strong>Play</strong>/<strong>Pause</strong> starts or stops rotation.</li>
-                                    </ul>
-                                </li>
-                                <li>Press <kbd>Enter</kbd> or <kbd>Space</kbd> on a button to activate it. The screen
-                                    reader will announce the new slide (e.g., “Slide 2 of 3”).</li>
-                                <li>Read the current slide’s content using arrow keys, or press <kbd>Tab</kbd> to move
-                                    to interactive items inside the slide.</li>
-                                <li>Autoplay (when on) pauses as soon as you focus inside the carousel; press
-                                    <strong>Play</strong> to resume.</li>
-                                <li>If a button doesn’t activate:
-                                    <ul>
-                                        <li><strong>NVDA</strong>: press <kbd>NVDA</kbd>+<kbd>Space</kbd> to switch to
-                                            <strong>Focus mode</strong>, activate, then press again to return to Browse.
-                                        </li>
-                                        <li><strong>JAWS</strong>: if needed, toggle Virtual PC Cursor with
-                                            <kbd>Insert</kbd>+<kbd>Z</kbd>, activate, then toggle back.</li>
-                                    </ul>
-                                </li>
-                                <li>When moving into the carousel with the <kbd>←</kbd>
-                                    / <kbd>→</kbd>. Your screen reader announces the new slide as a group
-                                    (e.g., “Slide 2 of 3”).</li>
-
-                            </ul>
-
-                        </section>
-                        <!-- Carousel end  -->
-                    </section>
-
-                    <!-- Modal -->
-                    <section class="modal pattern is-warning" aria-labelledby="modal-component-title">
-                        <h3 id="modal-component-title">Modal dialog</h3>
-
-
-                        <!-- actions (template uses: <div class="modal actions">) -->
-                        <div class="modal actions">
-                            <button type="button" class="button" id="open-demo-modal">Open modal</button>
-                        </div>
-
-                        <!-- component element -->
-                        <div id="demo-modal" class="modal-root" hidden>
-                            <div class="modal-backdrop" data-close></div>
-
-                            <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title"
-                                aria-describedby="demo-modal-desc" tabindex="-1">
-                                <div class="modal-header">
-                                    <h4 id="demo-modal-title">Chloe Modal Dialog!</h4>
-                                    <!-- <button type="button" class="modal-close" aria-label="Close dialog"
+                <div
+                  class="modal-dialog"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="demo-modal-title"
+                  aria-describedby="demo-modal-desc"
+                  tabindex="-1"
+                >
+                  <div class="modal-header">
+                    <h4 id="demo-modal-title">Chloe Modal Dialog!</h4>
+                    <!-- <button type="button" class="modal-close" aria-label="Close dialog"
                                         data-close>&times;</button> -->
-                                </div>
+                  </div>
 
-                                <div class="modal-body" id="demo-modal-desc">
-                                    <!-- Image inside the modal (no <figure>) -->
-                                    <img class="modal-img" src="assets/img/SuperGirlChloe.jpg"
-                                        alt="Chloe jumping over snow in a similar manner to supergirl" width="1600"
-                                        height="900" loading="lazy" decoding="async">
-                                    <p class="modal-text">Action Pup Chloe leaping into your hearts</p>
-                                </div>
+                  <div class="modal-body" id="demo-modal-desc">
+                    <!-- Image inside the modal (no <figure>) -->
+                    <img
+                      class="modal-img"
+                      src="assets/img/SuperGirlChloe.jpg"
+                      alt="Chloe jumping over snow in a similar manner to supergirl"
+                      width="1600"
+                      height="900"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <p class="modal-text">
+                      Action Pup Chloe leaping into your hearts
+                    </p>
+                  </div>
 
-                                <div class="modal-footer">
-                                    <button type="button" class="button" data-close>Close</button>
-                                </div>
-                            </div>
-                        </div>
+                  <div class="modal-footer">
+                    <button type="button" class="button" data-close>
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
 
-                        <!-- guidance: keyboard-only -->
-                        <section aria-labelledby="kbd-modal">
-                            <h4 id="kbd-modal">Keyboard-only navigation</h4>
-                            <ul>
-                                <li>Press <kbd>Tab</kbd> to the <strong>Open modal</strong> button, then press
-                                    <kbd>Enter</kbd> or <kbd>Space</kbd>.</li>
-                                <li>The dialog opens and focus moves into it. Use
-                                    <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd> to cycle through controls.</li>
-                                <li>Press <kbd>Esc</kbd> to close at any time. Focus returns to the <strong>Open
-                                        modal</strong> button.</li>
-                                <li>Clicking outside of the modal with mouse or the <strong>Close</strong> button closes
-                                    the
-                                    dialog.</li>
-                            </ul>
-                        </section>
+              <!-- guidance: keyboard-only -->
+              <section aria-labelledby="kbd-modal">
+                <h4 id="kbd-modal">Keyboard-only navigation</h4>
+                <ul>
+                  <li>
+                    Press <kbd>Tab</kbd> to the
+                    <strong>Open modal</strong> button, then press
+                    <kbd>Enter</kbd> or <kbd>Space</kbd>.
+                  </li>
+                  <li>
+                    The dialog opens and focus moves into it. Use
+                    <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd> to cycle
+                    through controls.
+                  </li>
+                  <li>
+                    Press <kbd>Esc</kbd> to close at any time. Focus returns to
+                    the <strong>Open modal</strong> button.
+                  </li>
+                  <li>
+                    Clicking outside of the modal with mouse or the
+                    <strong>Close</strong> button closes the dialog.
+                  </li>
+                </ul>
+              </section>
 
-                        <!-- guidance: JAWS / NVDA -->
-                        <section aria-labelledby="sr-modal">
-                            <h4 id="sr-modal">JAWS / NVDA navigation (Windows)</h4>
-                            <ul>
-                                <li>Activate <strong>Open modal</strong> with <kbd>Enter</kbd>/<kbd>Space</kbd>. The
-                                    reader announces a modal dialog and the modal label.</li>
-                                <li>The dialog is modal: only its content is navigable. Use
-                                    <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd> to move between buttons and links.
-                                </li>
-                                <li>Use arrow keys to read text inside the dialog. The image has concise
-                                    <code>alt</code> text.</li>
-                                <li>Press <kbd>Esc</kbd> or activate <strong>Close</strong> button to dismiss; focus
-                                    returns to
-                                    the trigger button.</li>
-                            </ul>
-                        </section>
-                        <!-- Modal end  -->
-                    </section>
+              <!-- guidance: JAWS / NVDA -->
+              <section aria-labelledby="sr-modal">
+                <h4 id="sr-modal">JAWS / NVDA navigation (Windows)</h4>
+                <ul>
+                  <li>
+                    Activate <strong>Open modal</strong> with
+                    <kbd>Enter</kbd>/<kbd>Space</kbd>. The reader announces a
+                    modal dialog and the modal label.
+                  </li>
+                  <li>
+                    The dialog is modal: only its content is navigable. Use
+                    <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd> to move
+                    between buttons and links.
+                  </li>
+                  <li>
+                    Use arrow keys to read text inside the dialog. The image has
+                    concise <code>alt</code> text.
+                  </li>
+                  <li>
+                    Press <kbd>Esc</kbd> or activate
+                    <strong>Close</strong> button to dismiss; focus returns to
+                    the trigger button.
+                  </li>
+                </ul>
+              </section>
+              <!-- Modal end  -->
+            </section>
 
-                    <section class="links pattern is-neutral" aria-labelledby="links-heading">
-                        <h3 id="links-heading">Links</h3>
+            <section
+              class="links pattern is-neutral"
+              aria-labelledby="links-heading"
+            >
+              <h3 id="links-heading">Links</h3>
 
-                        <!-- actions area (optional controls for this component) -->
-                        <div class="links actions"></div>
+              <!-- actions area (optional controls for this component) -->
+              <div class="links actions"></div>
 
-                        <!-- component element -->
-                        <ul class="link-examples">
-                            <li>
-                                <a href="#accordion">Standard link inside content - links to accordion</a>
-                            </li>
+              <!-- component element -->
+              <ul class="link-examples">
+                <li>
+                  <a href="#accordion"
+                    >Standard link inside content - links to accordion</a
+                  >
+                </li>
 
-                            <li>
-                                <a class="link-external" href="https://www.w3.org/WAI/" target="_blank" rel="noopener">
-                                    External resource - w3.org
-                                    <span class="sr-only">(opens in a new tab)</span>
-                                    <!-- decorative icon -->
-                                    <svg class="ext-icon" aria-hidden="true" viewBox="0 0 24 24" width="1em"
-                                        height="1em">
-                                        <path fill="currentColor"
-                                            d="M14 3h7v7h-2V6.41l-9.29 9.3l-1.42-1.42l9.3-9.29H14V3ZM5 5h6v2H7v10h10v-4h2v6H5V5Z" />
-                                    </svg>
-                                </a>
-                            </li>
+                <li>
+                  <a
+                    class="link-external"
+                    href="https://www.w3.org/WAI/"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    External resource - w3.org
+                    <span class="sr-only">(opens in a new tab)</span>
+                    <!-- decorative icon -->
+                    <svg
+                      class="ext-icon"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                      height="1em"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M14 3h7v7h-2V6.41l-9.29 9.3l-1.42-1.42l9.3-9.29H14V3ZM5 5h6v2H7v10h10v-4h2v6H5V5Z"
+                      />
+                    </svg>
+                  </a>
+                </li>
 
-                            <li>
-                                <a class="link-download" href="assets/img/chloChair.jpg" download>
-                                    Download a Chloe Pic <span class="sr-only">Image</span>
-                                </a>
-                            </li>
+                <li>
+                  <a
+                    class="link-download"
+                    href="assets/img/chloChair.jpg"
+                    download
+                  >
+                    Download a Chloe Pic <span class="sr-only">Image</span>
+                  </a>
+                </li>
 
-                            <li>
-                                <a class="link-inline" href="#main">In-page anchor: jump to main content</a>
-                            </li>
-                        </ul>
+                <li>
+                  <a class="link-inline" href="#main"
+                    >In-page anchor: jump to main content</a
+                  >
+                </li>
+              </ul>
 
-                        <!-- guidance: keyboard-only -->
-                        <section aria-labelledby="kbd-links">
-                            <h4 id="kbd-links">Keyboard-only navigation</h4>
-                            <ul>
-                                <li>Use <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd> to move through links.</li>
-                                <li>Press <kbd>Enter</kbd> to activate a focused link.</li>
-                                <li>External links that open in a new tab include hidden text announcing “opens in a new
-                                    tab”.</li>
-                                <li>Button-style links are still real links—<kbd>Enter</kbd>/<kbd>Space</kbd> activates
-                                    them.</li>
-                            </ul>
-                        </section>
+              <!-- guidance: keyboard-only -->
+              <section aria-labelledby="kbd-links">
+                <h4 id="kbd-links">Keyboard-only navigation</h4>
+                <ul>
+                  <li>
+                    Use <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd> to move
+                    through links.
+                  </li>
+                  <li>Press <kbd>Enter</kbd> to activate a focused link.</li>
+                  <li>
+                    External links that open in a new tab include hidden text
+                    announcing “opens in a new tab”.
+                  </li>
+                  <li>
+                    Button-style links are still real
+                    links—<kbd>Enter</kbd>/<kbd>Space</kbd> activates them.
+                  </li>
+                </ul>
+              </section>
 
-                        <!-- guidance: JAWS / NVDA -->
-                        <section aria-labelledby="sr-links">
-                            <h4 id="sr-links">JAWS / NVDA navigation</h4>
-                            <ul>
-                                <li>Use <kbd>Tab</kbd> to move through links, or <kbd>Insert</kbd>+<kbd>F7</kbd>
-                                    (JAWS/NVDA) to list all links.</li>
-                                <li>Activate with <kbd>Enter</kbd>. External links announce “opens
-                                    in a new tab”.</li>
-                                <li>Visited links are visibly distinct and remain high contrast.</li>
-                            </ul>
-                        </section>
-                        <!-- Links end  -->
-                    </section>
+              <!-- guidance: JAWS / NVDA -->
+              <section aria-labelledby="sr-links">
+                <h4 id="sr-links">JAWS / NVDA navigation</h4>
+                <ul>
+                  <li>
+                    Use <kbd>Tab</kbd> to move through links, or
+                    <kbd>Insert</kbd>+<kbd>F7</kbd> (JAWS/NVDA) to list all
+                    links.
+                  </li>
+                  <li>
+                    Activate with <kbd>Enter</kbd>. External links announce
+                    “opens in a new tab”.
+                  </li>
+                  <li>
+                    Visited links are visibly distinct and remain high contrast.
+                  </li>
+                </ul>
+              </section>
+              <!-- Links end  -->
+            </section>
 
-                    <section class="table pattern is-neutral" aria-labelledby="table-heading">
-                        <h3 id="table-heading">Sortable table</h3>
+            <section
+              class="table pattern is-neutral"
+              aria-labelledby="table-heading"
+            >
+              <h3 id="table-heading">Sortable table</h3>
 
-                        <!-- component element -->
-                        <table id="demo-table" class="sortable-table">
-                            <caption class="sr-only">Demo data table you can sort by each column</caption>
-                            <thead>
-                                <tr>
-                                    <!-- Each TH has a button that controls sorting and the TH itself carries aria-sort -->
-                                    <th scope="col" aria-sort="none">
-                                        <button type="button" data-type="text">First name</button>
-                                    </th>
-                                    <th scope="col" aria-sort="none">
-                                        <button type="button" data-type="text">Last name</button>
-                                    </th>
-                                    <th scope="col" aria-sort="none">
-                                        <button type="button" data-type="numeric">Age</button>
-                                    </th>
-                                    <th scope="col" aria-sort="none">
-                                        <button type="button" data-type="text">Favorite fruit</button>
-                                    </th>
-                                    <th scope="col" aria-sort="none">
-                                        <button type="button" data-type="date">Member since</button>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Alex</td>
-                                    <td>Rivera</td>
-                                    <td>29</td>
-                                    <td>Mango</td>
-                                    <td>2022-03-14</td>
-                                </tr>
-                                <tr>
-                                    <td>Bianca</td>
-                                    <td>Nguyen</td>
-                                    <td>41</td>
-                                    <td>Apple</td>
-                                    <td>2021-10-02</td>
-                                </tr>
-                                <tr>
-                                    <td>Carlos</td>
-                                    <td>Lee</td>
-                                    <td>35</td>
-                                    <td>Banana</td>
-                                    <td>2020-07-18</td>
-                                </tr>
-                                <tr>
-                                    <td>Dina</td>
-                                    <td>O’Connor</td>
-                                    <td>27</td>
-                                    <td>Cherry</td>
-                                    <td>2024-01-09</td>
-                                </tr>
-                                <tr>
-                                    <td>Elijah</td>
-                                    <td>Patel</td>
-                                    <td>33</td>
-                                    <td>Orange</td>
-                                    <td>2019-05-30</td>
-                                </tr>
-                                <tr>
-                                    <td>Farah</td>
-                                    <td>Singh</td>
-                                    <td>39</td>
-                                    <td>Grape</td>
-                                    <td>2023-06-22</td>
-                                </tr>
-                            </tbody>
-                        </table>
+              <!-- component element -->
+              <table id="demo-table" class="sortable-table">
+                <caption class="sr-only">
+                  Demo data table you can sort by each column
+                </caption>
+                <thead>
+                  <tr>
+                    <!-- Each TH has a button that controls sorting and the TH itself carries aria-sort -->
+                    <th scope="col" aria-sort="none">
+                      <button type="button" data-type="text">First name</button>
+                    </th>
+                    <th scope="col" aria-sort="none">
+                      <button type="button" data-type="text">Last name</button>
+                    </th>
+                    <th scope="col" aria-sort="none">
+                      <button type="button" data-type="numeric">Age</button>
+                    </th>
+                    <th scope="col" aria-sort="none">
+                      <button type="button" data-type="text">
+                        Favorite fruit
+                      </button>
+                    </th>
+                    <th scope="col" aria-sort="none">
+                      <button type="button" data-type="date">
+                        Member since
+                      </button>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Alex</td>
+                    <td>Rivera</td>
+                    <td>29</td>
+                    <td>Mango</td>
+                    <td>2022-03-14</td>
+                  </tr>
+                  <tr>
+                    <td>Bianca</td>
+                    <td>Nguyen</td>
+                    <td>41</td>
+                    <td>Apple</td>
+                    <td>2021-10-02</td>
+                  </tr>
+                  <tr>
+                    <td>Carlos</td>
+                    <td>Lee</td>
+                    <td>35</td>
+                    <td>Banana</td>
+                    <td>2020-07-18</td>
+                  </tr>
+                  <tr>
+                    <td>Dina</td>
+                    <td>O’Connor</td>
+                    <td>27</td>
+                    <td>Cherry</td>
+                    <td>2024-01-09</td>
+                  </tr>
+                  <tr>
+                    <td>Elijah</td>
+                    <td>Patel</td>
+                    <td>33</td>
+                    <td>Orange</td>
+                    <td>2019-05-30</td>
+                  </tr>
+                  <tr>
+                    <td>Farah</td>
+                    <td>Singh</td>
+                    <td>39</td>
+                    <td>Grape</td>
+                    <td>2023-06-22</td>
+                  </tr>
+                </tbody>
+              </table>
 
-                        <!-- polite SR status -->
-                        <p class="table-status sr-only" aria-live="polite"></p>
+              <!-- polite SR status -->
+              <p class="table-status sr-only" aria-live="polite"></p>
 
-                        <!-- guidance: keyboard-only -->
-                        <section aria-labelledby="kbd-table">
-                            <h4 id="kbd-table">Keyboard-only navigation</h4>
-                            <ul>
-                                <li>Use <kbd>Tab</kbd> to focus a column header button.</li>
-                                <li>Press <kbd>Enter</kbd> or <kbd>Space</kbd> to sort that column. Re-press to toggle
-                                    ascending/descending.</li>
-                                <li>Focus stays on the same header button after sorting.</li>
-                                <li>Use <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd> to move across header buttons or
-                                    into table cells (If actionable).</li>
-                            </ul>
-                        </section>
+              <!-- guidance: keyboard-only -->
+              <section aria-labelledby="kbd-table">
+                <h4 id="kbd-table">Keyboard-only navigation</h4>
+                <ul>
+                  <li>Use <kbd>Tab</kbd> to focus a column header button.</li>
+                  <li>
+                    Press <kbd>Enter</kbd> or <kbd>Space</kbd> to sort that
+                    column. Re-press to toggle ascending/descending.
+                  </li>
+                  <li>Focus stays on the same header button after sorting.</li>
+                  <li>
+                    Use <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd> to move
+                    across header buttons or into table cells (If actionable).
+                  </li>
+                </ul>
+              </section>
 
-                        <!-- guidance: JAWS / NVDA -->
-                        <section aria-labelledby="sr-table">
-                            <h4 id="sr-table">JAWS / NVDA navigation</h4>
-                            <ul>
-                                <li>Jump to the next/previous table with <kbd>T</kbd> / <kbd>Shift</kbd>+<kbd>T</kbd>.
-                                </li>
-                                <li>Move cell-by-cell with
-                                    <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>←</kbd>/<kbd>→</kbd>/<kbd>↑</kbd>/<kbd>↓</kbd>.
-                                    With proper headers, the screen reader announces the cell’s value
-                                    <em>with</em> its column/row header.</li>
-                                <li><strong>JAWS:</strong> press <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>NumPad 5</kbd> to
-                                    re-announce the current cell’s row/column headers on demand.</li>
-                                <li><strong>NVDA (fallback when headers aren’t coded):</strong> set header associations
-                                    manually:
-                                    <ul>
-                                        <li><kbd>NVDA</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> = mark current row as
-                                            <em>column headers</em> (announce when moving down).</li>
-                                        <li><kbd>NVDA</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd> = mark current column as
-                                            <em>row headers</em> (announce when moving right).</li>
-                                    </ul>
-                                </li>
-                                <li>Tips: keep focus on a header button to sort; the polite status will announce “Sorted
-                                    by …, ascending/descending.”</li>
-                            </ul>
-                        </section>
+              <!-- guidance: JAWS / NVDA -->
+              <section aria-labelledby="sr-table">
+                <h4 id="sr-table">JAWS / NVDA navigation</h4>
+                <ul>
+                  <li>
+                    Jump to the next/previous table with <kbd>T</kbd> /
+                    <kbd>Shift</kbd>+<kbd>T</kbd>.
+                  </li>
+                  <li>
+                    Move cell-by-cell with
+                    <kbd>Ctrl</kbd
+                    >+<kbd>Alt</kbd>+<kbd>←</kbd>/<kbd>→</kbd>/<kbd>↑</kbd>/<kbd>↓</kbd>.
+                    With proper headers, the screen reader announces the cell’s
+                    value <em>with</em> its column/row header.
+                  </li>
+                  <li>
+                    <strong>JAWS:</strong> press
+                    <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>NumPad 5</kbd> to
+                    re-announce the current cell’s row/column headers on demand.
+                  </li>
+                  <li>
+                    <strong>NVDA (fallback when headers aren’t coded):</strong>
+                    set header associations manually:
+                    <ul>
+                      <li>
+                        <kbd>NVDA</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> = mark
+                        current row as <em>column headers</em> (announce when
+                        moving down).
+                      </li>
+                      <li>
+                        <kbd>NVDA</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd> = mark
+                        current column as <em>row headers</em> (announce when
+                        moving right).
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    Tips: keep focus on a header button to sort; the polite
+                    status will announce “Sorted by …, ascending/descending.”
+                  </li>
+                </ul>
+              </section>
 
-                        <!-- Table end  -->
-                    </section>
-                    <section class="tooltips pattern is-neutral" aria-labelledby="tooltips-heading">
-                        <h3 id="tooltips-heading">Tooltips</h3>
+              <!-- Table end  -->
+            </section>
+            <section
+              class="tooltips pattern is-neutral"
+              aria-labelledby="tooltips-heading"
+            >
+              <h3 id="tooltips-heading">Tooltips</h3>
 
-                        <!-- actions (optional for this component) -->
-                        <div class="tooltips actions"></div>
+              <!-- actions (optional for this component) -->
+              <div class="tooltips actions"></div>
 
-                        <!-- component element -->
-                        <div class="tooltip-examples">
-                            <!-- ── Example A: Automatic tooltip (focus/hover shows it) ── -->
-                            <p>
-                                Automatic tooltip: Hover or focus this help icon:
-                                <span class="tooltip-wrapper" data-placement="top">
-                                    <button type="button" class="tooltip-trigger icon-help" aria-describedby="tt-auto-1"
-                                        aria-label="More info about accessibility">?</button>
+              <!-- component element -->
+              <div class="tooltip-examples">
+                <!-- ── Example A: Automatic tooltip (focus/hover shows it) ── -->
+                <p>
+                  Automatic tooltip: Hover or focus this help icon:
+                  <span class="tooltip-wrapper" data-placement="top">
+                    <button
+                      type="button"
+                      class="tooltip-trigger icon-help"
+                      aria-describedby="tt-auto-1"
+                      aria-label="More info about accessibility"
+                    >
+                      ?
+                    </button>
 
-                                    <!-- Tooltip bubble (no figure) -->
-                                    <div id="tt-auto-1" role="tooltip" class="tooltip-bubble" hidden>
-                                        Tooltips appear on <strong>hover</strong> and keyboard <strong>focus</strong>.
-                                        Press <kbd>Esc</kbd> to dismiss.
-                                    </div>
-                                </span>
-                            </p>
+                    <!-- Tooltip bubble (no figure) -->
+                    <div
+                      id="tt-auto-1"
+                      role="tooltip"
+                      class="tooltip-bubble"
+                      hidden
+                    >
+                      Tooltips appear on <strong>hover</strong> and keyboard
+                      <strong>focus</strong>. Press <kbd>Esc</kbd> to dismiss.
+                    </div>
+                  </span>
+                </p>
 
-                            <!-- ── Example B: Manual tooltip (click toggles open/close) ── -->
-                            <p>
-                                Manually tooltip requires <kbd>Enter</kbd> or <kbd>Space</kbd> to toggle this tooltip:
-                                <span class="tooltip-wrapper" data-placement="right">
-                                    <button type="button" class="tooltip-trigger" aria-controls="tt-man-1"
-                                        aria-expanded="false">
-                                        What’s a WCAG AA color?
-                                    </button>
+                <!-- ── Example B: Manual tooltip (click toggles open/close) ── -->
+                <p>
+                  Manually tooltip requires <kbd>Enter</kbd> or
+                  <kbd>Space</kbd> to toggle this tooltip:
+                  <span class="tooltip-wrapper" data-placement="right">
+                    <button
+                      type="button"
+                      class="tooltip-trigger"
+                      aria-controls="tt-man-1"
+                      aria-expanded="false"
+                    >
+                      What’s a WCAG AA color?
+                    </button>
 
-                                    <!-- Tooltip bubble controlled by the button above -->
-                                    <div id="tt-man-1" role="tooltip" class="tooltip-bubble" hidden>
-                                        AA means a minimum contrast ratio of <strong>4.5:1</strong> for normal text (or
-                                        <strong>3:1</strong> for large text).
-                                    </div>
-                                </span>
-                            </p>
-                        </div>
+                    <!-- Tooltip bubble controlled by the button above -->
+                    <div
+                      id="tt-man-1"
+                      role="tooltip"
+                      class="tooltip-bubble"
+                      hidden
+                    >
+                      AA means a minimum contrast ratio of
+                      <strong>4.5:1</strong> for normal text (or
+                      <strong>3:1</strong> for large text).
+                    </div>
+                  </span>
+                </p>
+              </div>
 
-                        <!-- guidance: keyboard-only -->
-                        <section aria-labelledby="kbd-tooltips">
-                            <h4 id="kbd-tooltips">Keyboard-only navigation</h4>
-                            <ul>
-                                <li><kbd>Tab</kbd> to a tooltip trigger (e.g., the “?” icon).</li>
-                                <li>Automatic tip: the tooltip appears on focus; press <kbd>Esc</kbd> to dismiss.</li>
-                                <li>Manual tip: press <kbd>Enter</kbd> or <kbd>Space</kbd> to toggle; focus stays on the
-                                    trigger; press <kbd>Esc</kbd> to close.</li>
-                                <li>Shift focus away (e.g., <kbd>Tab</kbd>) and automatic tooltips close.</li>
-                            </ul>
-                        </section>
+              <!-- guidance: keyboard-only -->
+              <section aria-labelledby="kbd-tooltips">
+                <h4 id="kbd-tooltips">Keyboard-only navigation</h4>
+                <ul>
+                  <li>
+                    <kbd>Tab</kbd> to a tooltip trigger (e.g., the “?” icon).
+                  </li>
+                  <li>
+                    Automatic tip: the tooltip appears on focus; press
+                    <kbd>Esc</kbd> to dismiss.
+                  </li>
+                  <li>
+                    Manual tip: press <kbd>Enter</kbd> or <kbd>Space</kbd> to
+                    toggle; focus stays on the trigger; press <kbd>Esc</kbd> to
+                    close.
+                  </li>
+                  <li>
+                    Shift focus away (e.g., <kbd>Tab</kbd>) and automatic
+                    tooltips close.
+                  </li>
+                </ul>
+              </section>
 
-                        <!-- guidance: JAWS / NVDA -->
-                        <section aria-labelledby="sr-tooltips">
-                            <h4 id="sr-tooltips">JAWS / NVDA navigation</h4>
-                            <ul>
-                                <li>Use <kbd>Tab</kbd> to reach the trigger. The tooltip content is associated via
-                                    <code>aria-describedby</code> (automatic) or
-                                    <code>aria-controls</code>/<code>aria-expanded</code> (manual).</li>
-                                <li>Automatic tip: on focus, the tooltip is announced. Press <kbd>Esc</kbd> to dismiss.
-                                </li>
-                                <li>Manual tip: activate the button with <kbd>Enter</kbd>/<kbd>Space</kbd>. Screen
-                                    reader announces the state change; the tooltip content is available while expanded.
-                                </li>
-                                <li>Tooltips are not focusable and contain no interactive elements.</li>
-                            </ul>
-                        </section>
-                        <!-- Tooltips End  -->
-                    </section>
+              <!-- guidance: JAWS / NVDA -->
+              <section aria-labelledby="sr-tooltips">
+                <h4 id="sr-tooltips">JAWS / NVDA navigation</h4>
+                <ul>
+                  <li>
+                    Use <kbd>Tab</kbd> to reach the trigger. The tooltip content
+                    is associated via <code>aria-describedby</code> (automatic)
+                    or <code>aria-controls</code>/<code>aria-expanded</code>
+                    (manual).
+                  </li>
+                  <li>
+                    Automatic tip: on focus, the tooltip is announced. Press
+                    <kbd>Esc</kbd> to dismiss.
+                  </li>
+                  <li>
+                    Manual tip: activate the button with
+                    <kbd>Enter</kbd>/<kbd>Space</kbd>. Screen reader announces
+                    the state change; the tooltip content is available while
+                    expanded.
+                  </li>
+                  <li>
+                    Tooltips are not focusable and contain no interactive
+                    elements.
+                  </li>
+                </ul>
+              </section>
+              <!-- Tooltips End  -->
+            </section>
+          </section>
+        </main>
 
-                </section>
-
-
-
-
-            </main>
-
-            <!-- Footer -->
-            <footer data-include="/components/footer.html"></footer>
-
-        </div>
-
-</body>
-
+        <!-- Footer -->
+        <footer data-include="/components/footer.html"></footer>
+      </div>
+    </div>
+  </body>
 </html>

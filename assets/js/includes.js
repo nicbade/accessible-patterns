@@ -66,3 +66,58 @@
   }
   (document.readyState === 'loading') ? document.addEventListener('DOMContentLoaded', load) : load();
 })();
+
+
+/* ===== Mark current page link in <nav class="site-nav"> ===== */
+(function setAriaCurrent() {
+  // Treat "/" as "/index.html" and ignore "www." so comparisons are reliable
+  function canonical(urlLike) {
+    const u = new URL(urlLike, document.baseURI);
+    const host = u.hostname.replace(/^www\./, '');
+    let p = u.pathname.replace(/\/{2,}/g, '/');
+    if (p.endsWith('/')) p += 'index.html';
+    return host + p; // host + path only (no query/hash)
+  }
+
+  function apply() {
+    const here = canonical(location.href);
+    document.querySelectorAll('.site-nav a[href]').forEach(a => {
+      const href = a.getAttribute('href');
+      // skip fragments and non-document links
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+        a.removeAttribute('aria-current');
+        return;
+      }
+      const there = canonical(href);
+      if (there === here) {
+        a.setAttribute('aria-current', 'page');  // ✅ add
+      } else {
+        a.removeAttribute('aria-current');       // ❌ remove
+      }
+    });
+  }
+
+  // Run now (if nav is already in the DOM)
+  apply();
+
+  // If you inject header/footer via includes, watch for them and re-apply
+  const mo = new MutationObserver(() => {
+    if (document.querySelector('.site-nav a[href]')) apply();
+  });
+  mo.observe(document.body, { childList: true, subtree: true });
+
+  // Re-run on client-side nav or hash changes (optional)
+  window.addEventListener('popstate', apply);
+  window.addEventListener('hashchange', apply);
+})();
+
+
+// // Manually add/remove/toggle aria-current on a specific link
+// window.setCurrentLink = (selector) => {
+//   document.querySelectorAll('.site-nav a[aria-current="page"]').forEach(a => a.removeAttribute('aria-current'));
+//   const link = document.querySelector(selector);
+//   if (link) link.setAttribute('aria-current', 'page');
+// };
+// window.clearCurrentLink = () => {
+//   document.querySelectorAll('.site-nav a[aria-current="page"]').forEach(a => a.removeAttribute('aria-current'));
+// };

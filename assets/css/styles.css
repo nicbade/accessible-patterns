@@ -1753,6 +1753,36 @@ legend {
     padding: 0 .25rem;
 }
 
+/* Style the current page link */
+/* Current-page styling */
+.site-nav a[aria-current="page"] {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 3px;
+  position: relative;
+}
+/* .site-nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -6px;
+  height: 4px; border-radius: 2px;
+  background: var(--focus, #38bdf8);
+} */
 
+/* Two-column layout that stacks on small screens */
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem; /* space between the two pattern cards */
+  align-items: start;
+}
+
+/* Switch to 2 columns at tablet/desktop sizes */
+@media (min-width: 768px) {
+  .overview-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 
 

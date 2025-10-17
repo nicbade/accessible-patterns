@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Navigation - Accessible Patterns</title>
+
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+
+    <!-- Load includes; it will inject header/footer, then load main.js -->
+    <script src="/assets/js/includes.js" defer></script>
+  </head>
+  <body>
+    <!-- Header via include -->
+    <div data-include="/components/header.html"></div>
+    <main id="main" class="site-main container">
+      <section
+        class="keyboard-help pattern is-neutral"
+        aria-labelledby="kbd-help-heading"
+      >
+        <h2 id="kbd-help-heading">Keyboard navigation</h2>
+
+        <!-- actions (none for this help component) -->
+        <div class="keyboard-help actions"></div>
+
+        <!-- Core movement -->
+        <section aria-labelledby="kbd-core">
+          <h3 id="kbd-core">Core movement</h3>
+          <ul>
+            <li>
+              <kbd>Tab</kbd> moves forward to the next focusable element (links,
+              buttons, inputs, controls).
+            </li>
+            <li><kbd>Shift</kbd>+<kbd>Tab</kbd> moves backward.</li>
+            <li>
+              <kbd>Enter</kbd> / <kbd>Space</kbd> activates the focused control
+              (follow a link, press a button, toggle a checkbox).
+            </li>
+            <li>
+              <kbd>Esc</kbd> closes/cancels open UI when supported (menus,
+              dialogs, tooltips).
+            </li>
+            <li>
+              Arrow keys move <em>within</em> certain widgets (e.g., tabs, radio
+              groups, menus, carousels).
+            </li>
+            <li>
+              The focused element must show a visible focus ring; if you can’t
+              see it, that’s a bug.
+            </li>
+          </ul>
+        </section>
+
+        <!-- Tips & expectations -->
+        <section aria-labelledby="kbd-tips">
+          <h3 id="kbd-tips">Tips &amp; expectations</h3>
+          <ul>
+            <li>
+              Use the **Skip link** (first Tab stop) to jump directly to main
+              content.
+            </li>
+            <li>
+              Tab order should follow the visual order; unexpected jumps
+              indicate a focus-order issue.
+            </li>
+            <li>
+              You should never get trapped: <kbd>Esc</kbd> closes popups;
+              <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd> move focus.
+            </li>
+            <li>
+              macOS: enable full keyboard navigation (System Settings → Keyboard
+              → “Keyboard Navigation”) and in Safari, “Press Tab to highlight
+              each item on a webpage”.
+            </li>
+          </ul>
+        </section>
+
+        <!-- Quick test checklist -->
+        <section aria-labelledby="kbd-checklist">
+          <h3 id="kbd-checklist">Quick test checklist</h3>
+          <ul>
+            <li>
+              Press <kbd>Tab</kbd> on the homepage: a **Skip to main content**
+              link appears, then header links, then main controls in logical
+              order.
+            </li>
+            <li>Every focused item shows a **visible focus ring**.</li>
+            <li>
+              <kbd>Enter</kbd>/<kbd>Space</kbd> activates focused controls
+              (links, buttons, toggles).
+            </li>
+            <li>
+              Open a mobile menu or modal: focus is **trapped** inside with
+              <kbd>Tab</kbd>/<kbd>Shift</kbd>+<kbd>Tab</kbd>;
+              <kbd>Esc</kbd> closes and returns focus to the trigger.
+            </li>
+            <li>
+              On forms: <kbd>Space</kbd> toggles checkboxes; Arrow keys change
+              radios; <kbd>Enter</kbd> submits only when a submit button is
+              focused.
+            </li>
+          </ul>
+        </section>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer data-include="/components/footer.html"></footer>
+  </body>
+</html>
