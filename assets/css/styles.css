@@ -1785,4 +1785,60 @@ legend {
   }
 }
 
+/* === Uniform header height on every page === */
+:root {
+  /* Tweak these two to taste */
+  --header-min-h: 72px;       /* consistent visual height */
+  --header-pad-y: 12px;       /* vertical padding inside header */
+}
+
+/* Make the header a self-contained box so child margins can't collapse it */
+.site-header {
+  min-height: var(--header-min-h);
+  padding-block: var(--header-pad-y);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  /* Prevent margin-collapsing quirks across pages */
+  border-top: 1px solid transparent;   /* any non-zero border/padding prevents collapse */
+  overflow: auto;                       /* secondary guard */
+}
+
+/* Normalize inner elements so headings/brand don’t add random height */
+.site-header .site-logo,
+.site-header .site-name,
+.site-header h1,
+.site-header h2,
+.site-header h3 {
+  margin: 0;
+  line-height: 1.15;
+}
+
+/* Keep the menu button from shrinking the header on some pages */
+.site-header .menu-toggle {
+  min-height: 40px;
+  padding: .4rem .6rem;
+}
+
+/* If your header uses a logo box, keep it consistent */
+.site-header .logo-box {
+  width: 36px;
+  height: 36px;
+  border-radius: .5rem;
+  background: var(--pattern-accent, #60a5fa);
+}
+
+/* Ensure the first section after the header never “pulls up” into it */
+.site-header + * {
+  margin-top: clamp(12px, 2vh, 24px);
+}
+
+/* If the header is sticky/fixed in your design, uncomment:
+.site-header { position: sticky; top: 0; z-index: 100; }
+:root { --skip-offset: calc(var(--header-min-h) + 16px); }
+#main { scroll-margin-top: var(--skip-offset); }
+*/
+
 
