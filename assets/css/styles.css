@@ -1842,3 +1842,54 @@ legend {
 */
 
 
+/* ===== Uniform header across all pages ===== */
+:root {
+  --header-min-h: 80px;   /* tweak this to taste */
+  --header-pad-y: 14px;   /* vertical padding inside header */
+}
+
+/* Make header a self-contained flex row with consistent inner spacing */
+header.site-header {
+  /* stop margin-collapse + normalize height */
+  min-height: var(--header-min-h);
+  padding-block: var(--header-pad-y);
+  border-top: 1px solid transparent; /* defeats collapse differences */
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Normalize inner elements so page-level styles don't shrink/expand the header */
+header.site-header .site-logo,
+header.site-header .site-name,
+header.site-header nav,
+header.site-header h1,
+header.site-header h2,
+header.site-header h3 {
+  margin: 0 !important;
+  line-height: 1.2 !important;
+}
+
+/* Keep primary nav from changing the header height via line-height on some pages */
+header.site-header .site-nav .nav-list {
+  list-style: none;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  /* Ensure the nav block itself matches header height visually */
+  min-height: calc(var(--header-min-h) - (var(--header-pad-y) * 2));
+}
+
+/* Don’t let big top margins from the next section “pull up” into the header area */
+header.site-header + * {
+  margin-top: clamp(12px, 2vh, 24px);
+}
+
+/* Safety reset: some pages may still have UA margins on body/html */
+html, body { margin: 0; }
